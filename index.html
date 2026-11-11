@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>The Corner Loaf - Fresh Baked Daily</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="hero">
+      <h1>THE CORNER LOAF</h1>
+      <p>17 Boundary Road &middot; East Legon, Accra</p>
+      <p class="hero-status" id="hero-status"></p>
+    </header>
+
+    <main class="wrapper">
+      <section class="today-section" aria-labelledby="today-heading">
+        <div>
+          <h2 id="today-heading">Available Today</h2>
+          <div
+            class="today-products"
+            id="today-products"
+            aria-live="polite"
+          ></div>
+        </div>
+      </section>
+
+      <section class="order-section">
+        <h2>Place an Order</h2>
+
+        <form id="order-form" class="order-form">
+          <div class="form-group">
+            <label for="order-item-select"> Item: </label>
+            <select id="order-item-select" class="form-field" required>
+              <option value="">Select an item</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="order-quantity"> Quantity: </label>
+            <input
+              type="number"
+              id="order-quantity"
+              class="form-field"
+              min="1"
+              value="1"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="order-name"> Name: </label>
+            <input
+              type="text"
+              id="order-name"
+              class="form-field"
+              placeholder="John Doe"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="order-contact"> Phone: </label>
+            <input
+              type="tel"
+              id="order-contact"
+              class="form-field"
+              placeholder="123-456-7890"
+              pattern="0[0-9]{3}\s?[0-9]{3}\s?[0-9]{3}"
+              title="Enter a valid phone number e.g. 0551 000 000"
+              required
+            />
+          </div>
+
+          <button type="submit" class="form-submit">Submit Order</button>
+        </form>
+
+        <div id="order-list"><ul></ul></div>
+      </section>
+
+      <section>
+        <h2>This Week's Bakes</h2>
+        <p>
+          Every week we bake a fresh selection of breads, pastries, and sweet
+          treats. Here is what is coming out of the oven this week.
+        </p>
+
+        <div class="table-wrapper">
+          <table class="menu-table">
+            <thead>
+              <tr class="table-header">
+                <th scope="col">Item</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Available</th>
+              </tr>
+            </thead>
+            <tbody id="menu-items"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="faq-list">
+        <h2>Pre-Order FAQ</h2>
+        <p class="section-intro">
+          Everything you need to know about placing a pre-order with us.
+        </p>
+
+        <div class="faq-item">
+          <button
+            type="button"
+            class="faq-trigger"
+            aria-expanded="false"
+            aria-controls="faq-advance"
+          >
+            How far in advance do I need to order?
+          </button>
+          <div class="faq-body" id="faq-advance">
+            <p>
+              We ask for at least one day's notice before your chosen collection
+              day. For large orders or custom items, two to three days is
+              better. This gives us time to plan our bake and make sure
+              everything is ready for you.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button
+            type="button"
+            class="faq-trigger"
+            aria-expanded="false"
+            aria-controls="faq-collect"
+          >
+            How do I collect my order?
+          </button>
+          <div class="faq-body" id="faq-collect">
+            <p>
+              Come to the bakery at your agreed collection time. We will have
+              your order bagged and labelled. If you are running late, let us
+              know — we can usually hold orders for up to two hours after the
+              agreed time.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button
+            type="button"
+            class="faq-trigger"
+            aria-expanded="false"
+            aria-controls="faq-change"
+          >
+            Can I cancel or change my order?
+          </button>
+          <div class="faq-body" id="faq-change">
+            <p>
+              Yes, but please let us know as early as possible. If we have
+              already started baking your order, we may not be able to cancel
+              it. Changes to quantity are usually fine if you give us a day's
+              notice.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button
+            type="button"
+            class="faq-trigger"
+            aria-expanded="false"
+            aria-controls="faq-delivery"
+          >
+            Do you deliver?
+          </button>
+          <div class="faq-body" id="faq-delivery">
+            <p>
+              We do not currently offer delivery. All orders must be collected
+              from the bakery in person. We are looking at delivery options for
+              the future — follow us on Instagram to hear when that changes.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="preorder-section">
+        <h2>Place a Pre-Order</h2>
+        <p class="section-intro">
+          Fill in the form below and we will be in touch to confirm your order
+          and collection time.
+        </p>
+
+        <form class="preorder-form">
+          <div class="form-group">
+            <label for="preorder-name">Name:</label>
+            <input
+              type="text"
+              id="preorder-name"
+              placeholder="John Doe"
+              class="form-field"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="preorder-order">Order:</label>
+            <input
+              type="text"
+              id="preorder-order"
+              placeholder="Banana Bread, Meat Pies"
+              class="form-field"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="preorder-phone">Contact:</label>
+            <input
+              type="tel"
+              id="preorder-phone"
+              pattern="0[0-9]{3}\s?[0-9]{3}\s?[0-9]{3}"
+              placeholder="0551 000 000"
+              title="Enter a valid phone number e.g. 0551 000 000"
+              class="form-field"
+              required
+            />
+          </div>
+          <button type="submit" class="form-submit">Submit Pre-Order</button>
+        </form>
+        <div id="preorder-list"><ul></ul></div>
+      </section>
+
+      <section>
+        <h2>About The Corner Loaf</h2>
+        <p class="section-intro">
+          Marcus started The Corner Loaf after years of baking at home for
+          friends and family. What started as a hobby turned into a proper small
+          bakery when demand grew too much to keep up with. Everything is made
+          by hand in small batches, no mass production, no shortcuts.
+        </p>
+
+        <div class="info-boxes">
+          <div class="info-box">
+            <b class="info-box-title">Location</b>
+            17 Boundary Road<br />
+            East Legon, Accra
+          </div>
+          <div class="info-box">
+            <b class="info-box-title">Hours</b>
+            Monday to Friday: 7am - 5pm<br />
+            Saturday: 7am - 2pm<br />
+            Sunday: Closed
+          </div>
+          <div class="info-box">
+            <b class="info-box-title">Contact</b>
+            WhatsApp: 0551 000 000<br />
+            Email: thecornerloaf@email.com
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-section">
+        <h2>Send Us a Message</h2>
+        <p class="section-intro">
+          Not sure what to order or have a special request? Send us a message
+          and we will get back to you.
+        </p>
+
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="contact-name">Name:</label>
+            <input
+              type="text"
+              id="contact-name"
+              placeholder="John Doe"
+              class="form-field"
+            />
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Email:</label>
+            <input
+              type="email"
+              id="contact-email"
+              placeholder="john.doe@email.com"
+              class="form-field"
+            />
+          </div>
+          <div class="form-group">
+            <label for="contact-message">Message:</label>
+            <textarea
+              id="contact-message"
+              placeholder="Your message"
+              class="form-field"
+            ></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>The Corner Loaf &copy; 2026. Handmade in Accra.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
