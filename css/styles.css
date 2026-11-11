@@ -277,16 +277,10 @@ h3 {
 }
 
 .faq-body {
-  display: none;
   margin-top: var(--space-3);
   color: var(--muted-text-color);
 }
 
-.faq-item.active .faq-body {
-  display: block;
-}
-
-.preorder-form,
 .contact-form,
 .order-form {
   display: flex;
@@ -360,18 +354,18 @@ h3 {
   transform: translateY(1px);
 }
 
-#preorder-list, #order-list {
+#order-list {
   margin-top: var(--space-4);
   color: var(--secondary-color);
   font-size: var(--text-sm);
 }
 
-#preorder-list ul, #order-list ul {
+#order-list ul {
   margin: var(--space-2) 0 0;
   padding-left: var(--space-5);
 }
 
-#preorder-list li, #order-list li {
+#order-list li {
   margin-bottom: var(--space-1);
 }
 

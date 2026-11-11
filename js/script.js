@@ -19,7 +19,7 @@ const bakeItems = [
       "Classic long-ferment sourdough, crusty outside and chewy inside.",
     price: "GH₵ 35",
     days: ["Tuesday", "Friday"],
-    image: "images/sample.jpg",
+    image: "images/bread-in-oven.jpg",
     imageAlt: "Fresh loaves baking in the oven",
   },
   {
@@ -27,7 +27,7 @@ const bakeItems = [
     description: "Dense, nutty whole wheat. Great for toast and sandwiches.",
     price: "GH₵ 28",
     days: ["Monday", "Wednesday", "Friday"],
-    image: "images/sample.jpg",
+    image: "images/bread-in-oven.jpg",
     imageAlt: "Fresh loaves baking in the oven",
   },
   {
@@ -35,7 +35,7 @@ const bakeItems = [
     description: "Crunchy, lightly sweetened. Comes in a bag of 200g.",
     price: "GH₵ 20",
     days: bakeDays,
-    image: "images/sample2.jpg",
+    image: "images/bofrot.jpg",
     imageAlt: "A selection of freshly baked treats",
   },
   {
@@ -43,7 +43,7 @@ const bakeItems = [
     description: "Buttery, flaky croissants. Baked fresh in the morning only.",
     price: "GH₵ 18",
     days: ["Saturday"],
-    image: "images/sample2.jpg",
+    image: "images/bofrot.jpg",
     imageAlt: "A selection of freshly baked treats",
   },
   {
@@ -52,7 +52,7 @@ const bakeItems = [
       "Moist banana bread, not too sweet. Sold by the slice or full loaf.",
     price: "GH₵ 15 / slice",
     days: ["Thursday", "Saturday"],
-    image: "images/sample2.jpg",
+    image: "images/bofrot.jpg",
     imageAlt: "A selection of freshly baked treats",
   },
   {
@@ -61,7 +61,7 @@ const bakeItems = [
       "Short-crust pastry filled with spiced minced meat and vegetables.",
     price: "GH₵ 12",
     days: ["Wednesday", "Friday"],
-    image: "images/sample2.jpg",
+    image: "images/bofrot.jpg",
     imageAlt: "A selection of freshly baked treats",
   },
 ];
@@ -203,6 +203,7 @@ function getOpenStatus(date = new Date()) {
 }
 
 const todayProducts = document.getElementById("today-products");
+const todayLoading = document.getElementById("today-loading");
 const heroStatus = document.getElementById("hero-status");
 const weekday = getBakeryNow().weekday;
 
@@ -215,11 +216,13 @@ if (heroStatus) {
   setInterval(updateStatus, 60 * 1000);
 }
 
+let availableToday = [];
+
 if (todayProducts) {
   const emptyMessage = document.createElement("p");
   emptyMessage.className = "today-empty";
 
-  const availableToday = bakeItems.filter((product) =>
+  availableToday = bakeItems.filter((product) =>
     product.days.includes(weekday),
   );
 
@@ -228,21 +231,12 @@ if (todayProducts) {
       weekday === "Sunday"
         ? "The bakery is closed today. Check back Monday for fresh bakes."
         : "No items are scheduled for today. Please check back soon.";
+    todayLoading.remove();
     todayProducts.appendChild(emptyMessage);
   } else {
-    const productSelect = document.getElementById("order-item-select");
-
+    todayLoading.remove();
     availableToday.forEach((product) => {
       todayProducts.appendChild(createProductCard(product));
-
-      if (productSelect) {
-        const option = document.createElement("option");
-
-        option.value = product.name;
-        option.textContent = `${product.name} (${product.price})`;
-
-        productSelect.appendChild(option);
-      }
     });
   }
 }
@@ -262,43 +256,18 @@ faqItems.forEach((item) => {
       faqItem
         .querySelector(".faq-trigger")
         .setAttribute("aria-expanded", "false");
+
+      faqItem.querySelector(".faq-body").hidden = true;
     });
 
     if (!isOpen) {
       item.classList.add("active");
       trigger.setAttribute("aria-expanded", "true");
+
+      item.querySelector(".faq-body").hidden = false;
     }
   });
 });
-
-// === SECTION 4: Pre-order tracker ===
-// When the pre-order form is submitted, add the customer's name and order
-// to the list below the form. Prevent the page from refreshing on submit.
-const preorderForm = document.querySelector(".preorder-form");
-const preorderList = document.getElementById("preorder-list");
-
-if (preorderForm && preorderList) {
-  const list = preorderList.querySelector("ul");
-
-  preorderForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const fields = preorderForm.querySelectorAll(".form-field");
-    const name = fields[0].value.trim();
-    const order = fields[1].value.trim();
-
-    if (!name || !order) {
-      return;
-    }
-
-    const item = document.createElement("li");
-    item.textContent = `${name}: ${order}`;
-
-    list.appendChild(item);
-
-    preorderForm.reset();
-  });
-}
 
 // === SECTION 5: Contact form ===
 // Validate the contact form before submission.
@@ -339,25 +308,60 @@ if (contactForm) {
 }
 
 // === SECTION 6: Order form ===
-const orderForm = document.getElementById('order-form');
-const orderList = document.getElementById('order-list');
+const orderForm = document.getElementById("order-form");
+const orderList = document.getElementById("order-list");
 
 if (orderForm && orderList) {
-  orderForm.addEventListener('submit', (event) => {
+  orderForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const name = document.getElementById('order-name').value;
-    const contact = document.getElementById('order-contact').value;
-    const product = document.getElementById('order-item-select').value;
-    const quantity = document.getElementById('order-quantity').value;
+    const name = document.getElementById("order-name").value;
+    const contact = document.getElementById("order-contact").value;
+    const product = document.getElementById("order-item-select").value;
+    const quantity = document.getElementById("order-quantity").value;
+    const type = document.getElementById("order-type").value;
 
     const item = document.createElement("li");
 
-      item.textContent =
-        `${name} | ${contact} | ${quantity} × ${product}`;
+    item.textContent = `${name} | ${contact} | ${quantity} × ${product} | ${type}`;
 
     orderList.appendChild(item);
 
     orderForm.reset();
+  });
+}
+
+const productSelect = document.getElementById("order-item-select");
+const orderTypeSelect = document.getElementById("order-type");
+const orderFormHelp = document.getElementById("order-form-help");
+
+function populateProducts(products) {
+  if (!productSelect) return;
+
+  productSelect.innerHTML =
+    '<option value="">Select an item</option>';
+
+  products.forEach((product) => {
+    const option = document.createElement("option");
+
+    option.value = product.name;
+    option.textContent = `${product.name} (${product.price})`;
+
+    productSelect.appendChild(option);
+  });
+}
+
+populateProducts(availableToday);
+orderFormHelp.textContent = `Today's Order: showing only today's available bakes.`
+
+if (orderTypeSelect) {
+  orderTypeSelect.addEventListener("change", () => {
+    if (orderTypeSelect.value === "today-order") {
+      populateProducts(availableToday);
+      orderFormHelp.textContent = `Today's Order: showing only today's available bakes.`;
+    } else if (orderTypeSelect.value === "pre-order") {
+      populateProducts(bakeItems);
+      orderFormHelp.textContent = `Pre-Order: showing all available items.`;
+    }
   });
 }
