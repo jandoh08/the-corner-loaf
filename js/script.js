@@ -1,6 +1,6 @@
 // The Corner Loaf — script.js
 
-// === SECTION 1: Bake menu ===
+// === Data ===
 const weekdays = [
   "Sunday",
   "Monday",
@@ -17,7 +17,7 @@ const bakeItems = [
     name: "Sourdough Loaf",
     description:
       "Classic long-ferment sourdough, crusty outside and chewy inside.",
-    price: "GH₵ 35",
+    price: 35,
     days: ["Tuesday", "Friday"],
     image: "images/bread-in-oven.jpg",
     imageAlt: "Fresh loaves baking in the oven",
@@ -25,7 +25,7 @@ const bakeItems = [
   {
     name: "Whole Wheat Loaf",
     description: "Dense, nutty whole wheat. Great for toast and sandwiches.",
-    price: "GH₵ 28",
+    price: 28,
     days: ["Monday", "Wednesday", "Friday"],
     image: "images/bread-in-oven.jpg",
     imageAlt: "Fresh loaves baking in the oven",
@@ -33,7 +33,7 @@ const bakeItems = [
   {
     name: "Chin Chin",
     description: "Crunchy, lightly sweetened. Comes in a bag of 200g.",
-    price: "GH₵ 20",
+    price: 20,
     days: bakeDays,
     image: "images/bofrot.jpg",
     imageAlt: "A selection of freshly baked treats",
@@ -41,7 +41,7 @@ const bakeItems = [
   {
     name: "Butter Croissants",
     description: "Buttery, flaky croissants. Baked fresh in the morning only.",
-    price: "GH₵ 18",
+    price: 18,
     days: ["Saturday"],
     image: "images/bofrot.jpg",
     imageAlt: "A selection of freshly baked treats",
@@ -50,7 +50,8 @@ const bakeItems = [
     name: "Banana Bread",
     description:
       "Moist banana bread, not too sweet. Sold by the slice or full loaf.",
-    price: "GH₵ 15 / slice",
+    price: 15,
+    priceUnit: "slice",
     days: ["Thursday", "Saturday"],
     image: "images/bofrot.jpg",
     imageAlt: "A selection of freshly baked treats",
@@ -59,12 +60,29 @@ const bakeItems = [
     name: "Meat Pies",
     description:
       "Short-crust pastry filled with spiced minced meat and vegetables.",
-    price: "GH₵ 12",
+    price: 12,
     days: ["Wednesday", "Friday"],
     image: "images/bofrot.jpg",
     imageAlt: "A selection of freshly baked treats",
   },
 ];
+
+const bakeryTimeZone = "Africa/Accra";
+const openingHours = {
+  Sunday: null,
+  Monday: { open: 7, close: 17 },
+  Tuesday: { open: 7, close: 17 },
+  Wednesday: { open: 7, close: 17 },
+  Thursday: { open: 7, close: 17 },
+  Friday: { open: 7, close: 17 },
+  Saturday: { open: 7, close: 14 },
+};
+
+// === Helpers ===
+function formatPrice(product) {
+  const base = `GH₵ ${product.price}`;
+  return product.priceUnit ? `${base} / ${product.priceUnit}` : base;
+}
 
 function formatAvailability(days) {
   if (bakeDays.every((day) => days.includes(day))) {
@@ -79,84 +97,6 @@ function formatAvailability(days) {
 
   return `${days.slice(0, -1).join(", ")} & ${lastDay}`;
 }
-
-function createProductCard(product) {
-  const card = document.createElement("article");
-  card.className = "product-card";
-
-  const image = document.createElement("img");
-  image.className = "product-image";
-  image.src = product.image;
-  image.alt = product.imageAlt;
-  image.loading = "lazy";
-
-  const details = document.createElement("div");
-  details.className = "product-details";
-
-  const header = document.createElement("div");
-  header.className = "product-header";
-
-  const name = document.createElement("h3");
-  name.className = "product-name";
-  name.textContent = product.name;
-
-  const price = document.createElement("p");
-  price.className = "product-price";
-  price.textContent = product.price;
-
-  header.append(name, price);
-
-  const description = document.createElement("p");
-  description.className = "product-description";
-  description.textContent = product.description;
-
-  details.append(header, description);
-
-  if (product.days.length === 1) {
-    const tag = document.createElement("p");
-    tag.className = "product-tag";
-    tag.textContent = "Today only";
-    details.append(tag);
-  }
-
-  card.append(image, details);
-  return card;
-}
-
-const menuItems = document.getElementById("menu-items");
-if (menuItems) {
-  bakeItems.forEach((product, index) => {
-    const row = document.createElement("tr");
-    if (index % 2 === 1) {
-      row.className = "alt-row";
-    }
-
-    [
-      product.name,
-      product.description,
-      product.price,
-      formatAvailability(product.days),
-    ].forEach((value) => {
-      const cell = document.createElement("td");
-      cell.textContent = value;
-      row.appendChild(cell);
-    });
-
-    menuItems.appendChild(row);
-  });
-}
-
-// === SECTION 2: Today's available bakes ===
-const bakeryTimeZone = "Africa/Accra";
-const openingHours = {
-  Sunday: null,
-  Monday: { open: 7, close: 17 },
-  Tuesday: { open: 7, close: 17 },
-  Wednesday: { open: 7, close: 17 },
-  Thursday: { open: 7, close: 17 },
-  Friday: { open: 7, close: 17 },
-  Saturday: { open: 7, close: 14 },
-};
 
 const formatHour = (hour) => `${hour % 12 || 12}${hour < 12 ? "am" : "pm"}`;
 
@@ -202,12 +142,49 @@ function getOpenStatus(date = new Date()) {
   return "Closed";
 }
 
-const todayProducts = document.getElementById("today-products");
-const todayLoading = document.getElementById("today-loading");
-const heroStatus = document.getElementById("hero-status");
-const weekday = getBakeryNow().weekday;
+function getAvailableToday() {
+  const { weekday } = getBakeryNow();
+  return bakeItems.filter((product) => product.days.includes(weekday));
+}
 
-if (heroStatus) {
+function canOrderForToday() {
+  const { weekday, time } = getBakeryNow();
+  const hours = openingHours[weekday];
+
+  return Boolean(hours) && time < hours.close;
+}
+
+// === Menu table ===
+function renderMenuTable() {
+  const menuItems = document.getElementById("menu-items");
+  if (!menuItems) return;
+
+  bakeItems.forEach((product, index) => {
+    const row = document.createElement("tr");
+    if (index % 2 === 1) {
+      row.className = "alt-row";
+    }
+
+    [
+      product.name,
+      product.description,
+      formatPrice(product),
+      formatAvailability(product.days),
+    ].forEach((value) => {
+      const cell = document.createElement("td");
+      cell.textContent = value;
+      row.appendChild(cell);
+    });
+
+    menuItems.appendChild(row);
+  });
+}
+
+// === Hero status ===
+function initHeroStatus() {
+  const heroStatus = document.getElementById("hero-status");
+  if (!heroStatus) return;
+
   const updateStatus = () => {
     heroStatus.textContent = getOpenStatus();
   };
@@ -216,152 +193,209 @@ if (heroStatus) {
   setInterval(updateStatus, 60 * 1000);
 }
 
-let availableToday = [];
+// === Today's cards ===
+function createProductCard(product) {
+  const card = document.createElement("article");
+  card.className = "product-card";
 
-if (todayProducts) {
-  const emptyMessage = document.createElement("p");
-  emptyMessage.className = "today-empty";
+  const image = document.createElement("img");
+  image.className = "product-image";
+  image.src = product.image;
+  image.alt = product.imageAlt;
 
-  availableToday = bakeItems.filter((product) =>
-    product.days.includes(weekday),
-  );
+  const details = document.createElement("div");
+  details.className = "product-details";
 
-  if (availableToday.length === 0) {
-    emptyMessage.textContent =
-      weekday === "Sunday"
-        ? "The bakery is closed today. Check back Monday for fresh bakes."
-        : "No items are scheduled for today. Please check back soon.";
-    todayLoading.remove();
-    todayProducts.appendChild(emptyMessage);
-  } else {
-    todayLoading.remove();
-    availableToday.forEach((product) => {
-      todayProducts.appendChild(createProductCard(product));
-    });
+  const header = document.createElement("div");
+  header.className = "product-header";
+
+  const name = document.createElement("h3");
+  name.className = "product-name";
+  name.textContent = product.name;
+
+  const price = document.createElement("p");
+  price.className = "product-price";
+  price.textContent = formatPrice(product);
+
+  header.append(name, price);
+
+  const description = document.createElement("p");
+  description.className = "product-description";
+  description.textContent = product.description;
+
+  details.append(header, description);
+
+  if (product.days.length === 1) {
+    const tag = document.createElement("p");
+    tag.className = "product-tag";
+    tag.textContent = "Today only";
+    details.append(tag);
   }
+
+  card.append(image, details);
+  return card;
 }
 
-// === SECTION 3: Pre-order FAQ accordion ===
-// Each .faq-trigger button expands and collapses its paired .faq-body when clicked.
-const faqItems = document.querySelectorAll(".faq-item");
+function renderTodayProducts(availableToday) {
+  const todayProducts = document.getElementById("today-products");
+  const todayLoading = document.getElementById("today-loading");
+  if (!todayProducts) return;
 
-faqItems.forEach((item) => {
-  const trigger = item.querySelector(".faq-trigger");
+  todayLoading?.remove();
 
-  trigger.addEventListener("click", () => {
-    const isOpen = item.classList.contains("active");
+  if (availableToday.length === 0) {
+    const emptyMessage = document.createElement("p");
+    emptyMessage.className = "today-empty";
+    emptyMessage.textContent =
+      getBakeryNow().weekday === "Sunday"
+        ? "The bakery is closed today. Check back Monday for fresh bakes."
+        : "No items are scheduled for today. Please check back soon.";
+    todayProducts.appendChild(emptyMessage);
+    return;
+  }
 
-    faqItems.forEach((faqItem) => {
-      faqItem.classList.remove("active");
-      faqItem
-        .querySelector(".faq-trigger")
-        .setAttribute("aria-expanded", "false");
-
-      faqItem.querySelector(".faq-body").hidden = true;
-    });
-
-    if (!isOpen) {
-      item.classList.add("active");
-      trigger.setAttribute("aria-expanded", "true");
-
-      item.querySelector(".faq-body").hidden = false;
-    }
+  availableToday.forEach((product) => {
+    todayProducts.appendChild(createProductCard(product));
   });
-});
+}
 
-// === SECTION 5: Contact form ===
-// Validate the contact form before submission.
-// Show a success message when all fields are correctly filled in.
-// If a required field is missing, tell the user what needs to be fixed.
-const contactForm = document.querySelector(".contact-form");
+// === FAQ accordion ===
+// Each .faq-trigger button expands and collapses its paired .faq-body when clicked.
+function initFaq() {
+  const faqItems = document.querySelectorAll(".faq-item");
 
-if (contactForm) {
+  faqItems.forEach((item) => {
+    const trigger = item.querySelector(".faq-trigger");
+
+    trigger.addEventListener("click", () => {
+      const isOpen = item.classList.contains("active");
+
+      faqItems.forEach((faqItem) => {
+        faqItem.classList.remove("active");
+        faqItem
+          .querySelector(".faq-trigger")
+          .setAttribute("aria-expanded", "false");
+        faqItem.querySelector(".faq-body").hidden = true;
+      });
+
+      if (!isOpen) {
+        item.classList.add("active");
+        trigger.setAttribute("aria-expanded", "true");
+        item.querySelector(".faq-body").hidden = false;
+      }
+    });
+  });
+}
+
+// === Contact form ===
+// The browser's built-in validation already blocks empty fields, so the only
+// check left for JS is an address like "kofi@mail" that the browser accepts.
+function initContactForm() {
+  const contactForm = document.querySelector(".contact-form");
+  const contactStatus = document.getElementById("contact-status");
+  if (!contactForm || !contactStatus) return;
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const showStatus = (message, isError) => {
+    contactStatus.textContent = message;
+    contactStatus.classList.toggle("is-error", isError);
+  };
+
   contactForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const fields = contactForm.querySelectorAll(".form-field");
-    const [nameField, emailField, messageField] = fields;
-
-    const name = nameField.value.trim();
-    const email = emailField.value.trim();
-    const message = messageField.value.trim();
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    const missing = [];
-    if (!name) missing.push("name");
-    if (!email) missing.push("email");
-    if (!message) missing.push("message");
-
-    if (missing.length > 0) {
-      alert(`Please complete the following: ${missing.join(", ")}`);
-      return;
-    }
+    const email = document.getElementById("contact-email").value.trim();
 
     if (!emailPattern.test(email)) {
-      alert("Please enter a valid email address.");
+      showStatus("Please enter a valid email address.", true);
       return;
     }
 
-    alert("Thanks! Your message has been sent successfully.");
+    showStatus("Thanks! Your message has been sent successfully.", false);
     contactForm.reset();
   });
 }
 
-// === SECTION 6: Order form ===
-const orderForm = document.getElementById("order-form");
-const orderList = document.getElementById("order-list");
-
-if (orderForm && orderList) {
-  orderForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const name = document.getElementById("order-name").value;
-    const contact = document.getElementById("order-contact").value;
-    const product = document.getElementById("order-item-select").value;
-    const quantity = document.getElementById("order-quantity").value;
-    const type = document.getElementById("order-type").value;
-
-    const item = document.createElement("li");
-
-    item.textContent = `${name} | ${contact} | ${quantity} × ${product} | ${type}`;
-
-    orderList.appendChild(item);
-
-    orderForm.reset();
-  });
-}
-
-const productSelect = document.getElementById("order-item-select");
-const orderTypeSelect = document.getElementById("order-type");
-const orderFormHelp = document.getElementById("order-form-help");
-
-function populateProducts(products) {
-  if (!productSelect) return;
-
-  productSelect.innerHTML =
-    '<option value="">Select an item</option>';
+// === Order form ===
+function populateProducts(select, products) {
+  select.innerHTML = '<option value="">Select an item</option>';
 
   products.forEach((product) => {
     const option = document.createElement("option");
 
     option.value = product.name;
-    option.textContent = `${product.name} (${product.price})`;
+    option.textContent = `${product.name} (${formatPrice(product)})`;
 
-    productSelect.appendChild(option);
+    select.appendChild(option);
   });
 }
 
-populateProducts(availableToday);
-orderFormHelp.textContent = `Today's Order: showing only today's available bakes.`
+function initOrderForm(availableToday) {
+  const orderForm = document.getElementById("order-form");
+  const orderList = document.getElementById("order-list");
+  const productSelect = document.getElementById("order-item-select");
+  const orderTypeSelect = document.getElementById("order-type");
+  const orderFormHelp = document.getElementById("order-form-help");
 
-if (orderTypeSelect) {
-  orderTypeSelect.addEventListener("change", () => {
+  if (!orderForm || !orderList || !productSelect || !orderTypeSelect) return;
+
+  const orderItems = orderList.querySelector("ul");
+
+  const updateOrderOptions = () => {
     if (orderTypeSelect.value === "today-order") {
-      populateProducts(availableToday);
-      orderFormHelp.textContent = `Today's Order: showing only today's available bakes.`;
-    } else if (orderTypeSelect.value === "pre-order") {
-      populateProducts(bakeItems);
-      orderFormHelp.textContent = `Pre-Order: showing all available items.`;
+      populateProducts(productSelect, availableToday);
+      orderFormHelp.textContent =
+        "Today's Order: showing only today's available bakes.";
+    } else {
+      populateProducts(productSelect, bakeItems);
+      orderFormHelp.textContent = canOrderForToday()
+        ? "Pre-Order: showing all available items."
+        : "Pre-Order: showing all available items. Orders for today are closed.";
     }
+  };
+
+  const setOrderDefaults = () => {
+    const todayOption = orderTypeSelect.querySelector(
+      'option[value="today-order"]',
+    );
+    const canOrderToday = canOrderForToday();
+
+    todayOption.disabled = !canOrderToday;
+    orderTypeSelect.value = canOrderToday ? "today-order" : "pre-order";
+    updateOrderOptions();
+  };
+
+  setOrderDefaults();
+  orderTypeSelect.addEventListener("change", updateOrderOptions);
+
+  orderForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const name = document.getElementById("order-name").value;
+    const contact = document.getElementById("order-contact").value;
+    const product = productSelect.value;
+    const quantity = document.getElementById("order-quantity").value;
+    const type = orderTypeSelect.selectedOptions[0].textContent;
+
+    const item = document.createElement("li");
+    item.textContent = `${name} | ${contact} | ${quantity} × ${product} | ${type}`;
+    orderItems.appendChild(item);
+
+    orderForm.reset();
+    setOrderDefaults();
   });
 }
+
+function init() {
+  const availableToday = getAvailableToday();
+
+  renderMenuTable();
+  initHeroStatus();
+  renderTodayProducts(availableToday);
+  initFaq();
+  initContactForm();
+  initOrderForm(availableToday);
+}
+
+init();
