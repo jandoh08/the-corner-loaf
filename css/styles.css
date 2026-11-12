@@ -7,6 +7,7 @@
   --primary-foreground-color: #ffffff;
   --secondary-color: #4a2c0a;
   --accent-color: #f5deb3;
+  --destructive-color: #b3261e;
 
   --color-orange-light: #ffe0b2;
   --color-green-light: #c8e6c9;
@@ -14,6 +15,7 @@
 
   --muted-text-color: #444444;
   --border-color: #e0e0e0;
+  --input-border-color: #767676;
   --shadow-color: rgba(74, 44, 10, 0.12);
 
   --text-xs: 0.75rem;
@@ -93,6 +95,7 @@ p {
   letter-spacing: var(--tracking-wide);
   line-height: var(--leading-tight);
   margin: 0 0 var(--space-1);
+  text-transform: uppercase;
 }
 
 .hero p {
@@ -157,7 +160,7 @@ h3 {
 
 .menu-table {
   width: 100%;
-  /* min-width: var(--width-md); */
+  min-width: var(--width-sm);
   border-collapse: collapse;
   font-size: var(--text-sm);
   background: var(--primary-foreground-color);
@@ -309,7 +312,7 @@ h3 {
 .form-field {
   width: 100%;
   padding: var(--space-3) var(--space-4);
-  border: var(--border-width) solid var(--border-color);
+  border: var(--border-width) solid var(--input-border-color);
   border-radius: var(--radius-sm);
   background-color: var(--primary-foreground-color);
   color: var(--foreground-color);
@@ -352,6 +355,17 @@ h3 {
 
 .form-submit:active {
   transform: translateY(1px);
+}
+
+.form-status {
+  margin: 0;
+  color: var(--secondary-color);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.form-status.is-error {
+  color: var(--destructive-color);
 }
 
 #order-list {
