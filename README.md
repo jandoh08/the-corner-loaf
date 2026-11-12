@@ -1,24 +1,78 @@
 ## Three things a customer must learn within 5 seconds of opening the website
 
-- The bakery name and location - "The Corner Loaf is a small neighbourhood bakery on Boundary Road in East Legon, Accra."
-- Whether the bakery is open or closed - "people increasingly check the website on their phones, mid-walk, to decide whether it is worth stopping in today."
-- The items available today - "Regulars have mentioned they cannot quickly tell what is actually available that day", "Marcus suspects he is losing quick morning walk-by traffic to people who give up scrolling and just keep walking", "people increasingly check the website on their phones, mid-walk, to decide whether it is worth stopping in today."
+Marcus's regulars check the site on their phones, mid-walk, to decide whether it is worth stopping in. If the page makes them scroll or think, they keep walking. So three questions have to be answered before anyone scrolls:
 
-## Issues found on exiting website
+1. **Who and where is this?** The Corner Loaf is a small neighbourhood bakery at 17 Boundary Road, East Legon. New visitors said the old site did not feel like the warm, unfussy shop they know, so the name and address sit at the very top. The original hero only said "East Legon, Accra"; the street address was buried at the bottom of the page.
+2. **Is it open right now?** This is the actual decision a walker is making: stop or keep going. The original only listed hours in a small 12px box at the bottom, with no sign of whether the shop was open at that moment.
+3. **What is available today?** Marcus says people come in, see what is on the shelf that morning, and buy it. The original only had a weekly table with a column of days, so a visitor had to read every row and work out for themselves what applied to today.
 
-- The main content of the website wasn't responsive due to the fact that fixed values were used, that is the units were in pixels instead of using relative units like rems or percentages. Hence this made viewing the website no mobile inconvenient with the user having to zoom in.
-- The website also had a broken navigation bar, none of the links in the navigation bar worked due to having a # in the href of the anchor element which lead nowhere.
-- The website also skips headings which is bad for accessibility, most users that rely on assistive technologies like screen readers depend on the order of the headings to know the page layout or to build a table of contents so skipping headings affects the way this screen readers navigate the website.
-- Then there was also the contact section which was out of sync with the rest of the layout in terms of it's positioning, which was mainly caused by the contact section not being included in the parent container that had a class of wrapper.
-- There was also the submit buttons of the forms that didn't work which was mainly due to the website having no javascript.
-- The website did not use any semantic elements just divs which do not give any meaning to assistive technolgy or the website in general, since div's do not have any semantic meaning unlike headers, footers, main, aside etc that give semantic meaning.
+## Layout sketch and why the page is ordered this way
 
+I drew the layout by hand in my notebook before I started building. The photos are in the sketches folder.
+
+The order follows the three things above.
+
+1. **Hero:** Name, address and a live open/closed status, so questions 1 and 2 are answered on first view.
+2. **Available Today:** What can be bought right now, directly under the hero, so question 3 is answered without scrolling on a phone.
+3. **Place an Order:** The next step for someone who has just seen what is available, the person can place an order before getting to the bakery or pre-order for other days.
+4. **This Week's Bakes:** Shows the entire menu for the week which helps people planning ahead, which is secondary to today.
+5. **Pre-Order FAQ:** Answers for people who have questions on pre-ordering.
+6. **About and contact details:** Info about the backery and how to get in touch with them.
+7. **Send Us a Message:** Another way to also get in touch with the bakery.
+
+## Issues found on original website
+
+Listed in order of impact on Marcus's business, each with its root cause.
+
+1. **Today's availability and opening status were hard to find.** The page was organised around the owner's content, not the customer's question. Availability was only stored as days in a static table, and the opening hours were at the bottom with no open/closed state. This is the "it makes you work to find out something simple" problem Marcus described, and the reason he suspects he loses walk-by customers.
+2. **The page was not responsive.** The main cause was a missing `<meta name="viewport">` tag, so phones rendered the page at desktop width and shrank it, which is why users had to zoom in. Fixed `820px` widths, pixel and point units, and three floated `240px` info boxes made it worse, because nothing could adapt to a narrow screen.
+3. **The navigation links went nowhere.** Every link in the navigation bar had `href="#"`, and none of the sections had an `id` to link to, so there was nothing for the links to point at. The bar also pushed the content down on small screens.
+4. **Heading levels were skipped.** The page jumped from `<h1>` to `<h3>`, and an `<h2>` appeared after the `<h3>`s. The levels were chosen for how they looked (sizes and borders) instead of for the structure of the page, so screen reader users could not rely on the outline.
+5. **The markup had no semantics.** Everything was `<div>`s, the table headers were `<td><b>` instead of `<th>`, spacing was done with `<br>` and `&nbsp;`, and `<html>` had no `lang` attribute. Assistive technology had nothing to tell users what each part of the page was.
+6. **The forms could not work.** The submit buttons were `type="button"`, which never submits a form, and the script file was empty. The inputs had no labels (placeholders only), no `required`, the email field was `type="text"`, and the message was a single-line input instead of a textarea.
+7. **The contact section and several components were unstyled.** The contact section sat outside the `.wrapper` container, and the CSS had no rules at all for the contact, FAQ, pre-order or form classes. That is why the contact area was out of line with the rest of the page and why every FAQ answer was permanently visible, adding to the clutter.
+8. **There was no deliberate visual system.** Font sizes mixed `pt` and `px` (11pt to 36px), colours were hard-coded and often inline, and much of the text was 11 to 12px, which is hard to read on a phone. Nothing tied the look back to a warm, small-bakery feel.
 
 ## Additional improvement beyond what the brief asked for
 
-With the additional improvement I went with an order form so that customers can place orders for items available today and they can can and pick them up during the day or a few minutes/hours after placing them. Which should help marcus get more customers since most of his customers are regulars who walk past every morning they can place the orders before going to the shop during their walk to pick up the order, and same for people coming from further away they can also place the order so that by the time they come to the shop the items have not been sold out.
+**An order form that lets customers order today's bakes.**
 
+**The gap.** The new page shows what is available today, but the visitor still can't secure anything. Marcus bakes in small batches, so popular items can sell out. A regular who sees "Sourdough Loaf" on their phone at 7:30 still has to walk over. Someone coming from further away risks a wasted trip.
+
+**What I built.** One order form for ordering todays bakes but since it was very similar to the pre-order form in terms of the data it collects I merged it into one order form with a "Type" choice:
+
+- **Today's Order** lists only the bakes available today, so a customer cannot order something that isn't on the shelf.
+- **Pre-Order** lists the full weekly menu.
+- Today's Order is only offered while the shop still has hours left to run. On Sundays and after closing time, the form switches to Pre-Order by itself and says why, instead of leaving the customer with an empty list and no explanation.
+- Each submitted order is shown back in a readable summary (name, phone, quantity, item, type).
+
+**Why it matters.** It targets what Marcus said he is losing: quick morning walk-by traffic. A customer can commit while still walking, and Marcus could plan each morning's bake around known demand, which suits small batches. The benefits for the customer are certainty that their item is waiting, and no wasted trip.
+
+**Limits.** Orders appear on the page but are not sent anywhere or saved, so a refresh clears them and Marcus does not receive them yet.
 
 ## Short written audit of finished website
 
-For starters I used semantic html in the codebase replacing the existing divs sprinkled all over the code, the html now has a header, footer, main and sections. I also made sure not skip any headings, making sure the page followed a chronological order. I had some images too in the code so I made sure the images had an alt tag, and also reserved space for images to prevent the page content jumping around hence ensuring a good cumulative layout shift score (0 when tested in development). I also made sure to optimize the images so that they don't take a long time to load which also gave a good largest contentful paint score (0.30s when tested in development). Then with the pre-order FAQ section I replaced the faq-trigger div's with buttons to make them keyboard focusable. The table for the this weeks bakes section too I made sure it's given a min width so that the content doesn't become squashed and also handled the overflow behaviour to make it scrollable if it exceeds the width of the viewport so that it doesn't shift the layout of the entire page. With the page styling too I made sure to create variables for the color's used, the font sizes, spacing, and width to ensure consistency across the page since only a defined set of variables are used. On the page too I made sure that key requirements/frustration of the client was tackled, so mainly wanted something that allowed users to see what's available today, which I did and it's one of the first things a user will notice when they visit the website and it's also visible on mobile without having to zoom in the page first. I also made sure there was good contrast between text and background with the lowest contrast across the entire website being a 5.4.
+**What I prioritised and why.** Marcus's customers are people on phones, mid-walk, deciding whether to stop. So the audit starts from that constraint, and I spent effort in this order:
+
+1. **Information first, on a phone.** The three things a customer must learn (who and where, open or closed, what is available today) are on the first screen without zooming. This was the owner's main complaint, so it came before everything else, including polish.
+2. **Responsive layout.** I added the missing viewport tag, replaced fixed pixel widths with relative units and fluid widths, and checked narrow screens, because a layout that needs zooming defeats the first priority.
+3. **Semantic HTML and baseline accessibility.** The original didn't use any semantic elements or have any accessibility functions which affects assistive technologies the most, which results in a bad user experience for these users.
+4. **Visual consistency.** A small set of tokens keeps the look warm and unfussy without being heavy, which matches Marcus's request that the site should not feel corporate.
+
+**Semantic HTML.** The page now uses `header`, `main`, `section` and `footer` instead of generic `div`s. Headings run in order (h1, then h2 sections, then h3 inside them), and the info-box titles are real headings. The weekly menu is a real table with `th scope="col"` headers. The FAQ triggers are `button`s with `aria-expanded` and `aria-controls`, and the answers use the `hidden` attribute, so collapsed answers are not read out.
+
+**Baseline accessibility.**
+
+- Every form field has a visible `label`, and required fields use `required`.
+- The contact form reports problems and success in a `role="status"` region instead of `alert()`, which doesn't interrupt screen-reader users.
+- The list of today's bakes is announced when it loads.
+- The scrollable table wrapper can be reached and scrolled by keyboard (`tabindex="0"`, `role="region"`, `aria-label`).
+- Images have meaningful alt text and the page language is set.
+- The lowest text contrast I measured is 5.4:1.
+
+**Visual consistency.** Colours, type sizes, spacing and widths come from CSS variables, so every value on the page comes from a small defined set. The warm browns and wheat tones fit a neighbourhood bakery. I chose a simple system font stack and avoided gradients and heavy effects so the page feels small and real. The menu table has a small minimum width (20rem), picked after testing on a phone. It only scrolls sideways inside its own wrapper when the screen is narrower than that.
+
+**Performance.** In development testing, cumulative layout shift was 0 and largest contentful paint was 0.16s. Images are compressed, and the script uses `defer`.
+
+**What I deliberately left out.** I did not add a navigation bar, because the page is short and one scroll long. 
+
