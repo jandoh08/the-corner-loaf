@@ -1,0 +1,34 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--space-7);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Verdana, sans-serif;
+  background: var(--background-color);
+  color: var(--foreground-color);
+  line-height: var(--leading-normal);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+h2 {
+  font-size: var(--text-xl);
+  color: var(--secondary-color);
+  border-bottom: var(--border-width-thick) solid var(--primary-color);
+  padding-bottom: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+
+h3 {
+  font-size: var(--text-lg);
+  color: var(--secondary-color);
+}

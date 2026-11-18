@@ -4,16 +4,36 @@
     <title>The Corner Loaf - Fresh Baked Daily</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/hero.css" />
+    <link rel="stylesheet" href="css/today.css" />
+    <link rel="stylesheet" href="css/order.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/faq.css" />
+    <link rel="stylesheet" href="css/about.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/layout.css" />
   </head>
   <body>
-    <header class="hero">
+    <header>
+      <nav class="top-bar">
+        <!-- <a href="#hero">Home</a> -->
+        <a href="#menu-section">Menu</a>
+        <a href="#order-section">Order</a>
+        <a href="#about-section">About</a>
+        <a href="#contact-section">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="hero">
       <h1>The Corner Loaf</h1>
       <p>17 Boundary Road &middot; East Legon, Accra</p>
       <p class="hero-status" id="hero-status">
         Opening hours: Mon-Fri 7am-5pm, Sat 7am-2pm
       </p>
-    </header>
+    </section>
 
     <main class="wrapper">
       <section class="today-section" aria-labelledby="today-heading">
@@ -25,7 +45,7 @@
         </div>
       </section>
 
-      <section class="order-section">
+      <section id="order-section" class="order-section">
         <h2>Place an Order</h2>
 
         <p id="order-form-help">
@@ -90,7 +110,7 @@
         <div id="order-list" aria-live="polite"><ul></ul></div>
       </section>
 
-      <section>
+      <section id="menu-section">
         <h2>This Week's Bakes</h2>
         <p>
           Every week we bake a fresh selection of breads, pastries, and sweet
@@ -199,7 +219,7 @@
         </div>
       </section>
 
-      <section>
+      <section id="about-section">
         <h2>About The Corner Loaf</h2>
         <p class="section-intro">
           Marcus started The Corner Loaf after years of baking at home for
@@ -228,7 +248,7 @@
         </div>
       </section>
 
-      <section class="contact-section">
+      <section id="contact-section" class="contact-section">
         <h2>Send Us a Message</h2>
         <p class="section-intro">
           Not sure what to order or have a special request? Send us a message

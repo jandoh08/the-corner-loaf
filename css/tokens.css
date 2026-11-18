@@ -1,0 +1,55 @@
+:root {
+  --background-color: #f9f9f9;
+  --foreground-color: #222222;
+  --primary-color: #8b4513;
+  --primary-foreground-color: #ffffff;
+  --secondary-color: #4a2c0a;
+  --accent-color: #f5deb3;
+  --destructive-color: #b3261e;
+
+  --color-orange-light: #ffe0b2;
+  --color-green-light: #c8e6c9;
+  --color-blue-light: #bbdefb;
+
+  --muted-text-color: #444444;
+  --border-color: #e0e0e0;
+  --input-border-color: #767676;
+  --shadow-color: rgba(74, 44, 10, 0.12);
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+
+  --tracking-wide: 0.1em;
+  --leading-tight: 1.4;
+  --leading-normal: 1.6;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --width-3xs: 5rem;
+  --width-2xs: 10rem;
+  --width-xs: 15rem;
+  --width-sm: 20rem;
+  --width-md: 24rem;
+  --width-lg: 32rem;
+  --width-xl: 42rem;
+  --width-2xl: 56rem;
+  --width-3xl: 72rem;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+
+  --border-width: 1px;
+  --border-width-thick: 2px;
+}

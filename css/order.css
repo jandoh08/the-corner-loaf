@@ -1,0 +1,14 @@
+#order-list {
+  margin-top: var(--space-4);
+  color: var(--secondary-color);
+  font-size: var(--text-sm);
+}
+
+#order-list ul {
+  margin: var(--space-2) 0 0;
+  padding-left: var(--space-5);
+}
+
+#order-list li {
+  margin-bottom: var(--space-1);
+}

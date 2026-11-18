@@ -1,0 +1,50 @@
+.faq-list {
+  max-width: var(--width-3xl);
+}
+
+.faq-item {
+  border: var(--border-width) solid var(--border-color);
+  background: var(--primary-foreground-color);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-3);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.faq-trigger {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0 var(--space-5) 0 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: bold;
+  color: var(--secondary-color);
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+}
+
+.faq-trigger:focus-visible {
+  outline: var(--border-width-thick) solid var(--primary-color);
+  outline-offset: var(--space-1);
+}
+
+.faq-trigger::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: var(--text-xl);
+  color: var(--primary-color);
+}
+
+.faq-item.active .faq-trigger::after {
+  content: "−";
+}
+
+.faq-body {
+  margin-top: var(--space-3);
+  color: var(--muted-text-color);
+}

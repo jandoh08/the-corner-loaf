@@ -1,0 +1,34 @@
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.menu-table {
+  width: 100%;
+  min-width: var(--width-sm);
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  background: var(--primary-foreground-color);
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.table-header {
+  background-color: var(--secondary-color);
+  color: var(--primary-foreground-color);
+}
+
+.menu-table td,
+.menu-table th {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: var(--border-width) solid var(--border-color);
+  vertical-align: top;
+}
+
+.alt-row {
+  background-color: var(--accent-color);
+}
+
+@media (max-width: 640px) {
+  .menu-table {
+    font-size: var(--text-xs);
+  }
+}
