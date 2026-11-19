@@ -1,11 +1,15 @@
 import { getOpenStatus } from "./helpers.js";
 
 export function initHeroStatus() {
-  const heroStatus = document.getElementById("hero-status");
-  if (!heroStatus) return;
+  const statusEls = document.querySelectorAll("[data-open-status]");
+  if (!statusEls.length) return;
 
   const updateStatus = () => {
-    heroStatus.textContent = getOpenStatus();
+    const text = getOpenStatus();
+    statusEls.forEach((el) => {
+      el.textContent = text;
+      el.dataset.open = text.startsWith("Open now");
+    });
   };
 
   updateStatus();
