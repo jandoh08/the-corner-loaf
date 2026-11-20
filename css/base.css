@@ -4,7 +4,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--space-8);
+  scroll-padding-top: 7rem;
 }
 
 body {
@@ -23,9 +23,8 @@ body {
 h2 {
   font-size: var(--text-xl);
   color: var(--secondary-color);
-  border-bottom: var(--border-width-thick) solid var(--primary-color);
   padding-bottom: var(--space-1);
-  margin-bottom: var(--space-4);
+  margin-bottom: 0;
 }
 
 h3 {

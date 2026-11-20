@@ -1,14 +1,220 @@
-#order-list {
-  margin-top: var(--space-4);
-  color: var(--secondary-color);
+.order-faq-link {
+  margin: 0 0 var(--space-4);
   font-size: var(--text-sm);
 }
 
-#order-list ul {
-  margin: var(--space-2) 0 0;
-  padding-left: var(--space-5);
+.order-faq-link a {
+  color: var(--primary-color);
+  font-weight: 700;
 }
 
-#order-list li {
-  margin-bottom: var(--space-1);
+@media (min-width: 48rem) {
+  .order-faq-link {
+    display: none;
+  }
+}
+
+.order-section .order-form {
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--primary-foreground-color);
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.order-type {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-1);
+  min-width: 0;
+  margin: 0;
+  padding: var(--space-1);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--accent-color);
+}
+
+.order-type-option {
+  position: relative;
+  display: block;
+}
+
+.order-type-option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.order-type-option span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-1);
+  border-radius: var(--radius-sm);
+  color: var(--secondary-color);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-align: center;
+}
+
+.order-type-option input:checked + span {
+  background: var(--primary-foreground-color);
+  color: var(--primary-color);
+  box-shadow: inset 0 0 0 var(--border-width-thick) var(--primary-color);
+}
+
+.order-type-option input:focus-visible + span {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.order-type-option input:disabled {
+  cursor: not-allowed;
+}
+
+.order-type-option input:disabled + span {
+  opacity: 0.6;
+}
+
+.order-help,
+.order-required-note {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.order-help {
+  padding: var(--space-3);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--background-color);
+  color: var(--muted-text-color);
+}
+
+.order-required-note {
+  color: var(--muted-text-color);
+}
+
+.order-section .order-form {
+  container-type: inline-size;
+}
+
+.order-fields {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.order-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.order-field[hidden] {
+  display: none;
+}
+
+.order-hint {
+  margin: 0;
+  color: var(--muted-text-color);
+  font-size: var(--text-sm);
+}
+
+.order-hint a {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+@container (min-width: 24rem) {
+  .order-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+.order-field label {
+  color: var(--secondary-color);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+}
+
+.order-form .form-field:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.order-form .form-field:disabled {
+  background: var(--background-color);
+  color: var(--muted-text-color);
+  cursor: not-allowed;
+}
+
+.stepper {
+  display: flex;
+  align-items: stretch;
+}
+
+.stepper .form-field {
+  flex: 1 1 auto;
+  min-width: 0;
+  border-radius: 0;
+  text-align: center;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.stepper .form-field::-webkit-inner-spin-button,
+.stepper .form-field::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.stepper-btn {
+  flex: none;
+  width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0;
+  border: var(--border-width) solid var(--input-border-color);
+  background: var(--accent-color);
+  color: var(--secondary-color);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.stepper-btn:first-child {
+  border-right: 0;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.stepper-btn:last-child {
+  border-left: 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.stepper-btn:hover {
+  background: var(--primary-color);
+  color: var(--primary-foreground-color);
+}
+
+.stepper-btn:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.order-form .form-submit {
+  min-height: 2.75rem;
+}
+
+.order-form .form-status a {
+  color: inherit;
 }

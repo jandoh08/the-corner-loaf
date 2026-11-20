@@ -184,70 +184,206 @@
         </div>
       </section>
 
-      <section id="order-section" class="order-section">
-        <h2>Place an Order</h2>
+      <div class="order-faq-wrapper">
+        <section
+          id="order-section"
+          class="order-section"
+          aria-labelledby="order-heading"
+        >
+          <h2 id="order-heading">Place an Order</h2>
+          <p class="section-intro">
+            Pick-up only, at 17 Boundary Road, East Legon. Your order goes to
+            Marcus on WhatsApp.
+          </p>
 
-        <p id="order-form-help">
-          Today's Order: showing only today's available bakes.
-        </p>
+          <!-- Only shown when the FAQ is stacked below (phones, enlarged text) -->
+          <p class="order-faq-link">
+            Questions about ordering?
+            <a href="#faq-section">See the FAQ below</a>.
+          </p>
 
-        <form id="order-form" class="order-form">
-          <div class="form-group">
-            <label for="order-item-select">Item:</label>
-            <select id="order-item-select" class="form-field" required>
-              <option value="">Select an item</option>
-            </select>
+          <form id="order-form" class="order-form">
+            <fieldset class="order-type">
+              <legend class="sr-only">Order type</legend>
+              <label class="order-type-option">
+                <input
+                  type="radio"
+                  name="order-type"
+                  value="today-order"
+                  checked
+                />
+                <span>Today's order</span>
+              </label>
+              <label class="order-type-option">
+                <input type="radio" name="order-type" value="pre-order" />
+                <span>Pre-order</span>
+              </label>
+            </fieldset>
+
+            <p id="order-form-help" class="order-help" aria-live="polite">
+              Today's order: showing only what is baked today.
+            </p>
+
+            <p class="order-required-note">All fields are required.</p>
+
+            <div class="order-fields">
+              <div class="order-field" id="order-day-field" hidden>
+                <label for="order-day">Collection day</label>
+                <select id="order-day" class="form-field">
+                  <option value="">Select a day</option>
+                </select>
+              </div>
+
+              <div class="order-field">
+                <label for="order-time">Collection time</label>
+                <select id="order-time" class="form-field" required>
+                  <option value="">Select a time</option>
+                </select>
+              </div>
+
+              <div class="order-field order-field--full">
+                <label for="order-item-select">Item</label>
+                <select id="order-item-select" class="form-field" required>
+                  <option value="">Select an item</option>
+                </select>
+              </div>
+
+              <div class="order-field">
+                <label for="order-quantity">Quantity</label>
+                <div class="stepper">
+                  <button
+                    type="button"
+                    class="stepper-btn"
+                    data-step="-1"
+                    aria-label="Decrease quantity"
+                  >
+                    &minus;
+                  </button>
+                  <input
+                    type="number"
+                    id="order-quantity"
+                    class="form-field"
+                    min="1"
+                    max="10"
+                    step="1"
+                    value="1"
+                    inputmode="numeric"
+                    aria-describedby="order-quantity-hint"
+                    required
+                  />
+                  <button
+                    type="button"
+                    class="stepper-btn"
+                    data-step="1"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div class="order-field">
+                <label for="order-name">Name</label>
+                <input
+                  type="text"
+                  id="order-name"
+                  class="form-field"
+                  placeholder="e.g. Kofi Kingston"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="form-submit">
+              Send order on WhatsApp
+            </button>
+            <p id="order-status" class="form-status" role="status"></p>
+          </form>
+        </section>
+        <section class="faq-list">
+          <h2>Pre-Order FAQ</h2>
+          <p class="section-intro">
+            Everything you need to know about placing a pre-order with us.
+          </p>
+
+          <div class="faq-item">
+            <button
+              type="button"
+              class="faq-trigger"
+              aria-expanded="false"
+              aria-controls="faq-advance"
+            >
+              How far in advance do I need to order?
+            </button>
+            <div class="faq-body" id="faq-advance" hidden>
+              <p>
+                We ask for at least one day's notice before your chosen
+                collection day. For large orders or custom items, two to three
+                days is better. This gives us time to plan our bake and make
+                sure everything is ready for you.
+              </p>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="order-quantity">Quantity:</label>
-            <input
-              type="number"
-              id="order-quantity"
-              class="form-field"
-              min="1"
-              value="1"
-            />
+          <div class="faq-item">
+            <button
+              type="button"
+              class="faq-trigger"
+              aria-expanded="false"
+              aria-controls="faq-collect"
+            >
+              How do I collect my order?
+            </button>
+            <div class="faq-body" id="faq-collect" hidden>
+              <p>
+                Come to the bakery at your agreed collection time. We will have
+                your order bagged and labelled. If you are running late, let us
+                know — we can usually hold orders for up to two hours after the
+                agreed time.
+              </p>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="order-name">Name:</label>
-            <input
-              type="text"
-              id="order-name"
-              class="form-field"
-              placeholder="eg. Kofi Kingston"
-              required
-            />
+          <div class="faq-item">
+            <button
+              type="button"
+              class="faq-trigger"
+              aria-expanded="false"
+              aria-controls="faq-change"
+            >
+              Can I cancel or change my order?
+            </button>
+            <div class="faq-body" id="faq-change" hidden>
+              <p>
+                Yes, but please let us know as early as possible. If we have
+                already started baking your order, we may not be able to cancel
+                it. Changes to quantity are usually fine if you give us a day's
+                notice.
+              </p>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="order-contact">Phone:</label>
-            <input
-              type="tel"
-              id="order-contact"
-              class="form-field"
-              placeholder="0551 000 000"
-              pattern="0[0-9]{3}\s?[0-9]{3}\s?[0-9]{3}"
-              title="Enter a valid phone number e.g. 0551 000 000"
-              required
-            />
+          <div class="faq-item">
+            <button
+              type="button"
+              class="faq-trigger"
+              aria-expanded="false"
+              aria-controls="faq-delivery"
+            >
+              Do you deliver?
+            </button>
+            <div class="faq-body" id="faq-delivery" hidden>
+              <p>
+                We do not currently offer delivery. All orders must be collected
+                from the bakery in person. We are looking at delivery options
+                for the future — follow us on Instagram to hear when that
+                changes.
+              </p>
+            </div>
           </div>
-
-          <div class="form-group">
-            <label for="order-type">Type:</label>
-            <select id="order-type" class="form-field" required>
-              <option value="">Select order type</option>
-              <option value="today-order" selected>Today's Order</option>
-              <option value="pre-order">Pre-Order</option>
-            </select>
-          </div>
-
-          <button type="submit" class="form-submit">Submit Order</button>
-        </form>
-
-        <div id="order-list" aria-live="polite"><ul></ul></div>
-      </section>
+        </section>
+      </div>
 
       <section id="menu-section">
         <h2>This Week's Bakes</h2>
@@ -273,88 +409,6 @@
             </thead>
             <tbody id="menu-items"></tbody>
           </table>
-        </div>
-      </section>
-
-      <section class="faq-list">
-        <h2>Pre-Order FAQ</h2>
-        <p class="section-intro">
-          Everything you need to know about placing a pre-order with us.
-        </p>
-
-        <div class="faq-item">
-          <button
-            type="button"
-            class="faq-trigger"
-            aria-expanded="false"
-            aria-controls="faq-advance"
-          >
-            How far in advance do I need to order?
-          </button>
-          <div class="faq-body" id="faq-advance" hidden>
-            <p>
-              We ask for at least one day's notice before your chosen collection
-              day. For large orders or custom items, two to three days is
-              better. This gives us time to plan our bake and make sure
-              everything is ready for you.
-            </p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button
-            type="button"
-            class="faq-trigger"
-            aria-expanded="false"
-            aria-controls="faq-collect"
-          >
-            How do I collect my order?
-          </button>
-          <div class="faq-body" id="faq-collect" hidden>
-            <p>
-              Come to the bakery at your agreed collection time. We will have
-              your order bagged and labelled. If you are running late, let us
-              know — we can usually hold orders for up to two hours after the
-              agreed time.
-            </p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button
-            type="button"
-            class="faq-trigger"
-            aria-expanded="false"
-            aria-controls="faq-change"
-          >
-            Can I cancel or change my order?
-          </button>
-          <div class="faq-body" id="faq-change" hidden>
-            <p>
-              Yes, but please let us know as early as possible. If we have
-              already started baking your order, we may not be able to cancel
-              it. Changes to quantity are usually fine if you give us a day's
-              notice.
-            </p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button
-            type="button"
-            class="faq-trigger"
-            aria-expanded="false"
-            aria-controls="faq-delivery"
-          >
-            Do you deliver?
-          </button>
-          <div class="faq-body" id="faq-delivery" hidden>
-            <p>
-              We do not currently offer delivery. All orders must be collected
-              from the bakery in person. We are looking at delivery options for
-              the future — follow us on Instagram to hear when that changes.
-            </p>
-          </div>
         </div>
       </section>
 

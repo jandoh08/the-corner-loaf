@@ -22,6 +22,24 @@
   margin-top: var(--space-6);
 }
 
+.order-faq-wrapper {
+  display: grid;
+  gap: var(--space-6);
+  max-width: var(--width-3xl);
+  margin: 0 auto;
+  margin-top: var(--space-6);
+}
+
+.wrapper .order-faq-wrapper > section {
+  margin: 0;
+  max-width: none;
+}
+
+section p {
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+}
+
 .footer {
   background-color: var(--primary-color);
   color: var(--primary-foreground-color);
@@ -53,5 +71,12 @@
   .section-intro {
     font-size: var(--text-sm);
     color: var(--muted-text-color);
+  }
+}
+
+@media (min-width: 48rem) {
+  .order-faq-wrapper {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
   }
 }

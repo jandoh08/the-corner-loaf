@@ -1,71 +1,213 @@
-import { canOrderForToday, formatPrice } from "./helpers.js";
-import { bakeItems } from "./data.js";
+import { bakeItems, openingHours, weekdays } from "./data.js";
+import { formatPrice, getBakeryNow } from "./helpers.js";
 
-function populateProducts(select, products) {
-  select.innerHTML = '<option value="">Select an item</option>';
+const WHATSAPP_NUMBER = "233551000000";
+const PICKUP_ADDRESS = "17 Boundary Road, East Legon";
+const SLOT_LENGTH = 0.5;
 
-  products.forEach((product) => {
-    const option = document.createElement("option");
-
-    option.value = product.name;
-    option.textContent = `${product.name} (${formatPrice(product)})`;
-
-    select.appendChild(option);
+function populateSelect(select, placeholder, options) {
+  select.replaceChildren(new Option(placeholder, ""));
+  options.forEach(({ value, label }) => {
+    select.append(new Option(label, value));
   });
 }
 
+const toOption = (product) => ({
+  value: product.name,
+  label: `${product.name} (${formatPrice(product)})`,
+});
+
+function formatTime(hours) {
+  const hour = Math.floor(hours);
+  const minutes = String(Math.round((hours - hour) * 60)).padStart(2, "0");
+
+  return `${hour % 12 || 12}:${minutes}${hour < 12 ? "am" : "pm"}`;
+}
+
+function getTimeSlots(day, after = 0) {
+  const hours = openingHours[day];
+  if (!hours) return [];
+
+  const slots = [];
+
+  for (
+    let time = hours.open;
+    time <= hours.close - SLOT_LENGTH;
+    time += SLOT_LENGTH
+  ) {
+    if (time > after) {
+      slots.push({ value: formatTime(time), label: formatTime(time) });
+    }
+  }
+
+  return slots;
+}
+
+function getUpcomingDays() {
+  const todayIndex = weekdays.indexOf(getBakeryNow().weekday);
+  const days = [];
+
+  for (let offset = 1; offset <= 6; offset += 1) {
+    const day = weekdays[(todayIndex + offset) % 7];
+
+    if (openingHours[day]) {
+      days.push({
+        value: day,
+        label: offset === 1 ? `Tomorrow (${day})` : day,
+      });
+    }
+  }
+
+  return days;
+}
+
 export function initOrderForm(availableToday) {
-  const orderForm = document.getElementById("order-form");
-  const orderList = document.getElementById("order-list");
-  const productSelect = document.getElementById("order-item-select");
-  const orderTypeSelect = document.getElementById("order-type");
-  const orderFormHelp = document.getElementById("order-form-help");
+  const form = document.getElementById("order-form");
+  if (!form) return;
 
-  if (!orderForm || !orderList || !productSelect || !orderTypeSelect) return;
+  const itemSelect = document.getElementById("order-item-select");
+  const daySelect = document.getElementById("order-day");
+  const dayField = document.getElementById("order-day-field");
+  const timeSelect = document.getElementById("order-time");
+  const quantity = document.getElementById("order-quantity");
+  const nameInput = document.getElementById("order-name");
+  const help = document.getElementById("order-form-help");
+  const status = document.getElementById("order-status");
+  const todayRadio = form.querySelector('input[value="today-order"]');
+  const preorderRadio = form.querySelector('input[value="pre-order"]');
 
-  const orderItems = orderList.querySelector("ul");
+  let todayAvailable = true;
+  const isTodayOrder = () => todayRadio.checked;
 
-  const updateOrderOptions = () => {
-    if (orderTypeSelect.value === "today-order") {
-      populateProducts(productSelect, availableToday);
-      orderFormHelp.textContent =
-        "Today's Order: showing only today's available bakes.";
-    } else {
-      populateProducts(productSelect, bakeItems);
-      orderFormHelp.textContent = canOrderForToday()
-        ? "Pre-Order: showing all available items."
-        : "Pre-Order: showing all available items. Orders for today are closed.";
+  const refill = (select, placeholder, options) => {
+    const previous = select.value;
+
+    populateSelect(select, placeholder, options);
+    select.disabled = options.length === 0;
+
+    if (options.some((option) => option.value === previous)) {
+      select.value = previous;
     }
   };
 
-  const setOrderDefaults = () => {
-    const todayOption = orderTypeSelect.querySelector(
-      'option[value="today-order"]',
-    );
-    const canOrderToday = canOrderForToday();
+  const updateItems = () => {
+    let products = [];
+    let placeholder = "Select an item";
 
-    todayOption.disabled = !canOrderToday;
-    orderTypeSelect.value = canOrderToday ? "today-order" : "pre-order";
-    updateOrderOptions();
+    if (isTodayOrder()) {
+      products = availableToday;
+    } else if (daySelect.value) {
+      products = bakeItems.filter((product) =>
+        product.days.includes(daySelect.value),
+      );
+    } else {
+      placeholder = "Choose a collection day first";
+    }
+
+    refill(itemSelect, placeholder, products.map(toOption));
   };
 
-  setOrderDefaults();
-  orderTypeSelect.addEventListener("change", updateOrderOptions);
+  const updateTimes = () => {
+    let slots = [];
+    let placeholder = "Select a time";
 
-  orderForm.addEventListener("submit", (event) => {
+    if (isTodayOrder()) {
+      const { weekday, time } = getBakeryNow();
+      slots = getTimeSlots(weekday, time);
+    } else if (daySelect.value) {
+      slots = getTimeSlots(daySelect.value);
+    } else {
+      placeholder = "Choose a collection day first";
+    }
+
+    refill(timeSelect, placeholder, slots);
+  };
+
+  const updateChoices = () => {
+    updateItems();
+    updateTimes();
+  };
+
+  const updateType = () => {
+    const today = isTodayOrder();
+
+    dayField.hidden = today;
+    daySelect.required = !today;
+
+    if (today) {
+      help.textContent = "Today's order: showing only what is baked today.";
+    } else {
+      help.textContent = todayAvailable
+        ? "Pre-order: pick the day you will collect, then choose from what is baked that day."
+        : "Today's pick-up times are closed. Pick the day you will collect, then choose from what is baked that day.";
+    }
+
+    updateChoices();
+  };
+
+  const setDefaults = () => {
+    const { weekday, time } = getBakeryNow();
+
+    todayAvailable = getTimeSlots(weekday, time).length > 0;
+    todayRadio.disabled = !todayAvailable;
+    (todayAvailable ? todayRadio : preorderRadio).checked = true;
+    populateSelect(daySelect, "Select a day", getUpcomingDays());
+    updateType();
+  };
+
+  setDefaults();
+
+  todayRadio.addEventListener("change", updateType);
+  preorderRadio.addEventListener("change", updateType);
+  daySelect.addEventListener("change", updateChoices);
+
+  const min = Number(quantity.min) || 1;
+  const max = Number(quantity.max) || Infinity;
+
+  quantity.addEventListener("keydown", (event) => {
+    if (["-", "+", ".", ",", "e", "E"].includes(event.key)) {
+      event.preventDefault();
+    }
+  });
+
+  form.querySelectorAll("[data-step]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const next =
+        (Number(quantity.value) || min) + Number(button.dataset.step);
+      quantity.value = Math.min(max, Math.max(min, next));
+    });
+  });
+
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const name = document.getElementById("order-name").value;
-    const contact = document.getElementById("order-contact").value;
-    const product = productSelect.value;
-    const quantity = document.getElementById("order-quantity").value;
-    const type = orderTypeSelect.selectedOptions[0].textContent;
+    const today = isTodayOrder();
+    const message = [
+      "Hello Marcus! I'd like to order from The Corner Loaf:",
+      "",
+      `• Type: ${today ? "Today's order" : "Pre-order"}`,
+      `• Collection: ${today ? "Today" : daySelect.value} at ${timeSelect.value}`,
+      `• Item: ${itemSelect.selectedOptions[0].textContent}`,
+      `• Quantity: ${quantity.value}`,
+      `• Name: ${nameInput.value.trim()}`,
+      "",
+      `Pick-up: ${PICKUP_ADDRESS}.`,
+    ].join("\n");
 
-    const item = document.createElement("li");
-    item.textContent = `${name} | ${contact} | ${quantity} × ${product} | ${type}`;
-    orderItems.appendChild(item);
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-    orderForm.reset();
-    setOrderDefaults();
+    window.open(url, "_blank", "noopener");
+
+    const fallback = document.createElement("a");
+    fallback.href = url;
+    fallback.target = "_blank";
+    fallback.rel = "noopener";
+    fallback.textContent = "Open WhatsApp";
+
+    status.classList.remove("is-error");
+    status.replaceChildren(
+      "Your order is ready in WhatsApp. Press send there to place it. Did WhatsApp not open? ",
+      fallback,
+    );
   });
 }
