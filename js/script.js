@@ -1,5 +1,4 @@
 import { initContactForm } from "./contact.js";
-import { initFaq } from "./faq.js";
 import { getAvailableToday } from "./helpers.js";
 import { initHeroStatus } from "./hero.js";
 import { renderMenuTable } from "./menu.js";
@@ -11,6 +10,5 @@ const availableToday = getAvailableToday();
 renderMenuTable();
 initHeroStatus();
 renderTodayProducts(availableToday);
-initFaq();
 initContactForm();
 initOrderForm(availableToday);

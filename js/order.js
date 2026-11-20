@@ -101,7 +101,7 @@ export function initOrderForm(availableToday) {
         product.days.includes(daySelect.value),
       );
     } else {
-      placeholder = "Choose a collection day first";
+      placeholder = "Choose a collection day";
     }
 
     refill(itemSelect, placeholder, products.map(toOption));
@@ -117,7 +117,7 @@ export function initOrderForm(availableToday) {
     } else if (daySelect.value) {
       slots = getTimeSlots(daySelect.value);
     } else {
-      placeholder = "Choose a collection day first";
+      placeholder = "Choose a collection day";
     }
 
     refill(timeSelect, placeholder, slots);

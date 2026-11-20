@@ -2,49 +2,89 @@
   max-width: var(--width-3xl);
 }
 
+.section-intro + .faq-group-title {
+  margin-top: 0;
+}
+
 .faq-item {
+  margin-bottom: var(--space-2);
   border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius-md);
   background: var(--primary-foreground-color);
+  box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+.faq-list .section-intro {
+  padding-bottom: 1.5rem;
+}
+
+.faq-item[open] {
+  border-color: var(--primary-color);
+}
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 2.75rem;
   padding: var(--space-3) var(--space-4);
-  margin-bottom: var(--space-3);
-  border-radius: var(--radius-sm);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-}
-
-.faq-trigger {
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: 0 var(--space-5) 0 0;
-  border: 0;
-  background: none;
-  font: inherit;
-  font-weight: bold;
+  border-radius: var(--radius-md);
   color: var(--secondary-color);
-  text-align: left;
+  font-weight: 700;
+  line-height: var(--leading-tight);
   cursor: pointer;
-  position: relative;
+  list-style: none;
 }
 
-.faq-trigger:focus-visible {
-  outline: var(--border-width-thick) solid var(--primary-color);
-  outline-offset: var(--space-1);
+.faq-item summary::-webkit-details-marker {
+  display: none;
 }
 
-.faq-trigger::after {
-  content: "+";
-  position: absolute;
-  right: 0;
-  top: 0;
-  font-size: var(--text-xl);
+.faq-item summary:hover {
   color: var(--primary-color);
 }
 
-.faq-item.active .faq-trigger::after {
+.faq-item summary:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* + and - in a circle. The second content line gives it empty alt text, so
+   screen readers do not read "plus"; the first line is the fallback for
+   browsers that do not understand that syntax. */
+.faq-item summary::after {
+  content: "+";
+  content: "+" / "";
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--accent-color);
+  color: var(--primary-color);
+  font-size: var(--text-lg);
+  line-height: 1;
+}
+
+.faq-item[open] summary::after {
   content: "−";
+  content: "−" / "";
 }
 
 .faq-body {
-  margin-top: var(--space-3);
+  padding: 0 var(--space-4) var(--space-4);
   color: var(--muted-text-color);
+  font-size: var(--text-sm);
+}
+
+.faq-body p {
+  margin: 0;
+}
+
+.faq-body a {
+  color: var(--primary-color);
+  font-weight: 700;
+  text-underline-offset: 0.2em;
 }

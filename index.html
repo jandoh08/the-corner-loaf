@@ -301,22 +301,43 @@
             <p id="order-status" class="form-status" role="status"></p>
           </form>
         </section>
-        <section class="faq-list">
-          <h2>Pre-Order FAQ</h2>
-          <p class="section-intro">
-            Everything you need to know about placing a pre-order with us.
-          </p>
+        <section
+          id="faq-section"
+          class="faq-list"
+          aria-labelledby="faq-heading"
+        >
+          <h2 id="faq-heading">Common Questions</h2>
+          <p class="section-intro">Quick answers about ordering.</p>
 
-          <div class="faq-item">
-            <button
-              type="button"
-              class="faq-trigger"
-              aria-expanded="false"
-              aria-controls="faq-advance"
-            >
-              How far in advance do I need to order?
-            </button>
-            <div class="faq-body" id="faq-advance" hidden>
+          <details class="faq-item" name="faq">
+            <summary>How do I place an order?</summary>
+            <div class="faq-body">
+              <p>
+                Choose Today's order or Pre-order, pick your collection time and
+                item, set the quantity and add your name. Then press "Send order
+                on WhatsApp". WhatsApp opens with your order already written,
+                and it is placed when you press send there.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" name="faq">
+            <summary>
+              What is the difference between a today's order and a pre-order?
+            </summary>
+            <div class="faq-body">
+              <p>
+                A today's order is for pick-up today and only lists what is
+                baked today. You can place one while there are pick-up times
+                left today. A pre-order is for a later day: you choose the day
+                you will collect, then pick from what is baked that day.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" name="faq">
+            <summary>How far in advance do I need to order?</summary>
+            <div class="faq-body">
               <p>
                 We ask for at least one day's notice before your chosen
                 collection day. For large orders or custom items, two to three
@@ -324,37 +345,11 @@
                 sure everything is ready for you.
               </p>
             </div>
-          </div>
+          </details>
 
-          <div class="faq-item">
-            <button
-              type="button"
-              class="faq-trigger"
-              aria-expanded="false"
-              aria-controls="faq-collect"
-            >
-              How do I collect my order?
-            </button>
-            <div class="faq-body" id="faq-collect" hidden>
-              <p>
-                Come to the bakery at your agreed collection time. We will have
-                your order bagged and labelled. If you are running late, let us
-                know — we can usually hold orders for up to two hours after the
-                agreed time.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button
-              type="button"
-              class="faq-trigger"
-              aria-expanded="false"
-              aria-controls="faq-change"
-            >
-              Can I cancel or change my order?
-            </button>
-            <div class="faq-body" id="faq-change" hidden>
+          <details class="faq-item" name="faq">
+            <summary>Can I cancel or change my order?</summary>
+            <div class="faq-body">
               <p>
                 Yes, but please let us know as early as possible. If we have
                 already started baking your order, we may not be able to cancel
@@ -362,26 +357,43 @@
                 notice.
               </p>
             </div>
-          </div>
+          </details>
 
-          <div class="faq-item">
-            <button
-              type="button"
-              class="faq-trigger"
-              aria-expanded="false"
-              aria-controls="faq-delivery"
-            >
-              Do you deliver?
-            </button>
-            <div class="faq-body" id="faq-delivery" hidden>
+          <details class="faq-item" name="faq">
+            <summary>Can I ask for something custom or a large order?</summary>
+            <div class="faq-body">
+              <p>
+                You can ask. Two to three days' notice is better for these. Send
+                us a
+                <a href="#contact-section">message</a> or write to us on
+                <a href="https://wa.me/233551000000">WhatsApp</a> with what you
+                need, and we will tell you what we can do.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" name="faq">
+            <summary>How do I collect my order?</summary>
+            <div class="faq-body">
+              <p>
+                Come to the bakery at your agreed collection time. We will have
+                your order bagged and labelled. If you are running late, let us
+                know. We can usually hold orders for up to two hours after the
+                agreed time.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" name="faq">
+            <summary>Do you deliver?</summary>
+            <div class="faq-body">
               <p>
                 We do not currently offer delivery. All orders must be collected
                 from the bakery in person. We are looking at delivery options
-                for the future — follow us on Instagram to hear when that
-                changes.
+                for the future.
               </p>
             </div>
-          </div>
+          </details>
         </section>
       </div>
 
