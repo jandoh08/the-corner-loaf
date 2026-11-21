@@ -1,4 +1,4 @@
-import { initContactForm } from "./contact.js";
+import { initContactForm, renderOpeningHours } from "./contact.js";
 import { getAvailableToday } from "./helpers.js";
 import { initHeroStatus } from "./hero.js";
 import { renderMenuTable } from "./menu.js";
@@ -12,3 +12,4 @@ initHeroStatus();
 initBakes();
 initContactForm();
 initOrderForm(availableToday);
+renderOpeningHours();

@@ -48,7 +48,7 @@
 
 .form-submit {
   display: inline-block;
-  width: 100%;
+  width: auto;
   padding: var(--space-3) var(--space-5);
   border: 0;
   border-radius: var(--radius-sm);

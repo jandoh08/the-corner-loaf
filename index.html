@@ -335,46 +335,114 @@
 
     </section>
 
-    <section id="contact-section" class="contact-section">
-      <h2>Send Us a Message</h2>
-      <p class="section-intro">
-        Not sure what to order or have a special request? Send us a message
-        and we will get back to you.
-      </p>
+    <section id="contact-section" class="contact-section" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Get in Touch with Us</h2>
 
-      <form class="contact-form">
-        <div class="form-group">
-          <label for="contact-name">Name:</label>
-          <input type="text" id="contact-name" class="form-field" required />
+      <div class="contact-layout">
+        <div class="contact-form-col">
+          <form class="contact-form" novalidate>
+            <p id="contact-form-help" class="contact-help">
+              Have a question, custom request, or want to check on a bake? Send us a message here and we will get back
+              to you on WhatsApp.
+            </p>
+
+            <p class="contact-required-note">All fields are required.</p>
+
+            <div class="contact-field">
+              <label for="contact-name">Name</label>
+              <input type="text" id="contact-name" class="form-field contact-name-field" autocomplete="name" required
+                aria-required="true" />
+            </div>
+            <div class="contact-field contact-field--full">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" class="form-field" rows="5" required aria-required="true"></textarea>
+            </div>
+
+            <button type="submit" class="form-submit contact-submit">
+              Send on WhatsApp
+            </button>
+            <p id="contact-status" class="form-status" role="status" aria-live="polite"></p>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="contact-email">Email:</label>
-          <input type="email" id="contact-email" class="form-field" required />
+
+        <div class="contact-info-col" aria-label="Bakery information">
+          <div class="contact-info-card">
+            <div class="contact-info-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path
+                  d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+              </svg>
+            </div>
+            <div class="contact-info-body">
+              <h3 class="contact-info-title">Location</h3>
+              <a href="https://maps.google.com/?q=17+Boundary+Road+East+Legon+Accra" class="contact-info-link"
+                target="_blank" rel="noopener noreferrer"
+                aria-label="17 Boundary Road, East Legon, Accra — opens in Google Maps">
+                17 Boundary Road, East Legon, Accra
+                <span class="contact-info-external" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="contact-info-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm.5 11H8v-1.5h3V7H12.5v6z" />
+              </svg>
+            </div>
+            <div class="contact-info-body">
+              <h3 class="contact-info-title">Open Hours</h3>
+              <dl class="contact-hours" id="contact-hours"></dl>
+            </div>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="contact-info-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path
+                  d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z" />
+              </svg>
+            </div>
+            <div class="contact-info-body">
+              <h3 class="contact-info-title">Direct Contact</h3>
+              <ul class="contact-links-list">
+                <li>
+                  <a href="https://wa.me/233551000000" class="contact-info-link" target="_blank"
+                    rel="noopener noreferrer" aria-label="Chat on WhatsApp: 0551 000 000 — opens in WhatsApp">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+                      fill="currentColor" aria-hidden="true" focusable="false">
+                      <path
+                        d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.359 5.016l-1.422 5.203 5.328-1.391c1.484.813 3.141 1.234 4.828 1.234h.031c5.5 0 9.969-4.469 9.969-9.969 0-2.656-1.031-5.156-2.922-7.047a9.92 9.92 0 0 0-7.031-2.25zm5.828 14.125c-.25.703-1.438 1.344-1.984 1.422-.516.078-1.156.109-1.859-.109-.438-.141-.984-.328-1.703-.641-2.984-1.297-4.938-4.297-5.094-4.5-.156-.203-1.219-1.625-1.219-3.094s.766-2.188 1.047-2.484c.281-.297.609-.375.813-.375.203 0 .406 0 .578.016.188.016.438-.063.688.516.25.594.859 2.094.938 2.25.078.156.125.344.016.547-.109.203-.156.328-.313.5-.156.172-.328.391-.469.516-.156.141-.313.297-.141.594.172.297.781 1.281 1.672 2.078 1.156 1.031 2.125 1.359 2.422 1.5.297.141.469.125.641-.078.172-.203.75-.875.953-1.172.203-.297.406-.25.688-.156.281.094 1.797.844 2.109 1 .313.156.516.234.594.359.078.141.078.797-.172 1.5z" />
+                    </svg>
+                    WhatsApp: 0551 000 000
+                  </a>
+                </li>
+                <li>
+                  <a href="tel:+233551000000" class="contact-info-link" aria-label="Call: 0551 000 000">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+                      fill="currentColor" aria-hidden="true" focusable="false">
+                      <path
+                        d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                    </svg>
+                    Call: 0551 000 000
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:thecornerloaf@email.com" class="contact-info-link"
+                    aria-label="Email us at thecornerloaf@email.com">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+                      fill="currentColor" aria-hidden="true" focusable="false">
+                      <path
+                        d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
+                    thecornerloaf@email.com
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="contact-message">Message:</label>
-          <textarea id="contact-message" class="form-field" required></textarea>
-        </div>
-        <button type="submit" class="form-submit">Send Message</button>
-        <p id="contact-status" class="form-status" role="status"></p>
-      </form>
-      <div class="info-boxes">
-        <div class="info-box">
-          <h3 class="info-box-title">Location</h3>
-          17 Boundary Road<br />
-          East Legon, Accra
-        </div>
-        <div class="info-box">
-          <h3 class="info-box-title">Open Hours</h3>
-          Monday to Friday: 7am - 5pm<br />
-          Saturday: 7am - 2pm<br />
-          Sunday: Closed
-        </div>
-        <div class="info-box">
-          <h3 class="info-box-title">Contact</h3>
-          WhatsApp: 0551 000 000<br />
-          Email: thecornerloaf@email.com
-        </div>
+
       </div>
     </section>
   </main>
