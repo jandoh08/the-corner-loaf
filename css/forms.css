@@ -50,7 +50,7 @@
   display: inline-block;
   width: auto;
   padding: var(--space-3) var(--space-5);
-  border: 0;
+  border: var(--border-width-thick) solid transparent;
   border-radius: var(--radius-sm);
   background-color: var(--primary-color);
   color: var(--primary-foreground-color);
@@ -61,6 +61,11 @@
     background-color 0.2s ease,
     transform 0.2s ease;
   align-self: flex-start;
+}
+
+.form-submit:focus-visible {
+  outline: 3px solid var(--secondary-color);
+  outline-offset: 2px;
 }
 
 .form-submit:hover {
@@ -90,5 +95,11 @@
 
   .form-group label {
     text-align: left;
+  }
+}
+
+@media (forced-colors: active) {
+  .form-submit {
+    border: 2px solid ButtonText;
   }
 }
