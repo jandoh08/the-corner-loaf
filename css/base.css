@@ -34,6 +34,13 @@ body {
   background-attachment: fixed;
 }
 
+h1 {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  color: var(--primary-color);
+  margin: 0;
+}
+
 h2 {
   font-family: var(--font-heading);
   font-size: var(--text-xl);

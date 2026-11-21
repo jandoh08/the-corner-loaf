@@ -30,21 +30,32 @@ header {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-2);
-  max-width: var(--width-3xl);
+  max-width: calc(var(--width-3xl) + 2 * var(--space-6));
   margin: 0 auto;
   padding: var(--space-2) var(--space-4);
   padding-bottom: 0;
   min-height: var(--space-7);
 }
 
-.top-bar .brand {
+.brand-heading {
+  margin: 0;
   display: inline-flex;
   align-items: center;
   flex: 1 1 0%;
-  padding: 0;
+  font-family: var(--font-heading);
   font-size: var(--text-lg);
   font-weight: 700;
   line-height: 1.2;
+}
+
+.top-bar .brand {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
   color: var(--primary-color);
   text-decoration: none;
 }
@@ -131,9 +142,9 @@ header {
     justify-content: space-between;
     align-items: center;
     gap: var(--space-1) var(--space-5);
-    max-width: var(--width-3xl);
+    max-width: calc(var(--width-3xl) + 2 * var(--space-6));
     margin: 0 auto;
-    padding: var(--space-1) var(--space-4);
+    padding: var(--space-1) var(--space-6);
   }
 
   .open-status {
@@ -183,11 +194,11 @@ header {
 
   .top-bar {
     flex-wrap: nowrap;
-    padding: 0 var(--space-4);
+    padding: 0 var(--space-6);
     min-height: 3.5rem;
   }
 
-  .top-bar .brand {
+  .brand-heading {
     font-size: var(--text-xl);
   }
 
