@@ -152,14 +152,48 @@
 }
 
 .bakes-note {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
   margin: 0 0 var(--space-4);
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: var(--border-width) solid var(--border-color);
   border-left: var(--border-width-thick) solid var(--primary-color);
   background: var(--primary-foreground-color);
+  font-size: var(--text-sm);
+  line-height: var(--leading-tight);
 }
 
-.bakes-note:empty {
-  display: none;
+.bakes-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+.bakes-status[data-open]::before {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--primary-color);
+}
+
+.bakes-status[data-open="true"]::before {
+  background: #2e7d32;
+}
+
+.bakes-status[data-open="true"] {
+  color: #1b5e20;
+}
+
+.bakes-note-message {
+  color: var(--muted-text-color);
+  font-weight: 500;
 }
 
 .day-picker {

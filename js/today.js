@@ -169,6 +169,7 @@ export function initBakes() {
     label: document.getElementById("day-label"),
     status: document.getElementById("day-status"),
     note: document.getElementById("bakes-note"),
+    noteMessage: document.getElementById("bakes-note-message"),
   };
   if (!elements.pills || !elements.products) return;
 
@@ -177,8 +178,8 @@ export function initBakes() {
   const { weekday: today } = getBakeryNow();
   const { day: startDay, isToday } = getDefaultDay();
 
-  if (!isToday) {
-    elements.note.textContent = `We're closed for today. Showing ${startDay}'s bakes.`;
+  if (!isToday && elements.noteMessage) {
+    elements.noteMessage.textContent = `· Showing ${startDay}'s bakes`;
   }
 
   const selectableDays = [...bakeDays, "All Bakes"];
@@ -202,6 +203,10 @@ export function initBakes() {
     const todayMarker = elements.pills.querySelector(".day-pill-today");
     if (todayMarker) {
       todayMarker.hidden = selectedDay === today;
+    }
+
+    if (elements.noteMessage) {
+      elements.noteMessage.textContent = "";
     }
   });
 }
