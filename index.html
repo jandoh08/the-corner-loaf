@@ -103,6 +103,17 @@
           <span id="bakes-note-message" class="bakes-note-message"></span>
         </p>
 
+        <noscript>
+          <style>
+            #today-loading { display: none !important; }
+            .day-picker { display: none !important; }
+          </style>
+          <div class="noscript-notice">
+            <p><strong>JavaScript is turned off in your browser.</strong></p>
+            <p>Here is Marcus&apos;s weekly schedule: Sourdough Country Loaf (Tue &amp; Fri), Focaccia (Mon–Wed), Cinnamon Buns (Daily), Butter Croissants (Sat only), Baguettes (Daily), and Banana Bread (Thu &amp; Sat). Call or WhatsApp <a href="https://wa.me/233551000000">0551 000 000</a> to check today&apos;s shelf or place an order.</p>
+          </div>
+        </noscript>
+
         <fieldset class="day-picker">
           <legend>Choose a day</legend>
           <div class="day-pills" id="day-pills"></div>
@@ -363,7 +374,20 @@
             </div>
             <div class="contact-info-body">
               <h3 class="contact-info-title">Open Hours</h3>
-              <dl class="contact-hours" id="contact-hours"></dl>
+              <dl class="contact-hours" id="contact-hours">
+                <div class="contact-hours-row">
+                  <dt>Mon – Fri</dt>
+                  <dd>7 am – 5 pm</dd>
+                </div>
+                <div class="contact-hours-row">
+                  <dt>Saturday</dt>
+                  <dd>7 am – 2 pm</dd>
+                </div>
+                <div class="contact-hours-row">
+                  <dt>Sunday</dt>
+                  <dd>Closed</dd>
+                </div>
+              </dl>
             </div>
           </div>
 

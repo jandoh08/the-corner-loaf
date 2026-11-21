@@ -196,6 +196,32 @@
   font-weight: 500;
 }
 
+.noscript-notice {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--border-color);
+  border-left: var(--border-width-thick) solid var(--primary-color);
+  border-radius: var(--radius-sm);
+  background: var(--primary-foreground-color);
+  color: var(--foreground-color);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+
+.noscript-notice p {
+  margin: 0 0 var(--space-2);
+}
+
+.noscript-notice p:last-child {
+  margin-bottom: 0;
+}
+
+.noscript-notice a {
+  color: var(--primary-color);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
 .day-picker {
   margin: 0 0 var(--space-4);
   padding: 0;
