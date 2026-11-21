@@ -11,20 +11,6 @@ export function formatPrice(product) {
   return product.priceUnit ? `${base} / ${product.priceUnit}` : base;
 }
 
-export function formatAvailability(days) {
-  if (bakeDays.every((day) => days.includes(day))) {
-    return "Every day";
-  }
-
-  if (days.length === 1) {
-    return `${days[0]} only`;
-  }
-
-  const lastDay = days.at(-1);
-
-  return `${days.slice(0, -1).join(", ")} & ${lastDay}`;
-}
-
 export const formatHour = (hour) =>
   `${hour % 12 || 12}${hour < 12 ? "am" : "pm"}`;
 
@@ -80,4 +66,44 @@ export function canOrderForToday() {
   const hours = openingHours[weekday];
 
   return Boolean(hours) && time < hours.close;
+}
+
+export function formatDayList(days) {
+  if (days.length === 1) return days[0];
+  return `${days.slice(0, -1).join(", ")} & ${days.at(-1)}`;
+}
+
+export function formatAvailability(days) {
+  if (bakeDays.every((day) => days.includes(day))) {
+    return "Monday to Saturday";
+  }
+
+  if (days.length === 1) {
+    return `${days[0]} only`;
+  }
+
+  return formatDayList(days);
+}
+
+export function getDefaultDay() {
+  const { weekday } = getBakeryNow();
+
+  if (canOrderForToday()) {
+    return { day: weekday, isToday: true };
+  }
+
+  const todayIndex = weekdays.indexOf(weekday);
+  for (let offset = 1; offset <= 7; offset += 1) {
+    const nextDay = weekdays[(todayIndex + offset) % 7];
+    if (openingHours[nextDay]) {
+      return { day: nextDay, isToday: false };
+    }
+  }
+
+  return { day: bakeDays[0], isToday: false };
+}
+
+export function isMobile() {
+  if (typeof window === "undefined" || !window.matchMedia) return false;
+  return window.matchMedia("(max-width: 48rem)").matches;
 }
