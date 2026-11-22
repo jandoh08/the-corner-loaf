@@ -219,13 +219,6 @@
     align-items: center;
 }
 
-.contact-hours-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0 var(--space-3);
-}
-
 .contact-hours-row dd {
     overflow-wrap: anywhere;
 }
