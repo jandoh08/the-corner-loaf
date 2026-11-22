@@ -20,6 +20,7 @@
   border-radius: var(--radius-md);
   background: var(--primary-foreground-color);
   box-shadow: 0 2px 8px var(--shadow-color);
+  container-type: inline-size;
 }
 
 .order-type {
@@ -85,6 +86,7 @@
 .order-required-note {
   margin: 0;
   font-size: var(--text-sm);
+  color: var(--muted-text-color);
 }
 
 .order-help {
@@ -95,33 +97,16 @@
   color: var(--muted-text-color);
 }
 
-.order-required-note {
-  color: var(--muted-text-color);
-}
-
-.order-section .order-form {
-  container-type: inline-size;
-}
-
 .order-field {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
+  flex: 0 1 var(--field-width, 100%);
+  max-width: 100%;
 }
 
 .order-field[hidden] {
   display: none;
-}
-
-.order-hint {
-  margin: 0;
-  color: var(--muted-text-color);
-  font-size: var(--text-sm);
-}
-
-.order-hint a {
-  color: var(--primary-color);
-  font-weight: 700;
 }
 
 .order-fields {
@@ -131,10 +116,6 @@
   gap: var(--space-4);
 }
 
-.order-field {
-  flex: 0 1 var(--field-width, 100%);
-  max-width: 100%;
-}
 
 .order-field--day {
   --field-width: 14rem;

@@ -35,6 +35,7 @@
 .contact-required-note {
     margin: 0;
     font-size: var(--text-sm);
+    color: var(--muted-text-color);
 }
 
 .contact-help {
@@ -44,10 +45,6 @@
     background: var(--background-color);
     color: var(--muted-text-color);
     line-height: var(--leading-normal);
-}
-
-.contact-required-note {
-    color: var(--muted-text-color);
 }
 
 .contact-field {
@@ -204,6 +201,7 @@
 .contact-hours-row dd {
     margin: 0;
     color: var(--foreground-color);
+    overflow-wrap: anywhere;
 }
 
 .contact-links-list {
@@ -217,10 +215,6 @@
 
 .contact-links-list .contact-info-link {
     align-items: center;
-}
-
-.contact-hours-row dd {
-    overflow-wrap: anywhere;
 }
 
 @media (forced-colors: active) {

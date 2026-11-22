@@ -7,22 +7,6 @@
   margin: 0;
 }
 
-.form-group {
-  display: grid;
-  grid-template-columns: var(--width-3xs) minmax(0, 1fr);
-  gap: var(--space-1);
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.form-group label {
-  color: var(--secondary-color);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  text-align: left;
-  line-height: var(--leading-tight);
-}
-
 .form-field {
   width: 100%;
   padding: var(--space-3) var(--space-4);
@@ -103,18 +87,6 @@
 .order-form .form-field,
 .contact-form .form-field {
   max-width: 100%;
-}
-
-
-@media (max-width: 640px) {
-  .form-group {
-    grid-template-columns: 1fr;
-    gap: var(--space-2);
-  }
-
-  .form-group label {
-    text-align: left;
-  }
 }
 
 @media (forced-colors: active) {
