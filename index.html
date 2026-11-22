@@ -195,28 +195,28 @@
           <p class="order-required-note">All fields are required.</p>
 
           <div class="order-fields">
-            <div class="order-field" id="order-day-field" hidden>
+            <div class="order-field order-field--day" id="order-day-field" hidden>
               <label for="order-day">Collection day</label>
               <select id="order-day" class="form-field">
                 <option value="">Select a day</option>
               </select>
             </div>
 
-            <div class="order-field">
+            <div class="order-field order-field--time">
               <label for="order-time">Collection time</label>
               <select id="order-time" class="form-field" required>
                 <option value="">Select a time</option>
               </select>
             </div>
 
-            <div class="order-field">
+            <div class="order-field order-field--item">
               <label for="order-item-select">Item</label>
               <select id="order-item-select" class="form-field" required>
                 <option value="">Select an item</option>
               </select>
             </div>
 
-            <div class="order-field">
+            <div class="order-field order-field--quantity">
               <label for="order-quantity">Quantity (up to 10) </label>
               <div class="stepper">
                 <button type="button" class="stepper-btn" data-step="-1" aria-label="Decrease quantity">
@@ -230,10 +230,9 @@
               </div>
             </div>
 
-            <div class="order-field">
+            <div class="order-field order-field--name">
               <label for="order-name">Name</label>
-              <input type="text" id="order-name" class="form-field" placeholder="e.g. Kofi Kingston" autocomplete="name"
-                required />
+              <input type="text" id="order-name" class="form-field" autocomplete="name" required />
             </div>
           </div>
 

@@ -130,11 +130,36 @@
   font-weight: 700;
 }
 
-@container (min-width: 24rem) {
-  .order-fields {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
-  }
+.order-fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.order-field {
+  flex: 0 1 var(--field-width, 100%);
+  max-width: 100%;
+}
+
+.order-field--day {
+  --field-width: 14rem;
+}
+
+.order-field--time {
+  --field-width: 9.5rem;
+}
+
+.order-field--item {
+  --field-width: 18rem;
+}
+
+.order-field--quantity {
+  --field-width: 9rem;
+}
+
+.order-field--name {
+  --field-width: 15rem;
 }
 
 .order-field label {
