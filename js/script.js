@@ -16,7 +16,14 @@ const header = document.querySelector("header");
 const infoBar = document.querySelector(".info-bar");
 
 if (header && infoBar && "ResizeObserver" in window) {
-    new ResizeObserver(() => {
+    const infoBarObserver = new ResizeObserver(() => {
         header.style.setProperty("--info-bar-height", `${infoBar.offsetHeight}px`);
-    }).observe(infoBar);
+    });
+
+    infoBarObserver.observe(infoBar);
+
+    window.addEventListener("pagehide", () => infoBarObserver.disconnect());
+    window.addEventListener("pageshow", (event) => {
+        if (event.persisted) infoBarObserver.observe(infoBar);
+    });
 }
