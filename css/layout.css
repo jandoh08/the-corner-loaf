@@ -1,8 +1,9 @@
 .wrapper {
+  --wrapper-pad: var(--space-6);
   width: 100%;
   margin: 0 auto;
   background-color: var(--background-color);
-  padding: var(--space-6) var(--space-6) var(--space-8);
+  padding: var(--space-6) var(--wrapper-pad) var(--space-8);
 }
 
 .wrapper section {
@@ -12,13 +13,13 @@
 }
 
 .wrapper .today-section {
-  margin-left: calc(-1 * var(--space-6));
-  margin-right: calc(-1 * var(--space-6));
+  margin-left: calc(-1 * var(--wrapper-pad));
+  margin-right: calc(-1 * var(--wrapper-pad));
   margin-top: calc(-1 * var(--space-6));
   max-width: unset;
 }
 
-.wrapper section + section {
+.wrapper section+section {
   margin-top: var(--space-6);
 }
 
@@ -30,7 +31,7 @@
   margin-top: var(--space-6);
 }
 
-.wrapper .order-faq-wrapper > section {
+.wrapper .order-faq-wrapper>section {
   margin: 0;
   max-width: none;
 }
@@ -57,13 +58,7 @@ section p {
 
 @media (max-width: 640px) {
   .wrapper {
-    padding-left: var(--space-4);
-    padding-right: var(--space-4);
-  }
-
-  .wrapper .today-section {
-    margin-left: calc(-1 * var(--space-4));
-    margin-right: calc(-1 * var(--space-4));
+    --wrapper-pad: var(--space-4);
   }
 }
 
