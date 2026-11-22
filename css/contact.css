@@ -63,7 +63,7 @@
     line-height: var(--leading-tight);
 }
 
-.contact-name-field {
+.contact-form .contact-name-field {
     width: 100%;
     max-width: min(100%, var(--width-xs));
 }
@@ -175,12 +175,6 @@
     outline: 3px solid var(--secondary-color);
     outline-offset: 2px;
     border-radius: var(--radius-sm);
-}
-
-.contact-info-external {
-    font-size: var(--text-xs);
-    line-height: 1.8;
-    opacity: 0.7;
 }
 
 .contact-hours {
