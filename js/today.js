@@ -34,6 +34,8 @@ function createProductCard(product, day) {
   image.className = "product-image";
   image.src = product.image;
   image.alt = product.imageAlt;
+  image.width = 300;
+  image.height = 402;
 
   const details = document.createElement("div");
   details.className = "product-details";
