@@ -59,7 +59,7 @@ function createProductCard(product, day) {
   const tag = document.createElement("span");
   tag.className = "product-tag";
   if (product.days.length === bakeDays.length) {
-    tag.textContent = "Baked every day (Mon–Sat)";
+    tag.textContent = "Baked every day (Monday to Saturday)";
   } else if (product.days.length === 1) {
     tag.textContent = `${product.days[0]}s only`;
   } else if (day === "All Bakes") {
