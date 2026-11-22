@@ -4,7 +4,8 @@ import {
   formatPrice,
   getBakeryNow,
   getDefaultDay,
-  getOpenStatusSentence
+  getNextBakeDay,
+  getOpenStatusSentence,
 } from "./helpers.js";
 
 function createAccessiblePrice(product, className = "product-price") {
@@ -111,9 +112,6 @@ function createDayPill(day, { isToday, isSelected }) {
     marker.setAttribute("aria-hidden", "true");
     marker.textContent = "Today";
 
-    if (isSelected) {
-      marker.hidden = true;
-    }
     text.append(marker);
   }
 
@@ -121,13 +119,14 @@ function createDayPill(day, { isToday, isSelected }) {
   return label;
 }
 
-function renderDay(day, today, elements) {
-  const isAll = day === "All Bakes";
-  const items = isAll
+function getDayItems(day) {
+  return day === "All Bakes"
     ? bakeItems
     : bakeItems.filter((product) => product.days.includes(day));
-  const isSelectedToday = day === today;
-  const countStr = `${items.length} ${items.length === 1 ? "bake" : "bakes"}`;
+}
+
+function renderDay(day, today, items, elements) {
+  const isAll = day === "All Bakes";
 
   if (elements.label) {
     elements.label.replaceChildren();
@@ -140,7 +139,7 @@ function renderDay(day, today, elements) {
     name.textContent = isAll ? "All Bakes This Week" : day;
     titleGroup.appendChild(name);
 
-    if (isSelectedToday) {
+    if (day === today) {
       const todayBadge = document.createElement("span");
       todayBadge.className = "day-label-today-badge";
       todayBadge.setAttribute("aria-hidden", "true");
@@ -152,17 +151,39 @@ function renderDay(day, today, elements) {
   }
 
   if (items.length === 0) {
+    const nextDay = isAll ? null : getNextBakeDay(day);
     const empty = document.createElement("p");
     empty.className = "today-empty";
-    empty.textContent = `Nothing is scheduled for ${day}. Check back soon.`;
+
+    if (isAll) {
+      empty.textContent = "No bakes are scheduled this week.";
+    } else if (nextDay) {
+      empty.textContent = `Nothing is scheduled for ${day}. The next bakes are on ${nextDay}.`;
+    } else {
+      empty.textContent = `Nothing is scheduled for ${day}.`;
+    }
+
     elements.products.replaceChildren(empty);
-    return `${day}: nothing scheduled`;
+    return;
   }
 
   elements.products.replaceChildren(
     ...items.map((product) => createProductCard(product, day)),
   );
-  return `${isAll ? "All bakes" : day}${isSelectedToday ? " (today)" : ""}: ${countStr}`;
+}
+
+function describeDay(day, today, itemCount) {
+  if (itemCount === 0) return `${day}: nothing scheduled`;
+
+  const countStr = `${itemCount} ${itemCount === 1 ? "bake" : "bakes"}`;
+  const label = day === "All Bakes" ? "All bakes" : day;
+
+  return `${label}${day === today ? " (today)" : ""}: ${countStr}`;
+}
+
+function updateTodayMarker(pills, selectedDay, today) {
+  const marker = pills.querySelector(".day-pill-today");
+  if (marker) marker.hidden = selectedDay === today;
 }
 
 export function initBakes() {
@@ -203,17 +224,22 @@ export function initBakes() {
     ),
   );
 
-  renderDay(startDay, today, elements);
+  const showDay = (day) => {
+    const items = getDayItems(day);
+
+    renderDay(day, today, items, elements);
+    updateTodayMarker(elements.pills, day, today);
+
+    return items.length;
+  };
+
+  showDay(startDay);
 
   elements.pills.addEventListener("change", (event) => {
     const selectedDay = event.target.value;
-    const message = renderDay(selectedDay, today, elements);
-    elements.status.textContent = message;
+    const itemCount = showDay(selectedDay);
 
-    const todayMarker = elements.pills.querySelector(".day-pill-today");
-    if (todayMarker) {
-      todayMarker.hidden = selectedDay === today;
-    }
+    elements.status.textContent = describeDay(selectedDay, today, itemCount);
 
     if (elements.noteMessage) {
       elements.noteMessage.textContent = "";
