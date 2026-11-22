@@ -28,10 +28,6 @@ body {
   background: var(--background-color);
   color: var(--foreground-color);
   line-height: var(--leading-normal);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 h1 {
