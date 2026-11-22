@@ -22,38 +22,74 @@ export function getBakeryNow(date = new Date()) {
     hourCycle: "h23",
     timeZone: bakeryTimeZone,
   }).formatToParts(date);
-  const get = (type) => parts.find((part) => part.type === type).value;
+  const get = (type) => parts.find((part) => part.type === type)?.value ?? "";
 
   return {
     weekday: get("weekday"),
-    time: Number(get("hour")) + Number(get("minute")) / 60,
+    time: (Number(get("hour")) || 0) + (Number(get("minute")) || 0) / 60,
   };
 }
 
-export function getOpenStatus(date = new Date()) {
+function findNextOpenDay(weekday) {
+  const todayIndex = weekdays.indexOf(weekday);
+
+  for (let offset = 1; offset <= 7; offset += 1) {
+    const day = weekdays[(todayIndex + offset) % 7];
+    const hours = openingHours[day];
+
+    if (hours) return { day, offset, opens: hours.open };
+  }
+
+  return null;
+}
+
+function getOpenState(date = new Date()) {
   const { weekday, time } = getBakeryNow(date);
   const hours = openingHours[weekday];
 
   if (hours && time >= hours.open && time < hours.close) {
-    return `Open now · Closes ${formatHour(hours.close)}`;
+    return { kind: "open", closes: hours.close };
   }
 
   if (hours && time < hours.open) {
-    return `Closed · Opens today at ${formatHour(hours.open)}`;
+    return { kind: "opens-today", opens: hours.open };
   }
+  const next = findNextOpenDay(weekday);
+  return next ? { kind: "opens-later", ...next } : { kind: "closed" };
+}
 
-  const todayIndex = weekdays.indexOf(weekday);
-  for (let offset = 1; offset <= 7; offset += 1) {
-    const nextDay = weekdays[(todayIndex + offset) % 7];
-    const nextHours = openingHours[nextDay];
+export function getOpenStatus(date = new Date()) {
+  const state = getOpenState(date);
 
-    if (nextHours) {
-      const when = offset === 1 ? "tomorrow" : nextDay;
-      return `Closed · Opens ${when} at ${formatHour(nextHours.open)}`;
+  switch (state.kind) {
+    case "open":
+      return `Open now · Closes ${formatHour(state.closes)}`;
+    case "opens-today":
+      return `Closed · Opens today at ${formatHour(state.opens)}`;
+    case "opens-later": {
+      const when = state.offset === 1 ? "tomorrow" : state.day;
+      return `Closed · Opens ${when} at ${formatHour(state.opens)}`;
     }
+    default:
+      return "Closed";
   }
+}
 
-  return "Closed";
+export function getOpenStatusSentence(date = new Date()) {
+  const state = getOpenState(date);
+
+  switch (state.kind) {
+    case "open":
+      return `The bakery is open now and closes at ${formatHour(state.closes)}.`;
+    case "opens-today":
+      return `The bakery is closed right now and opens today at ${formatHour(state.opens)}.`;
+    case "opens-later": {
+      const when = state.offset === 1 ? "tomorrow" : `on ${state.day}`;
+      return `The bakery is closed right now and opens ${when} at ${formatHour(state.opens)}.`;
+    }
+    default:
+      return "The bakery is closed.";
+  }
 }
 
 export function getAvailableToday() {
@@ -73,18 +109,6 @@ export function formatDayList(days) {
   return `${days.slice(0, -1).join(", ")} & ${days.at(-1)}`;
 }
 
-export function formatAvailability(days) {
-  if (bakeDays.every((day) => days.includes(day))) {
-    return "Monday to Saturday";
-  }
-
-  if (days.length === 1) {
-    return `${days[0]} only`;
-  }
-
-  return formatDayList(days);
-}
-
 export function getDefaultDay() {
   const { weekday } = getBakeryNow();
 
@@ -92,45 +116,20 @@ export function getDefaultDay() {
     return { day: weekday, isToday: true };
   }
 
-  const todayIndex = weekdays.indexOf(weekday);
-  for (let offset = 1; offset <= 7; offset += 1) {
-    const nextDay = weekdays[(todayIndex + offset) % 7];
-    if (openingHours[nextDay]) {
-      return { day: nextDay, isToday: false };
+  const next = findNextOpenDay(weekday);
+  return { day: next ? next.day : bakeDays[0], isToday: false };
+}
+
+export function getNextBakeDay(day) {
+  const startIndex = bakeDays.indexOf(day);
+
+  for (let offset = 1; offset <= bakeDays.length; offset += 1) {
+    const candidate = bakeDays[(startIndex + offset) % bakeDays.length];
+
+    if (bakeItems.some((product) => product.days.includes(candidate))) {
+      return candidate;
     }
   }
 
-  return { day: bakeDays[0], isToday: false };
-}
-
-export function isMobile() {
-  if (typeof window === "undefined" || !window.matchMedia) return false;
-  return window.matchMedia("(max-width: 48rem)").matches;
-}
-
-
-export function getOpenStatusSentence(date = new Date()) {
-  const { weekday, time } = getBakeryNow(date);
-  const hours = openingHours[weekday];
-
-  if (hours && time >= hours.open && time < hours.close) {
-    return `The bakery is open now and closes at ${formatHour(hours.close)}.`;
-  }
-
-  if (hours && time < hours.open) {
-    return `The bakery is closed right now and opens today at ${formatHour(hours.open)}.`;
-  }
-
-  const todayIndex = weekdays.indexOf(weekday);
-  for (let offset = 1; offset <= 7; offset += 1) {
-    const nextDay = weekdays[(todayIndex + offset) % 7];
-    const nextHours = openingHours[nextDay];
-
-    if (nextHours) {
-      const when = offset === 1 ? "tomorrow" : `on ${nextDay}`;
-      return `The bakery is closed right now and opens ${when} at ${formatHour(nextHours.open)}.`;
-    }
-  }
-
-  return "The bakery is closed.";
+  return null;
 }
