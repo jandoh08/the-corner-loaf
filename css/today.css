@@ -127,7 +127,7 @@
   align-self: flex-start;
   padding: 0.125rem var(--space-2);
   border-radius: var(--radius-sm);
-  background: #fdfaf5;
+  background: var(--surface-warm-color);
   border: 1px solid var(--border-color);
   color: var(--secondary-color);
   font-size: var(--text-xs);
@@ -188,11 +188,11 @@
 }
 
 .bakes-status[data-open="true"]::before {
-  background: #2e7d32;
+  background: var(--open-color);
 }
 
 .bakes-status[data-open="true"] {
-  color: #1b5e20;
+  color: var(--open-text-color);
 }
 
 .bakes-note-message {
