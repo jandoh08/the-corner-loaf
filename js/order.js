@@ -162,7 +162,19 @@ export function initOrderForm(availableToday) {
   daySelect.addEventListener("change", updateChoices);
 
   const min = Number(quantity.min) || 1;
-  const max = Number(quantity.max) || Infinity;
+  const max = Number(quantity.max) || 10;
+
+  const clampQuantity = () => {
+    const value = Math.trunc(Number(quantity.value));
+
+    if (!Number.isFinite(value) || value < min) {
+      quantity.value = min;
+    } else {
+      quantity.value = Math.min(max, value);
+    }
+  };
+
+  quantity.addEventListener("change", clampQuantity);
 
   quantity.addEventListener("keydown", (event) => {
     if (["-", "+", ".", ",", "e", "E"].includes(event.key)) {
@@ -180,6 +192,13 @@ export function initOrderForm(availableToday) {
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
+
+    if (Number(quantity.value) > max) {
+      status.classList.add("is-error");
+      status.textContent = `The most you can order here is ${max} per order. For more, send us a message.`;
+      quantity.focus();
+      return;
+    }
 
     const today = isTodayOrder();
     const message = [

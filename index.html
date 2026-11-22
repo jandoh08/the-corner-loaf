@@ -13,11 +13,20 @@
   <link rel="stylesheet" href="css/header.css" />
   <link rel="stylesheet" href="css/today.css" />
   <link rel="stylesheet" href="css/order.css" />
-  <link rel="stylesheet" href="css/menu.css" />
   <link rel="stylesheet" href="css/faq.css" />
   <link rel="stylesheet" href="css/about.css" />
   <link rel="stylesheet" href="css/forms.css" />
   <link rel="stylesheet" href="css/contact.css" />
+  <noscript>
+    <style>
+      #today-loading,
+      .day-picker,
+      .order-form,
+      .contact-form {
+        display: none;
+      }
+    </style>
+  </noscript>
 </head>
 
 <body>
@@ -104,13 +113,24 @@
         </p>
 
         <noscript>
-          <style>
-            #today-loading { display: none !important; }
-            .day-picker { display: none !important; }
-          </style>
           <div class="noscript-notice">
-            <p><strong>JavaScript is turned off in your browser.</strong></p>
-            <p>Here is Marcus&apos;s weekly schedule: Sourdough Country Loaf (Tue &amp; Fri), Focaccia (Mon–Wed), Cinnamon Buns (Daily), Butter Croissants (Sat only), Baguettes (Daily), and Banana Bread (Thu &amp; Sat). Call or WhatsApp <a href="https://wa.me/233551000000">0551 000 000</a> to check today&apos;s shelf or place an order.</p>
+            <p>
+              <strong>JavaScript is turned off in your browser.</strong> The day-by-day
+              view needs it, so here is the weekly schedule instead:
+            </p>
+            <ul>
+              <li>Sourdough Loaf: Tuesday &amp; Friday</li>
+              <li>Whole Wheat Loaf: Monday, Wednesday &amp; Friday</li>
+              <li>Chin Chin: Monday to Saturday</li>
+              <li>Butter Croissants: Saturday only</li>
+              <li>Banana Bread: Thursday &amp; Saturday</li>
+              <li>Meat Pies: Wednesday &amp; Friday</li>
+            </ul>
+            <p>
+              Closed on Sundays. To check today&apos;s shelf or place an order, call
+              <a href="tel:+233551000000">0551 000 000</a> or message us on
+              <a href="https://wa.me/233551000000">WhatsApp</a>.
+            </p>
           </div>
         </noscript>
 
@@ -143,6 +163,17 @@
           Questions about ordering?
           <a href="#faq-section">See the FAQ below</a>.
         </p>
+
+        <noscript>
+          <div class="noscript-notice">
+            <p>
+              The order form needs JavaScript. To order, message us on
+              <a href="https://wa.me/233551000000">WhatsApp</a> or call
+              <a href="tel:+233551000000">0551 000 000</a> with what you'd like and
+              when you'll collect it.
+            </p>
+          </div>
+        </noscript>
 
         <form id="order-form" class="order-form">
           <fieldset class="order-type">
@@ -178,7 +209,7 @@
               </select>
             </div>
 
-            <div class="order-field order-field--full">
+            <div class="order-field">
               <label for="order-item-select">Item</label>
               <select id="order-item-select" class="form-field" required>
                 <option value="">Select an item</option>
@@ -186,13 +217,13 @@
             </div>
 
             <div class="order-field">
-              <label for="order-quantity">Quantity</label>
+              <label for="order-quantity">Quantity (up to 10) </label>
               <div class="stepper">
                 <button type="button" class="stepper-btn" data-step="-1" aria-label="Decrease quantity">
                   &minus;
                 </button>
                 <input type="number" id="order-quantity" class="form-field" min="1" max="10" step="1" value="1"
-                  inputmode="numeric" aria-describedby="order-quantity-hint" required />
+                  inputmode="numeric" required />
                 <button type="button" class="stepper-btn" data-step="1" aria-label="Increase quantity">
                   +
                 </button>
@@ -280,6 +311,20 @@
         </details>
 
         <details class="faq-item" name="faq">
+          <summary>Is there a limit on how many I can order?</summary>
+          <div class="faq-body">
+            <p>
+              The order form takes one item at a time, up to 10 of that item per
+              order. For several different items, send one order for each. For
+              anything bigger, send us a
+              <a href="#contact-section">message</a> or write to us on
+              <a href="https://wa.me/233551000000">WhatsApp</a>, ideally two to three
+              days ahead, and we will tell you what we can do.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq-item" name="faq">
           <summary>How do I collect my order?</summary>
           <div class="faq-body">
             <p>
@@ -321,6 +366,14 @@
       <h2 id="contact-heading">Get in Touch with Us</h2>
 
       <div class="contact-layout">
+        <noscript>
+          <div class="noscript-notice">
+            <p>
+              The message form needs JavaScript. You can reach us on WhatsApp, by
+              phone or by email using the details beside it.
+            </p>
+          </div>
+        </noscript>
         <div class="contact-form-col">
           <form class="contact-form" novalidate>
             <p id="contact-form-help" class="contact-help">
@@ -347,7 +400,7 @@
           </form>
         </div>
 
-        <div class="contact-info-col" aria-label="Bakery information">
+        <div class="contact-info-col">
           <div class="contact-info-card">
             <div class="contact-info-icon" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">

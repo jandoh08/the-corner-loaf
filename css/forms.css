@@ -87,6 +87,22 @@
   color: var(--destructive-color);
 }
 
+.order-section .order-form,
+.contact-form {
+  padding: min(var(--space-5), 4vw);
+}
+
+.order-field,
+.contact-field {
+  min-width: 0;
+}
+
+.order-form .form-field,
+.contact-form .form-field {
+  max-width: 100%;
+}
+
+
 @media (max-width: 640px) {
   .form-group {
     grid-template-columns: 1fr;
@@ -102,4 +118,9 @@
   .form-submit {
     border: 2px solid ButtonText;
   }
+}
+
+.order-form .stepper .form-field {
+  min-width: calc(3ch + 2 * var(--space-1));
+  padding-inline: var(--space-1);
 }

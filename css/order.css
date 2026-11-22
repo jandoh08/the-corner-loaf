@@ -16,7 +16,6 @@
 
 .order-section .order-form {
   gap: var(--space-4);
-  padding: var(--space-5);
   border: var(--border-width) solid var(--border-color);
   border-radius: var(--radius-md);
   background: var(--primary-foreground-color);
@@ -63,13 +62,13 @@
   text-align: center;
 }
 
-.order-type-option input:checked + span {
+.order-type-option input:checked+span {
   background: var(--primary-foreground-color);
   color: var(--primary-color);
   box-shadow: inset 0 0 0 var(--border-width-thick) var(--primary-color);
 }
 
-.order-type-option input:focus-visible + span {
+.order-type-option input:focus-visible+span {
   outline: 3px solid var(--primary-color);
   outline-offset: 2px;
 }
@@ -78,7 +77,7 @@
   cursor: not-allowed;
 }
 
-.order-type-option input:disabled + span {
+.order-type-option input:disabled+span {
   opacity: 0.6;
 }
 
@@ -106,6 +105,7 @@
 
 .order-fields {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-4);
 }
 
@@ -177,8 +177,8 @@
 
 .stepper-btn {
   flex: none;
-  width: 2.75rem;
-  min-height: 2.75rem;
+  width: 44px;
+  min-height: 44px;
   padding: 0;
   border: var(--border-width) solid var(--input-border-color);
   background: var(--accent-color);

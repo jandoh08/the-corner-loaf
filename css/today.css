@@ -222,6 +222,11 @@
   text-decoration: underline;
 }
 
+.noscript-notice ul {
+  margin: 0 0 var(--space-2);
+  padding-left: var(--space-5);
+}
+
 .day-picker {
   margin: 0 0 var(--space-4);
   padding: 0;
@@ -344,7 +349,7 @@
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 22rem) {
   .product-card {
     flex-direction: column;
   }
