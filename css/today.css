@@ -49,7 +49,6 @@
   align-items: stretch;
   width: 100%;
   flex: 1;
-  overflow: hidden;
   border: var(--border-width) solid var(--border-color);
   border-radius: var(--radius-md);
   background: var(--primary-foreground-color);
@@ -70,6 +69,7 @@
   height: auto;
   object-fit: cover;
   background: var(--accent-color);
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
 }
 
 .product-details {
@@ -367,6 +367,7 @@
     max-width: 100%;
     height: 7.5rem;
     flex: none;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
   }
 }
 

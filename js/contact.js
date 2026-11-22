@@ -21,6 +21,13 @@ export function initContactForm() {
   contactForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
+    const fail = (field, message) => {
+      field.setAttribute("aria-invalid", "true");
+      field.setAttribute("aria-describedby", "contact-status");
+      showStatus(message, true);
+      field.focus();
+    };
+
     const nameEl = document.getElementById("contact-name");
     const messageEl = document.getElementById("contact-message");
 
@@ -28,14 +35,12 @@ export function initContactForm() {
     const message = messageEl.value.trim();
 
     if (!name) {
-      showStatus("Please enter your name.", true);
-      nameEl.focus();
+      fail(nameEl, "Please enter your name.");
       return;
     }
 
     if (!message) {
-      showStatus("Please enter a message.", true);
-      messageEl.focus();
+      fail(messageEl, "Please enter a message.");
       return;
     }
 

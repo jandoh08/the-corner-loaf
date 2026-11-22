@@ -41,7 +41,6 @@
 }
 
 .form-field:focus {
-  outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 var(--border-width-thick) rgba(139, 69, 19, 0.12);
 }
@@ -64,8 +63,12 @@
 }
 
 .form-submit:focus-visible {
-  outline: 3px solid var(--secondary-color);
+  outline: 3px solid var(--primary-color);
   outline-offset: 2px;
+}
+
+.form-field:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .form-submit:hover {

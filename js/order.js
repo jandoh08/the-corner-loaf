@@ -1,5 +1,5 @@
 import { bakeItems, openingHours, weekdays } from "./data.js";
-import { formatPrice, getBakeryNow } from "./helpers.js";
+import { getBakeryNow } from "./helpers.js";
 
 const WHATSAPP_NUMBER = "233551000000";
 const PICKUP_ADDRESS = "17 Boundary Road, East Legon";
@@ -12,9 +12,12 @@ function populateSelect(select, placeholder, options) {
   });
 }
 
+const spokenPrice = (product) =>
+  `${product.price} cedis${product.priceUnit ? ` per ${product.priceUnit}` : ""}`;
+
 const toOption = (product) => ({
   value: product.name,
-  label: `${product.name} (${formatPrice(product)})`,
+  label: `${product.name} (${spokenPrice(product)})`,
 });
 
 function formatTime(hours) {
