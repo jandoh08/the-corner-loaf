@@ -97,7 +97,7 @@ export function getAvailableToday() {
   return bakeItems.filter((product) => product.days.includes(weekday));
 }
 
-export function canOrderForToday() {
+function canOrderForToday() {
   const { weekday, time } = getBakeryNow();
   const hours = openingHours[weekday];
 
