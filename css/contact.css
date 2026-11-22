@@ -1,11 +1,14 @@
 .contact-layout {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--space-6);
+    width: 100%;
+    min-width: 0;
 }
 
 @media (min-width: 48rem) {
     .contact-layout {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         align-items: start;
     }
 }
@@ -17,7 +20,9 @@
 
 .contact-form {
     width: 100%;
-    max-width: none;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     gap: var(--space-4);
     padding: var(--space-5);
     border: var(--border-width) solid var(--border-color);
@@ -60,8 +65,8 @@
 }
 
 .contact-name-field {
-    max-width: var(--width-xs);
     width: 100%;
+    max-width: min(100%, var(--width-xs));
 }
 
 .contact-field textarea.form-field {
@@ -78,8 +83,13 @@
 .contact-submit {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-2);
     align-self: flex-start;
+    max-width: 100%;
+    white-space: normal;
+    word-break: break-word;
+    text-align: center;
 }
 
 .contact-submit:focus-visible {
@@ -87,14 +97,18 @@
     outline-offset: 2px;
 }
 
+.contact-form-col,
 .contact-info-col {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+    min-width: 0;
+    width: 100%;
 }
 
 .contact-info-card {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--space-3);
     align-items: flex-start;
     padding: var(--space-4);
@@ -102,6 +116,9 @@
     background: var(--primary-foreground-color);
     border: var(--border-width) solid var(--border-color);
     box-shadow: 0 2px 6px var(--shadow-color);
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .contact-info-icon {
@@ -117,8 +134,9 @@
 }
 
 .contact-info-body {
-    flex: 1;
+    flex: 1 1 12rem;
     min-width: 0;
+    max-width: 100%;
 }
 
 .contact-info-title {
@@ -132,14 +150,22 @@
 
 .contact-info-link {
     display: inline-flex;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
     gap: var(--space-1);
     color: var(--primary-color);
     font-size: var(--text-sm);
     line-height: var(--leading-normal);
     text-decoration: underline;
     text-underline-offset: 2px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
     transition: color 0.15s ease;
+}
+
+.contact-info-link svg {
+    flex-shrink: 0;
 }
 
 .contact-info-link:hover {
