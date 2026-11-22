@@ -218,3 +218,32 @@
 .order-form .form-status a {
   color: inherit;
 }
+
+@media (forced-colors: active) {
+  .order-type {
+    border: 1px solid ButtonText;
+  }
+
+  .order-type-option span {
+    border: 2px solid ButtonText;
+  }
+
+  .order-type-option input:checked+span {
+    border-color: Highlight;
+    background: Highlight;
+    color: HighlightText;
+    forced-color-adjust: none;
+  }
+
+  .order-type-option input:focus-visible+span {
+    outline: 3px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  .order-type-option input:disabled+span {
+    border-style: dashed;
+    border-color: GrayText;
+    color: GrayText;
+    opacity: 1;
+  }
+}

@@ -134,6 +134,10 @@
   font-weight: 600;
 }
 
+.day-label:empty {
+  display: none;
+}
+
 @media (max-width: 640px) {
   .today-section:has(.product-card) {
     min-height: 70svh;

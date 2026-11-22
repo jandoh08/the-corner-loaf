@@ -44,7 +44,7 @@ function createProductCard(product, day) {
   const header = document.createElement("div");
   header.className = "product-header";
 
-  const name = document.createElement("h3");
+  const name = document.createElement("h4");
   name.className = "product-name";
   name.textContent = product.name;
 
@@ -132,7 +132,7 @@ function renderDay(day, today, elements) {
   if (elements.label) {
     elements.label.replaceChildren();
 
-    const titleGroup = document.createElement("div");
+    const titleGroup = document.createElement("span");
     titleGroup.className = "day-label-heading";
 
     const name = document.createElement("span");
