@@ -65,6 +65,8 @@ export const bakeItems = [
 ];
 
 export const bakeryTimeZone = "Africa/Accra";
+export const WHATSAPP_NUMBER = "233551000000";
+export const PHONE_DISPLAY = "0551 000 000";
 export const openingHours = {
   Sunday: null,
   Monday: { open: 7, close: 17 },

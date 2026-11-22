@@ -1,7 +1,10 @@
-import { bakeDays, openingHours } from "./data.js";
+import {
+  bakeDays,
+  openingHours,
+  PHONE_DISPLAY,
+  WHATSAPP_NUMBER,
+} from "./data.js";
 import { formatHour } from "./helpers.js";
-
-const WHATSAPP_NUMBER = "233551000000";
 
 function buildWhatsAppUrl(name, message) {
   const text = [`Hi, it's ${name}.`, "", message].join("\n");
@@ -31,6 +34,11 @@ export function initContactForm() {
     const nameEl = document.getElementById("contact-name");
     const messageEl = document.getElementById("contact-message");
 
+    [nameEl, messageEl].forEach((field) => {
+      field.removeAttribute("aria-invalid");
+      field.removeAttribute("aria-describedby");
+    });
+
     const name = nameEl.value.trim();
     const message = messageEl.value.trim();
 
@@ -48,13 +56,13 @@ export function initContactForm() {
     window.open(url, "_blank", "noopener,noreferrer");
 
     showStatus(
-      "WhatsApp should open with your message pre-filled. Press send there to reach us. If nothing opens, call or message 0551 000 000.",
+      `WhatsApp should open with your message pre-filled. Press send there to reach us. If nothing opens, call or message ${PHONE_DISPLAY}.`,
       false,
     );
   });
 }
 
-const weekOrder = [...bakeDays, "Sunday"];
+const hoursDisplayOrder = [...bakeDays, "Sunday"];
 
 function describeHours(hours) {
   return hours
@@ -65,7 +73,7 @@ function describeHours(hours) {
 function groupDays() {
   const groups = [];
 
-  weekOrder.forEach((day) => {
+  hoursDisplayOrder.forEach((day) => {
     const text = describeHours(openingHours[day]);
     const last = groups.at(-1);
 
