@@ -1,78 +1,20 @@
-## Three things a customer must learn within 5 seconds of opening the website
+# The Corner Loaf
 
-Marcus's regulars check the site on their phones, mid-walk, to decide whether it is worth stopping in. If the page makes them scroll or think, they keep walking. So three questions have to be answered before anyone scrolls:
+The Corner Loaf is an artisanal neighbourhood bakery located on Boundary Road in East Legon, Accra. Marcus bakes fresh sourdough bread and pastries in small morning batches.
 
-1. **Who and where is this?** The Corner Loaf is a small neighbourhood bakery at 17 Boundary Road, East Legon. New visitors said the old site did not feel like the warm, unfussy shop they know, so the name and address sit at the very top. The original hero only said "East Legon, Accra"; the street address was buried at the bottom of the page.
-2. **Is it open right now?** This is the actual decision a walker is making: stop or keep going. The original only listed hours in a small 12px box at the bottom, with no sign of whether the shop was open at that moment.
-3. **What is available today?** Marcus says people come in, see what is on the shelf that morning, and buy it. The original only had a weekly table with a column of days, so a visitor had to read every row and work out for themselves what applied to today.
+This repository documents the incremental design, development, and accessibility refactoring of the bakery's web presence across project modules.
 
-## Layout sketch and why the page is ordered this way
+---
 
-I drew the layout by hand in my notebook before I started building. The photos are in the sketches folder.
+## Project Documentation
 
-The order follows the three things above.
+The project documentation is organised by module:
 
-1. **Hero:** Name, address and a live open/closed status, so questions 1 and 2 are answered on first view.
-2. **Available Today:** What can be bought right now, directly under the hero, so question 3 is answered without scrolling on a phone.
-3. **Place an Order:** The next step for someone who has just seen what is available, the person can place an order before getting to the bakery or pre-order for other days.
-4. **This Week's Bakes:** Shows the entire menu for the week which helps people planning ahead, which is secondary to today.
-5. **Pre-Order FAQ:** Answers for people who have questions on pre-ordering.
-6. **About and contact details:** Info about the backery and how to get in touch with them.
-7. **Send Us a Message:** Another way to also get in touch with the bakery.
+* **Module 1 (EE01) — Initial Redesign & Mobile-First Architecture**  
+  👉 **[docs/ee01/ee01.md](docs/ee01/ee01.md)**  
+  Covers the original audit of the legacy website, initial mobile-first layout sketches, answering the 3 core questions within 5 seconds of loading, semantic foundation, and initial order flow.
 
-## Issues found on original website
-
-Listed in order of impact on Marcus's business, each with its root cause.
-
-1. **Today's availability and opening status were hard to find.** The page was organised around the owner's content, not the customer's question. Availability was only stored as days in a static table, and the opening hours were at the bottom with no open/closed state. This is the "it makes you work to find out something simple" problem Marcus described, and the reason he suspects he loses walk-by customers.
-2. **The page was not responsive.** The main cause was a missing `<meta name="viewport">` tag, so phones rendered the page at desktop width and shrank it, which is why users had to zoom in. Fixed `820px` widths, pixel and point units, and three floated `240px` info boxes made it worse, because nothing could adapt to a narrow screen.
-3. **The navigation links went nowhere.** Every link in the navigation bar had `href="#"`, and none of the sections had an `id` to link to, so there was nothing for the links to point at. The bar also pushed the content down on small screens.
-4. **Heading levels were skipped.** The page jumped from `<h1>` to `<h3>`, and an `<h2>` appeared after the `<h3>`s. The levels were chosen for how they looked (sizes and borders) instead of for the structure of the page, so screen reader users could not rely on the outline.
-5. **The markup had no semantics.** Everything was `<div>`s, the table headers were `<td><b>` instead of `<th>`, spacing was done with `<br>` and `&nbsp;`, and `<html>` had no `lang` attribute. Assistive technology had nothing to tell users what each part of the page was.
-6. **The forms could not work.** The submit buttons were `type="button"`, which never submits a form, and the script file was empty. The inputs had no labels (placeholders only), no `required`, the email field was `type="text"`, and the message was a single-line input instead of a textarea.
-7. **The contact section and several components were unstyled.** The contact section sat outside the `.wrapper` container, and the CSS had no rules at all for the contact, FAQ, pre-order or form classes. That is why the contact area was out of line with the rest of the page and why every FAQ answer was permanently visible, adding to the clutter.
-8. **There was no deliberate visual system.** Font sizes mixed `pt` and `px` (11pt to 36px), colours were hard-coded and often inline, and much of the text was 11 to 12px, which is hard to read on a phone. Nothing tied the look back to a warm, small-bakery feel.
-
-## Additional improvement beyond what the brief asked for
-
-**An order form that lets customers order today's bakes.**
-
-**The gap.** The new page shows what is available today, but the visitor still can't secure anything. Marcus bakes in small batches, so popular items can sell out. A regular who sees "Sourdough Loaf" on their phone at 7:30 still has to walk over. Someone coming from further away risks a wasted trip.
-
-**What I built.** One order form for ordering todays bakes but since it was very similar to the pre-order form in terms of the data it collects I merged it into one order form with a "Type" choice:
-
-- **Today's Order** lists only the bakes available today, so a customer cannot order something that isn't on the shelf.
-- **Pre-Order** lists the full weekly menu.
-- Today's Order is only offered while the shop still has hours left to run. On Sundays and after closing time, the form switches to Pre-Order by itself and says why, instead of leaving the customer with an empty list and no explanation.
-- Each submitted order is shown back in a readable summary (name, phone, quantity, item, type).
-
-**Why it matters.** It targets what Marcus said he is losing: quick morning walk-by traffic. A customer can commit while still walking, and Marcus could plan each morning's bake around known demand, which suits small batches. The benefits for the customer are certainty that their item is waiting, and no wasted trip.
-
-**Limits.** Orders appear on the page but are not sent anywhere or saved, so a refresh clears them and Marcus does not receive them yet.
-
-## Short written audit of finished website
-
-**What I prioritised and why.** Marcus's customers are people on phones, mid-walk, deciding whether to stop. So the audit starts from that constraint, and I spent effort in this order:
-
-1. **Information first, on a phone.** The three things a customer must learn (who and where, open or closed, what is available today) are on the first screen without zooming. This was the owner's main complaint, so it came before everything else, including polish.
-2. **Responsive layout.** I added the missing viewport tag, replaced fixed pixel widths with relative units and fluid widths, and checked narrow screens, because a layout that needs zooming defeats the first priority.
-3. **Semantic HTML and baseline accessibility.** The original didn't use any semantic elements or have any accessibility functions which affects assistive technologies the most, which results in a bad user experience for these users.
-4. **Visual consistency.** A small set of tokens keeps the look warm and unfussy without being heavy, which matches Marcus's request that the site should not feel corporate.
-
-**Semantic HTML.** The page now uses `header`, `main`, `section` and `footer` instead of generic `div`s. Headings run in order (h1, then h2 sections, then h3 inside them), and the info-box titles are real headings. The weekly menu is a real table with `th scope="col"` headers. The FAQ triggers are `button`s with `aria-expanded` and `aria-controls`, and the answers use the `hidden` attribute, so collapsed answers are not read out.
-
-**Baseline accessibility.**
-
-- Every form field has a visible `label`, and required fields use `required`.
-- The contact form reports problems and success in a `role="status"` region instead of `alert()`, which doesn't interrupt screen-reader users.
-- The list of today's bakes is announced when it loads.
-- The scrollable table wrapper can be reached and scrolled by keyboard (`tabindex="0"`, `role="region"`, `aria-label`).
-- Images have meaningful alt text and the page language is set.
-- The lowest text contrast I measured is 5.4:1.
-
-**Visual consistency.** Colours, type sizes, spacing and widths come from CSS variables, so every value on the page comes from a small defined set. The warm browns and wheat tones fit a neighbourhood bakery. I chose a simple system font stack and avoided gradients and heavy effects so the page feels small and real. The menu table has a small minimum width (20rem), picked after testing on a phone. It only scrolls sideways inside its own wrapper when the screen is narrower than that.
-
-**Performance.** In development testing, cumulative layout shift was 0 and largest contentful paint was 0.16s. Images are compressed, and the script uses `defer`.
-
-**What I deliberately left out.** I did not add a navigation bar, because the page is short and one scroll long. 
+* **Module 2 (EE02) — Peer Accessibility Audit & WCAG 2.2 Refactoring**  
+  👉 **[docs/ee02/ee02.md](docs/ee02/ee02.md)**  
+  Covers the peer accessibility audit of Samuel Attu's website, response and resolution of findings from the peer audit of The Corner Loaf, the layout evolution from EE01 to EE02, and implemented improvements beyond the audit scope (vestibular safety and motor accessibility).
 
