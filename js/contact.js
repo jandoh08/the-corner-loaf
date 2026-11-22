@@ -53,7 +53,7 @@ const weekOrder = [...bakeDays, "Sunday"];
 
 function describeHours(hours) {
   return hours
-    ? `${formatHour(hours.open)} – ${formatHour(hours.close)}`
+    ? `${formatHour(hours.open)} to ${formatHour(hours.close)}`
     : "Closed";
 }
 
@@ -76,7 +76,8 @@ function groupDays() {
 
 function formatDayRange(days) {
   if (days.length === 1) return days[0];
-  return `${days[0].slice(0, 3)} – ${days.at(-1).slice(0, 3)}`;
+  if (days.length === 2) return `${days[0]} and ${days[1]}`;
+  return `${days[0]} to ${days.at(-1)}`;
 }
 
 export function renderOpeningHours() {
