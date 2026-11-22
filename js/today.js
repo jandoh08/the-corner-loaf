@@ -4,6 +4,7 @@ import {
   formatPrice,
   getBakeryNow,
   getDefaultDay,
+  getOpenStatusSentence
 } from "./helpers.js";
 
 function createAccessiblePrice(product, className = "product-price") {
@@ -172,6 +173,7 @@ export function initBakes() {
     status: document.getElementById("day-status"),
     note: document.getElementById("bakes-note"),
     noteMessage: document.getElementById("bakes-note-message"),
+    statusSpoken: document.getElementById("bakes-note-spoken"),
   };
   if (!elements.pills || !elements.products) return;
 
@@ -181,7 +183,13 @@ export function initBakes() {
   const { day: startDay, isToday } = getDefaultDay();
 
   if (!isToday && elements.noteMessage) {
-    elements.noteMessage.textContent = `· Showing ${startDay}'s bakes`;
+    elements.noteMessage.textContent = `Showing ${startDay}'s bakes`;
+  }
+
+  if (elements.statusSpoken) {
+    const spoken = [getOpenStatusSentence()];
+    if (!isToday) spoken.push(`Showing ${startDay}'s bakes.`);
+    elements.statusSpoken.textContent = spoken.join(" ");
   }
 
   const selectableDays = [...bakeDays, "All Bakes"];
@@ -209,6 +217,10 @@ export function initBakes() {
 
     if (elements.noteMessage) {
       elements.noteMessage.textContent = "";
+    }
+
+    if (elements.statusSpoken) {
+      elements.statusSpoken.textContent = getOpenStatusSentence();
     }
   });
 }

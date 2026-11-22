@@ -338,6 +338,10 @@
   letter-spacing: 0.02em;
 }
 
+.bakes-note-message::before {
+  content: "· " / "";
+}
+
 @media (max-width: 480px) {
   .product-image {
     flex: 0 0 5rem;

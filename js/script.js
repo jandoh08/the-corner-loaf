@@ -11,3 +11,12 @@ initBakes();
 initContactForm();
 initOrderForm(availableToday);
 renderOpeningHours();
+
+const header = document.querySelector("header");
+const infoBar = document.querySelector(".info-bar");
+
+if (header && infoBar && "ResizeObserver" in window) {
+    new ResizeObserver(() => {
+        header.style.setProperty("--info-bar-height", `${infoBar.offsetHeight}px`);
+    }).observe(infoBar);
+}

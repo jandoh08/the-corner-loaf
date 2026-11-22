@@ -107,3 +107,30 @@ export function isMobile() {
   if (typeof window === "undefined" || !window.matchMedia) return false;
   return window.matchMedia("(max-width: 48rem)").matches;
 }
+
+
+export function getOpenStatusSentence(date = new Date()) {
+  const { weekday, time } = getBakeryNow(date);
+  const hours = openingHours[weekday];
+
+  if (hours && time >= hours.open && time < hours.close) {
+    return `The bakery is open now and closes at ${formatHour(hours.close)}.`;
+  }
+
+  if (hours && time < hours.open) {
+    return `The bakery is closed right now and opens today at ${formatHour(hours.open)}.`;
+  }
+
+  const todayIndex = weekdays.indexOf(weekday);
+  for (let offset = 1; offset <= 7; offset += 1) {
+    const nextDay = weekdays[(todayIndex + offset) % 7];
+    const nextHours = openingHours[nextDay];
+
+    if (nextHours) {
+      const when = offset === 1 ? "tomorrow" : `on ${nextDay}`;
+      return `The bakery is closed right now and opens ${when} at ${formatHour(nextHours.open)}.`;
+    }
+  }
+
+  return "The bakery is closed.";
+}

@@ -183,6 +183,15 @@
     line-height: var(--leading-normal);
 }
 
+.contact-hours-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0 var(--space-3);
+    padding: var(--space-1) 0;
+    border-bottom: var(--border-width) solid var(--border-color);
+}
+
 .contact-hours-row:last-child {
     border-bottom: none;
 }
