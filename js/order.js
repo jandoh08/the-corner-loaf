@@ -1,7 +1,6 @@
-import { bakeItems, openingHours, weekdays } from "./data.js";
+import { bakeItems, openingHours, weekdays, WHATSAPP_NUMBER } from "./data.js";
 import { getBakeryNow } from "./helpers.js";
 
-const WHATSAPP_NUMBER = "233551000000";
 const PICKUP_ADDRESS = "17 Boundary Road, East Legon";
 const SLOT_LENGTH = 0.5;
 
@@ -20,9 +19,10 @@ const toOption = (product) => ({
   label: `${product.name} (${spokenPrice(product)})`,
 });
 
-function formatTime(hours) {
-  const hour = Math.floor(hours);
-  const minutes = String(Math.round((hours - hour) * 60)).padStart(2, "0");
+function formatSlotTime(hours) {
+  const totalMinutes = Math.round(hours * 60);
+  const hour = Math.floor(totalMinutes / 60);
+  const minutes = String(totalMinutes % 60).padStart(2, "0");
 
   return `${hour % 12 || 12}:${minutes}${hour < 12 ? "am" : "pm"}`;
 }
@@ -39,7 +39,7 @@ function getTimeSlots(day, after = 0) {
     time += SLOT_LENGTH
   ) {
     if (time > after) {
-      slots.push({ value: formatTime(time), label: formatTime(time) });
+      slots.push({ value: formatSlotTime(time), label: formatSlotTime(time) });
     }
   }
 
