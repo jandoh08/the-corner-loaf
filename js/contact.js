@@ -62,6 +62,8 @@ export function initContactForm() {
   });
 }
 
+// Monday to Saturday, then Sunday last, so days with identical hours sit
+// next to each other and can be grouped into one row ("Monday to Friday").
 const hoursDisplayOrder = [...bakeDays, "Sunday"];
 
 function describeHours(hours) {
