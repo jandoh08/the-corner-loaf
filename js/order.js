@@ -1,18 +1,18 @@
-import { bakeItems, openingHours, weekdays, WHATSAPP_NUMBER } from "./data.js";
-import { getBakeryNow } from "./helpers.js";
+import { bakeItems, openingHours, weekdays, WHATSAPP_NUMBER } from './data.js';
+import { getBakeryNow } from './helpers.js';
 
-const PICKUP_ADDRESS = "17 Boundary Road, East Legon";
+const PICKUP_ADDRESS = '17 Boundary Road, East Legon';
 const SLOT_LENGTH = 0.5;
 
 function populateSelect(select, placeholder, options) {
-  select.replaceChildren(new Option(placeholder, ""));
+  select.replaceChildren(new Option(placeholder, ''));
   options.forEach(({ value, label }) => {
     select.append(new Option(label, value));
   });
 }
 
 const spokenPrice = (product) =>
-  `${product.price} cedis${product.priceUnit ? ` per ${product.priceUnit}` : ""}`;
+  `${product.price} cedis${product.priceUnit ? ` per ${product.priceUnit}` : ''}`;
 
 const toOption = (product) => ({
   value: product.name,
@@ -22,9 +22,9 @@ const toOption = (product) => ({
 function formatSlotTime(hours) {
   const totalMinutes = Math.round(hours * 60);
   const hour = Math.floor(totalMinutes / 60);
-  const minutes = String(totalMinutes % 60).padStart(2, "0");
+  const minutes = String(totalMinutes % 60).padStart(2, '0');
 
-  return `${hour % 12 || 12}:${minutes}${hour < 12 ? "am" : "pm"}`;
+  return `${hour % 12 || 12}:${minutes}${hour < 12 ? 'am' : 'pm'}`;
 }
 
 function getTimeSlots(day, after = 0) {
@@ -65,17 +65,17 @@ function getUpcomingDays() {
 }
 
 export function initOrderForm(availableToday) {
-  const form = document.getElementById("order-form");
+  const form = document.getElementById('order-form');
   if (!form) return;
 
-  const itemSelect = document.getElementById("order-item-select");
-  const daySelect = document.getElementById("order-day");
-  const dayField = document.getElementById("order-day-field");
-  const timeSelect = document.getElementById("order-time");
-  const quantity = document.getElementById("order-quantity");
-  const nameInput = document.getElementById("order-name");
-  const help = document.getElementById("order-form-help");
-  const status = document.getElementById("order-status");
+  const itemSelect = document.getElementById('order-item-select');
+  const daySelect = document.getElementById('order-day');
+  const dayField = document.getElementById('order-day-field');
+  const timeSelect = document.getElementById('order-time');
+  const quantity = document.getElementById('order-quantity');
+  const nameInput = document.getElementById('order-name');
+  const help = document.getElementById('order-form-help');
+  const status = document.getElementById('order-status');
   const todayRadio = form.querySelector('input[value="today-order"]');
   const preorderRadio = form.querySelector('input[value="pre-order"]');
 
@@ -95,16 +95,16 @@ export function initOrderForm(availableToday) {
 
   const updateItems = () => {
     let products = [];
-    let placeholder = "Select an item";
+    let placeholder = 'Select an item';
 
     if (isTodayOrder()) {
       products = availableToday;
     } else if (daySelect.value) {
       products = bakeItems.filter((product) =>
-        product.days.includes(daySelect.value),
+        product.days.includes(daySelect.value)
       );
     } else {
-      placeholder = "Choose a collection day";
+      placeholder = 'Choose a collection day';
     }
 
     refill(itemSelect, placeholder, products.map(toOption));
@@ -112,7 +112,7 @@ export function initOrderForm(availableToday) {
 
   const updateTimes = () => {
     let slots = [];
-    let placeholder = "Select a time";
+    let placeholder = 'Select a time';
 
     if (isTodayOrder()) {
       const { weekday, time } = getBakeryNow();
@@ -120,7 +120,7 @@ export function initOrderForm(availableToday) {
     } else if (daySelect.value) {
       slots = getTimeSlots(daySelect.value);
     } else {
-      placeholder = "Choose a collection day";
+      placeholder = 'Choose a collection day';
     }
 
     refill(timeSelect, placeholder, slots);
@@ -141,7 +141,7 @@ export function initOrderForm(availableToday) {
       help.textContent = "Today's order: showing only what is baked today.";
     } else {
       help.textContent = todayAvailable
-        ? "Pre-order: pick the day you will collect, then choose from what is baked that day."
+        ? 'Pre-order: pick the day you will collect, then choose from what is baked that day.'
         : "Today's pick-up times are closed. Pick the day you will collect, then choose from what is baked that day.";
     }
 
@@ -154,15 +154,15 @@ export function initOrderForm(availableToday) {
     todayAvailable = getTimeSlots(weekday, time).length > 0;
     todayRadio.disabled = !todayAvailable;
     (todayAvailable ? todayRadio : preorderRadio).checked = true;
-    populateSelect(daySelect, "Select a day", getUpcomingDays());
+    populateSelect(daySelect, 'Select a day', getUpcomingDays());
     updateType();
   };
 
   setDefaults();
 
-  todayRadio.addEventListener("change", updateType);
-  preorderRadio.addEventListener("change", updateType);
-  daySelect.addEventListener("change", updateChoices);
+  todayRadio.addEventListener('change', updateType);
+  preorderRadio.addEventListener('change', updateType);
+  daySelect.addEventListener('change', updateChoices);
 
   const min = Number(quantity.min) || 1;
   const max = Number(quantity.max) || 10;
@@ -177,27 +177,27 @@ export function initOrderForm(availableToday) {
     }
   };
 
-  quantity.addEventListener("change", clampQuantity);
+  quantity.addEventListener('change', clampQuantity);
 
-  quantity.addEventListener("keydown", (event) => {
-    if (["-", "+", ".", ",", "e", "E"].includes(event.key)) {
+  quantity.addEventListener('keydown', (event) => {
+    if (['-', '+', '.', ',', 'e', 'E'].includes(event.key)) {
       event.preventDefault();
     }
   });
 
-  form.querySelectorAll("[data-step]").forEach((button) => {
-    button.addEventListener("click", () => {
+  form.querySelectorAll('[data-step]').forEach((button) => {
+    button.addEventListener('click', () => {
       const next =
         (Number(quantity.value) || min) + Number(button.dataset.step);
       quantity.value = Math.min(max, Math.max(min, next));
     });
   });
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener('submit', (event) => {
     event.preventDefault();
 
     if (Number(quantity.value) > max) {
-      status.classList.add("is-error");
+      status.classList.add('is-error');
       status.textContent = `The most you can order here is ${max} per order. For more, send us a message.`;
       quantity.focus();
       return;
@@ -206,30 +206,30 @@ export function initOrderForm(availableToday) {
     const today = isTodayOrder();
     const message = [
       "Hello Marcus! I'd like to order from The Corner Loaf:",
-      "",
-      `• Type: ${today ? "Today's order" : "Pre-order"}`,
-      `• Collection: ${today ? "Today" : daySelect.value} at ${timeSelect.value}`,
+      '',
+      `• Type: ${today ? "Today's order" : 'Pre-order'}`,
+      `• Collection: ${today ? 'Today' : daySelect.value} at ${timeSelect.value}`,
       `• Item: ${itemSelect.selectedOptions[0].textContent}`,
       `• Quantity: ${quantity.value}`,
       `• Name: ${nameInput.value.trim()}`,
-      "",
+      '',
       `Pick-up: ${PICKUP_ADDRESS}.`,
-    ].join("\n");
+    ].join('\n');
 
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-    window.open(url, "_blank", "noopener");
+    window.open(url, '_blank', 'noopener');
 
-    const fallback = document.createElement("a");
+    const fallback = document.createElement('a');
     fallback.href = url;
-    fallback.target = "_blank";
-    fallback.rel = "noopener";
-    fallback.textContent = "Open WhatsApp";
+    fallback.target = '_blank';
+    fallback.rel = 'noopener';
+    fallback.textContent = 'Open WhatsApp';
 
-    status.classList.remove("is-error");
+    status.classList.remove('is-error');
     status.replaceChildren(
-      "Your order is ready in WhatsApp. Press send there to place it. Did WhatsApp not open? ",
-      fallback,
+      'Your order is ready in WhatsApp. Press send there to place it. Did WhatsApp not open? ',
+      fallback
     );
   });
 }

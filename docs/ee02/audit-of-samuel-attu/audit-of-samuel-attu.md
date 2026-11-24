@@ -8,7 +8,7 @@
 ## How I tested
 
 - Automated tools: WAVE (10/10) and Lighthouse (accessibility score 100 on every run).
- ![Wave test results](./wave-score.png) ![Lighthouse accessibility](./accessibility.png)
+  ![Wave test results](./wave-score.png) ![Lighthouse accessibility](./accessibility.png)
 - Keyboard: I tabbed through every link and button on the page, used the header navigation links, the Mon to Sun day links, the "View today's menu and pre-order" link, and opened and closed the mobile menu with Enter and Space.
 - Zoom, text size and reflow: browser responsive view at 320px wide, first at default text size and then with the browser font size set to "very large". Also tested on desktop default width at 200% zoom and 400% zoom.
 - Screen reader: NVDA on Windows, Chrome.
@@ -29,9 +29,10 @@ Samuel's Corner Loaf site works well for people who use a screen reader: it pass
   2. Switch to responsive view and set the width to 320px.
   3. Scroll to "This week's bakes" and look at the item rows, for example Saturday.
   4. The item names overlap the prices.
-- Evidence: observed at 320px with very large text; at 320px with default text there is no overlap. 
-  
+- Evidence: observed at 320px with very large text; at 320px with default text there is no overlap.
+
   ![Price Running into item name screenshot](./price-running-into-item-names.png)
+
 - Principle and criterion: Perceivable; 1.4.4 Resize Text (AA) and 1.4.10 Reflow (AA).
 - Who it affects and how: people with low vision who enlarge text so they can read at all. They cannot read the prices, which is the main reason to visit the page.
 - Found by: zoom and text-size testing.
@@ -50,6 +51,7 @@ Samuel's Corner Loaf site works well for people who use a screen reader: it pass
 - Evidence: observed on both links. The image below shows a screenshot with the monday heading hidden behind the page header./nav bar.
 
   ![Heading Hidden Behind Header](./heading-hidden-behind-header.png)
+
 - Principle and criterion: Operable; 2.4.11 Focus Not Obscured (Minimum) (AA, WCAG 2.2). The criterion covers focused content, and the same sticky-header overlap hides the jump target here.
 - Who it affects and how: keyboard users, screen magnifier users and people who zoom. They rely on landing where the link promised, and lose track of which day they are reading.
 - Found by: keyboard and link activation.
@@ -67,6 +69,7 @@ Samuel's Corner Loaf site works well for people who use a screen reader: it pass
 - Evidence: observed at 320px with very large text.
 
   ![Contact Section Forcing Sideways SCrolling](./contact-section-forcing-sideways-scrolling.png)
+
 - Principle and criterion: Perceivable; 1.4.10 Reflow (AA).
 - Who it affects and how: people with low vision who zoom or enlarge text, and who should not need to scroll in two directions.
 - Found by: zoom and text-size testing.
@@ -81,9 +84,10 @@ Samuel's Corner Loaf site works well for people who use a screen reader: it pass
   2. Set the responsive view to 320px wide.
   3. Look at the top of the page, then scroll down.
   4. The menu button sits below the name, and the header is only partly visible while scrolling.
-- Evidence: observed at 320px with very large text. It causes no horizontal scrolling. I did not trace the half-hidden header to one cause. 
-  
+- Evidence: observed at 320px with very large text. It causes no horizontal scrolling. I did not trace the half-hidden header to one cause.
+
   ![Half of header hidden when text is very large on a small screen](./price-running-into-item-names.png)
+
 - Principle and criterion: Perceivable; 1.4.10 Reflow (AA), as a related layout failure.
 - Who it affects and how: people with low vision on phones, for whom the header is awkward and takes up screen space.
 - Found by: zoom and text-size testing.

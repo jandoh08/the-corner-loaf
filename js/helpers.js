@@ -4,7 +4,7 @@ import {
   bakeryTimeZone,
   openingHours,
   bakeItems,
-} from "./data.js";
+} from './data.js';
 
 export function formatPrice(product) {
   const base = `GH₵ ${product.price}`;
@@ -12,21 +12,21 @@ export function formatPrice(product) {
 }
 
 export const formatHour = (hour) =>
-  `${hour % 12 || 12}${hour < 12 ? "am" : "pm"}`;
+  `${hour % 12 || 12}${hour < 12 ? 'am' : 'pm'}`;
 
 export function getBakeryNow(date = new Date()) {
-  const parts = new Intl.DateTimeFormat("en", {
-    weekday: "long",
-    hour: "numeric",
-    minute: "numeric",
-    hourCycle: "h23",
+  const parts = new Intl.DateTimeFormat('en', {
+    weekday: 'long',
+    hour: 'numeric',
+    minute: 'numeric',
+    hourCycle: 'h23',
     timeZone: bakeryTimeZone,
   }).formatToParts(date);
-  const get = (type) => parts.find((part) => part.type === type)?.value ?? "";
+  const get = (type) => parts.find((part) => part.type === type)?.value ?? '';
 
   return {
-    weekday: get("weekday"),
-    time: (Number(get("hour")) || 0) + (Number(get("minute")) || 0) / 60,
+    weekday: get('weekday'),
+    time: (Number(get('hour')) || 0) + (Number(get('minute')) || 0) / 60,
   };
 }
 
@@ -48,30 +48,30 @@ function getOpenState(date = new Date()) {
   const hours = openingHours[weekday];
 
   if (hours && time >= hours.open && time < hours.close) {
-    return { kind: "open", closes: hours.close };
+    return { kind: 'open', closes: hours.close };
   }
 
   if (hours && time < hours.open) {
-    return { kind: "opens-today", opens: hours.open };
+    return { kind: 'opens-today', opens: hours.open };
   }
   const next = findNextOpenDay(weekday);
-  return next ? { kind: "opens-later", ...next } : { kind: "closed" };
+  return next ? { kind: 'opens-later', ...next } : { kind: 'closed' };
 }
 
 export function getOpenStatus(date = new Date()) {
   const state = getOpenState(date);
 
   switch (state.kind) {
-    case "open":
+    case 'open':
       return `Open now · Closes ${formatHour(state.closes)}`;
-    case "opens-today":
+    case 'opens-today':
       return `Closed · Opens today at ${formatHour(state.opens)}`;
-    case "opens-later": {
-      const when = state.offset === 1 ? "tomorrow" : state.day;
+    case 'opens-later': {
+      const when = state.offset === 1 ? 'tomorrow' : state.day;
       return `Closed · Opens ${when} at ${formatHour(state.opens)}`;
     }
     default:
-      return "Closed";
+      return 'Closed';
   }
 }
 
@@ -79,16 +79,16 @@ export function getOpenStatusSentence(date = new Date()) {
   const state = getOpenState(date);
 
   switch (state.kind) {
-    case "open":
+    case 'open':
       return `The bakery is open now and closes at ${formatHour(state.closes)}.`;
-    case "opens-today":
+    case 'opens-today':
       return `The bakery is closed right now and opens today at ${formatHour(state.opens)}.`;
-    case "opens-later": {
-      const when = state.offset === 1 ? "tomorrow" : `on ${state.day}`;
+    case 'opens-later': {
+      const when = state.offset === 1 ? 'tomorrow' : `on ${state.day}`;
       return `The bakery is closed right now and opens ${when} at ${formatHour(state.opens)}.`;
     }
     default:
-      return "The bakery is closed.";
+      return 'The bakery is closed.';
   }
 }
 
@@ -106,7 +106,7 @@ function canOrderForToday() {
 
 export function formatDayList(days) {
   if (days.length === 1) return days[0];
-  return `${days.slice(0, -1).join(", ")} & ${days.at(-1)}`;
+  return `${days.slice(0, -1).join(', ')} & ${days.at(-1)}`;
 }
 
 export function getDefaultDay() {
