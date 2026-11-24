@@ -1,4 +1,4 @@
-.today-section>div {
+.today-section > div {
   max-width: calc(var(--width-3xl) + 2 * var(--space-6));
   margin: 0 auto;
   padding: var(--space-6) var(--space-6) var(--space-8);
@@ -21,8 +21,10 @@
 
 .today-products {
   display: grid;
-  grid-template-columns: repeat(auto-fit,
-      minmax(min(100%, var(--width-md)), 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--width-md)), 1fr)
+  );
   gap: var(--space-4);
   margin: 0;
   padding: 0;
@@ -53,7 +55,10 @@
   border-radius: var(--radius-md);
   background: var(--primary-foreground-color);
   box-shadow: 0 2px 8px var(--shadow-color);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .product-card:hover {
@@ -143,7 +148,7 @@
     min-height: 70svh;
   }
 
-  .today-section>div {
+  .today-section > div {
     padding-left: var(--space-4);
     padding-right: var(--space-4);
   }
@@ -179,7 +184,7 @@
 }
 
 .bakes-status[data-open]::before {
-  content: "";
+  content: '';
   flex: none;
   width: 0.5rem;
   height: 0.5rem;
@@ -187,11 +192,11 @@
   background: var(--primary-color);
 }
 
-.bakes-status[data-open="true"]::before {
+.bakes-status[data-open='true']::before {
   background: var(--open-color);
 }
 
-.bakes-status[data-open="true"] {
+.bakes-status[data-open='true'] {
   color: var(--open-text-color);
 }
 
@@ -276,18 +281,18 @@
   background: var(--color-orange-light);
 }
 
-.day-pill-input:checked+.day-pill-text {
+.day-pill-input:checked + .day-pill-text {
   background: var(--secondary-color);
   border-color: var(--secondary-color);
   color: var(--primary-foreground-color);
 }
 
-.day-pill-input:checked+.day-pill-text .day-pill-label::before {
-  content: "✓ " / "";
+.day-pill-input:checked + .day-pill-text .day-pill-label::before {
+  content: '✓ ' / '';
 }
 
 .day-pill:has(.day-pill-input:focus-visible),
-.day-pill-input:focus-visible+.day-pill-text {
+.day-pill-input:focus-visible + .day-pill-text {
   outline: 3px solid var(--foreground-color);
   outline-offset: 2px;
   border-radius: var(--radius-full);
@@ -298,12 +303,12 @@
   font-weight: 400;
 }
 
-.day-pill-input:checked+.day-pill-text .day-pill-today {
+.day-pill-input:checked + .day-pill-text .day-pill-today {
   display: none;
 }
 
 @media (forced-colors: active) {
-  .day-pill-input:checked+.day-pill-text {
+  .day-pill-input:checked + .day-pill-text {
     outline: 3px solid;
   }
 }
@@ -343,7 +348,7 @@
 }
 
 .bakes-note-message::before {
-  content: "· " / "";
+  content: '· ' / '';
 }
 
 @media (max-width: 480px) {

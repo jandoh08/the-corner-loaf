@@ -15,8 +15,8 @@
   --input-border-color: #85786b;
   --shadow-color: rgba(74, 44, 10, 0.12);
 
-  --font-heading: "Fraunces", Georgia, serif;
-  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-heading: 'Fraunces', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
