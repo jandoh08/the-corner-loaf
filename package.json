@@ -46,15 +46,15 @@
   "private": true,
   "lint-staged": {
     "*.js": [
-      "eslint",
-      "prettier --check"
+      "eslint --fix",
+      "prettier --write"
     ],
     "css/**/*.css": [
       "stylelint",
-      "prettier --check"
+      "prettier --write"
     ],
-    "*.{html,json,md}": [
-      "prettier --check"
+    "*.{html,json,md,yml,yaml}": [
+      "prettier --write"
     ]
   }
 }
