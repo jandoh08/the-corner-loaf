@@ -1,502 +1,679 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <title>The Corner Loaf - Neighbourhood Bakery in East Legon, Accra</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The Corner Loaf is a small neighbourhood bakery on Boundary Road, East Legon, Accra. See what's baking today, order for pick-up, and find our opening hours."
+    />
+    <link
+      rel="preload"
+      href="fonts/fraunces.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/plus-jakarta-sans.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/today.css" />
+    <link rel="stylesheet" href="css/order.css" />
+    <link rel="stylesheet" href="css/faq.css" />
+    <link rel="stylesheet" href="css/about.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+    <noscript>
+      <style>
+        #today-loading,
+        .day-picker,
+        .order-form,
+        .contact-form {
+          display: none;
+        }
+      </style>
+    </noscript>
+  </head>
 
-<head>
-  <title>The Corner Loaf - Neighbourhood Bakery in East Legon, Accra</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="The Corner Loaf is a small neighbourhood bakery on Boundary Road, East Legon, Accra. See what's baking today, order for pick-up, and find our opening hours." />
-  <link rel="preload" href="fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/header.css" />
-  <link rel="stylesheet" href="css/today.css" />
-  <link rel="stylesheet" href="css/order.css" />
-  <link rel="stylesheet" href="css/faq.css" />
-  <link rel="stylesheet" href="css/about.css" />
-  <link rel="stylesheet" href="css/forms.css" />
-  <link rel="stylesheet" href="css/contact.css" />
-  <noscript>
-    <style>
-      #today-loading,
-      .day-picker,
-      .order-form,
-      .contact-form {
-        display: none;
-      }
-    </style>
-  </noscript>
-</head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
 
-<body>
-  <a class="skip-link" href="#main">Skip to main content</a>
+    <header>
+      <!-- info bar only visible on desktop -->
+      <div class="info-bar">
+        <div class="info-bar-inner">
+          <div class="info-links">
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=17+Boundary+Road+East+Legon+Accra"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+              >
+                <path
+                  fill="currentColor"
+                  d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"
+                />
+              </svg>
+              <span class="sr-only">View our location on google maps</span>
+              <span>17 Boundary Road, East Legon</span>
+            </a>
+            <a href="https://wa.me/233551000000">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.359 5.016l-1.422 5.203 5.328-1.391c1.484.813 3.141 1.234 4.828 1.234h.031c5.5 0 9.969-4.469 9.969-9.969 0-2.656-1.031-5.156-2.922-7.047a9.92 9.92 0 0 0-7.031-2.25zm5.828 14.125c-.25.703-1.438 1.344-1.984 1.422-.516.078-1.156.109-1.859-.109-.438-.141-.984-.328-1.703-.641-2.984-1.297-4.938-4.297-5.094-4.5-.156-.203-1.219-1.625-1.219-3.094s.766-2.188 1.047-2.484c.281-.297.609-.375.813-.375.203 0 .406 0 .578.016.188.016.438-.063.688.516.25.594.859 2.094.938 2.25.078.156.125.344.016.547-.109.203-.156.328-.313.5-.156.172-.328.391-.469.516-.156.141-.313.297-.141.594.172.297.781 1.281 1.672 2.078 1.156 1.031 2.125 1.359 2.422 1.5.297.141.469.125.641-.078.172-.203.75-.875.953-1.172.203-.297.406-.25.688-.156.281.094 1.797.844 2.109 1 .313.156.516.234.594.359.078.141.078.797-.172 1.5z"
+                />
+              </svg>
 
-  <header>
-    <!-- info bar only visible on desktop -->
-    <div class="info-bar">
-      <div class="info-bar-inner">
-        <div class="info-links">
-          <a href="https://www.google.com/maps/search/?api=1&query=17+Boundary+Road+East+Legon+Accra">
-            <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
-              <path fill="currentColor"
-                d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+              <span class="sr-only">Chat with us on WhatsApp</span>
+              <span>0551 000 000</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <nav class="top-bar" aria-label="Main navigation">
+        <h1 class="brand-heading">
+          <a class="brand" href="#main"> The Corner Loaf </a>
+        </h1>
+
+        <!-- Only visible on mobile -->
+        <div class="mobile-actions">
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=17+Boundary+Road+East+Legon+Accra"
+          >
+            <span class="sr-only">
+              View our location on google maps. 17 Boundary Road, East Legon
+            </span>
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+              <path
+                fill="currentColor"
+                d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"
+              />
             </svg>
-            <span class="sr-only">View our location on google maps</span>
-            <span>17 Boundary Road, East Legon</span>
           </a>
           <a href="https://wa.me/233551000000">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
-              aria-hidden="true">
+            <span class="sr-only">Chat with us on WhatsApp. 0551 000 000</span>
+            <svg
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
               <path
-                d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.359 5.016l-1.422 5.203 5.328-1.391c1.484.813 3.141 1.234 4.828 1.234h.031c5.5 0 9.969-4.469 9.969-9.969 0-2.656-1.031-5.156-2.922-7.047a9.92 9.92 0 0 0-7.031-2.25zm5.828 14.125c-.25.703-1.438 1.344-1.984 1.422-.516.078-1.156.109-1.859-.109-.438-.141-.984-.328-1.703-.641-2.984-1.297-4.938-4.297-5.094-4.5-.156-.203-1.219-1.625-1.219-3.094s.766-2.188 1.047-2.484c.281-.297.609-.375.813-.375.203 0 .406 0 .578.016.188.016.438-.063.688.516.25.594.859 2.094.938 2.25.078.156.125.344.016.547-.109.203-.156.328-.313.5-.156.172-.328.391-.469.516-.156.141-.313.297-.141.594.172.297.781 1.281 1.672 2.078 1.156 1.031 2.125 1.359 2.422 1.5.297.141.469.125.641-.078.172-.203.75-.875.953-1.172.203-.297.406-.25.688-.156.281.094 1.797.844 2.109 1 .313.156.516.234.594.359.078.141.078.797-.172 1.5z" />
+                d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.359 5.016l-1.422 5.203 5.328-1.391c1.484.813 3.141 1.234 4.828 1.234h.031c5.5 0 9.969-4.469 9.969-9.969 0-2.656-1.031-5.156-2.922-7.047a9.92 9.92 0 0 0-7.031-2.25zm5.828 14.125c-.25.703-1.438 1.344-1.984 1.422-.516.078-1.156.109-1.859-.109-.438-.141-.984-.328-1.703-.641-2.984-1.297-4.938-4.297-5.094-4.5-.156-.203-1.219-1.625-1.219-3.094s.766-2.188 1.047-2.484c.281-.297.609-.375.813-.375.203 0 .406 0 .578.016.188.016.438-.063.688.516.25.594.859 2.094.938 2.25.078.156.125.344.016.547-.109.203-.156.328-.313.5-.156.172-.328.391-.469.516-.156.141-.313.297-.141.594.172.297.781 1.281 1.672 2.078 1.156 1.031 2.125 1.359 2.422 1.5.297.141.469.125.641-.078.172-.203.75-.875.953-1.172.203-.297.406-.25.688-.156.281.094 1.797.844 2.109 1 .313.156.516.234.594.359.078.141.078.797-.172 1.5z"
+              />
             </svg>
-
-            <span class="sr-only">Chat with us on WhatsApp</span>
-            <span>0551 000 000</span>
           </a>
         </div>
-      </div>
-    </div>
 
-    <nav class="top-bar" aria-label="Main navigation">
-      <h1 class="brand-heading">
-        <a class="brand" href="#main"> The Corner Loaf </a>
-      </h1>
-
-      <!-- Only visible on mobile -->
-      <div class="mobile-actions">
-        <a href="https://www.google.com/maps/search/?api=1&query=17+Boundary+Road+East+Legon+Accra">
-          <span class="sr-only">
-            View our location on google maps. 17 Boundary Road, East Legon
-          </span>
-          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
-            <path fill="currentColor"
-              d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-          </svg>
-        </a>
-        <a href="https://wa.me/233551000000">
-          <span class="sr-only">Chat with us on WhatsApp. 0551 000 000</span>
-          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-            fill="currentColor">
-            <path
-              d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.359 5.016l-1.422 5.203 5.328-1.391c1.484.813 3.141 1.234 4.828 1.234h.031c5.5 0 9.969-4.469 9.969-9.969 0-2.656-1.031-5.156-2.922-7.047a9.92 9.92 0 0 0-7.031-2.25zm5.828 14.125c-.25.703-1.438 1.344-1.984 1.422-.516.078-1.156.109-1.859-.109-.438-.141-.984-.328-1.703-.641-2.984-1.297-4.938-4.297-5.094-4.5-.156-.203-1.219-1.625-1.219-3.094s.766-2.188 1.047-2.484c.281-.297.609-.375.813-.375.203 0 .406 0 .578.016.188.016.438-.063.688.516.25.594.859 2.094.938 2.25.078.156.125.344.016.547-.109.203-.156.328-.313.5-.156.172-.328.391-.469.516-.156.141-.313.297-.141.594.172.297.781 1.281 1.672 2.078 1.156 1.031 2.125 1.359 2.422 1.5.297.141.469.125.641-.078.172-.203.75-.875.953-1.172.203-.297.406-.25.688-.156.281.094 1.797.844 2.109 1 .313.156.516.234.594.359.078.141.078.797-.172 1.5z" />
-          </svg>
-        </a>
-      </div>
-
-      <ul class="nav-links">
-        <li><a href="#menu-section">Menu</a></li>
-        <li><a href="#order-section">Order</a></li>
-        <li><a href="#about-section">About</a></li>
-        <li><a href="#contact-section">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main class="wrapper" id="main">
-    <section class="today-section" id="menu-section" aria-labelledby="bakes-heading">
-      <div>
-        <div class="bakes-header">
-          <h2 id="bakes-heading">This Week's Bakes</h2>
-          <p class="bakes-intro">
-            What&apos;s on the shelf today, and what&apos;s coming on the other days.
-          </p>
-        </div>
-
-        <p id="bakes-note" class="bakes-note">
-          <span class="bakes-status" id="bakes-status" data-open-status aria-hidden="true"></span>
-          <span id="bakes-note-message" class="bakes-note-message" aria-hidden="true"></span>
-          <span id="bakes-note-spoken" class="sr-only"></span>
-        </p>
-
-        <noscript>
-          <div class="noscript-notice">
-            <p>
-              <strong>JavaScript is turned off in your browser.</strong> The day-by-day
-              view needs it, so here is the weekly schedule instead:
-            </p>
-            <ul>
-              <li>Sourdough Loaf: Tuesday &amp; Friday</li>
-              <li>Whole Wheat Loaf: Monday, Wednesday &amp; Friday</li>
-              <li>Chin Chin: Monday to Saturday</li>
-              <li>Butter Croissants: Saturday only</li>
-              <li>Banana Bread: Thursday &amp; Saturday</li>
-              <li>Meat Pies: Wednesday &amp; Friday</li>
-            </ul>
-            <p>
-              Closed on Sundays. To check today&apos;s shelf or place an order, call
-              <a href="tel:+233551000000">0551 000 000</a> or message us on
-              <a href="https://wa.me/233551000000">WhatsApp</a>.
-            </p>
-          </div>
-        </noscript>
-
-        <fieldset class="day-picker">
-          <legend>Choose a day</legend>
-          <div class="day-pills" id="day-pills"></div>
-        </fieldset>
-
-        <h3 id="day-label" class="day-label"></h3>
-        <p id="day-status" class="sr-only" role="status"></p>
-
-        <ul class="today-products" id="today-products">
-          <li id="today-loading">
-            <p>Loading this week's bakes...</p>
-          </li>
+        <ul class="nav-links">
+          <li><a href="#menu-section">Menu</a></li>
+          <li><a href="#order-section">Order</a></li>
+          <li><a href="#about-section">About</a></li>
+          <li><a href="#contact-section">Contact</a></li>
         </ul>
-      </div>
-    </section>
+      </nav>
+    </header>
 
-    <div class="order-faq-wrapper">
-      <section id="order-section" class="order-section" aria-labelledby="order-heading">
-        <h2 id="order-heading">Place an Order</h2>
-        <p class="section-intro">
-          Pick-up only, at 17 Boundary Road, East Legon. Your order goes to
-          Marcus on WhatsApp.
-        </p>
-
-        <!-- Only shown when the FAQ is stacked below (phones, enlarged text) -->
-        <p class="order-faq-link">
-          Questions about ordering?
-          <a href="#faq-section">See the FAQ below</a>.
-        </p>
-
-        <noscript>
-          <div class="noscript-notice">
-            <p>
-              The order form needs JavaScript. To order, message us on
-              <a href="https://wa.me/233551000000">WhatsApp</a> or call
-              <a href="tel:+233551000000">0551 000 000</a> with what you'd like and
-              when you'll collect it.
+    <main class="wrapper" id="main">
+      <section
+        class="today-section"
+        id="menu-section"
+        aria-labelledby="bakes-heading"
+      >
+        <div>
+          <div class="bakes-header">
+            <h2 id="bakes-heading">This Week's Bakes</h2>
+            <p class="bakes-intro">
+              What&apos;s on the shelf today, and what&apos;s coming on the
+              other days.
             </p>
           </div>
-        </noscript>
 
-        <form id="order-form" class="order-form">
-          <fieldset class="order-type">
-            <legend class="sr-only">Order type</legend>
-            <label class="order-type-option">
-              <input type="radio" name="order-type" value="today-order" checked />
-              <span>Today's order</span>
-            </label>
-            <label class="order-type-option">
-              <input type="radio" name="order-type" value="pre-order" />
-              <span>Pre-order</span>
-            </label>
+          <p id="bakes-note" class="bakes-note">
+            <span
+              class="bakes-status"
+              id="bakes-status"
+              data-open-status
+              aria-hidden="true"
+            ></span>
+            <span
+              id="bakes-note-message"
+              class="bakes-note-message"
+              aria-hidden="true"
+            ></span>
+            <span id="bakes-note-spoken" class="sr-only"></span>
+          </p>
+
+          <noscript>
+            <div class="noscript-notice">
+              <p>
+                <strong>JavaScript is turned off in your browser.</strong> The
+                day-by-day view needs it, so here is the weekly schedule
+                instead:
+              </p>
+              <ul>
+                <li>Sourdough Loaf: Tuesday &amp; Friday</li>
+                <li>Whole Wheat Loaf: Monday, Wednesday &amp; Friday</li>
+                <li>Chin Chin: Monday to Saturday</li>
+                <li>Butter Croissants: Saturday only</li>
+                <li>Banana Bread: Thursday &amp; Saturday</li>
+                <li>Meat Pies: Wednesday &amp; Friday</li>
+              </ul>
+              <p>
+                Closed on Sundays. To check today&apos;s shelf or place an
+                order, call
+                <a href="tel:+233551000000">0551 000 000</a> or message us on
+                <a href="https://wa.me/233551000000">WhatsApp</a>.
+              </p>
+            </div>
+          </noscript>
+
+          <fieldset class="day-picker">
+            <legend>Choose a day</legend>
+            <div class="day-pills" id="day-pills"></div>
           </fieldset>
 
-          <p id="order-form-help" class="order-help" aria-live="polite">
-            Today's order: showing only what is baked today.
+          <h3 id="day-label" class="day-label"></h3>
+          <p id="day-status" class="sr-only" role="status"></p>
+
+          <ul class="today-products" id="today-products">
+            <li id="today-loading">
+              <p>Loading this week's bakes...</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="order-faq-wrapper">
+        <section
+          id="order-section"
+          class="order-section"
+          aria-labelledby="order-heading"
+        >
+          <h2 id="order-heading">Place an Order</h2>
+          <p class="section-intro">
+            Pick-up only, at 17 Boundary Road, East Legon. Your order goes to
+            Marcus on WhatsApp.
           </p>
 
-          <p class="order-required-note">All fields are required.</p>
+          <!-- Only shown when the FAQ is stacked below (phones, enlarged text) -->
+          <p class="order-faq-link">
+            Questions about ordering?
+            <a href="#faq-section">See the FAQ below</a>.
+          </p>
 
-          <div class="order-fields">
-            <div class="order-field order-field--day" id="order-day-field" hidden>
-              <label for="order-day">Collection day</label>
-              <select id="order-day" class="form-field">
-                <option value="">Select a day</option>
-              </select>
+          <noscript>
+            <div class="noscript-notice">
+              <p>
+                The order form needs JavaScript. To order, message us on
+                <a href="https://wa.me/233551000000">WhatsApp</a> or call
+                <a href="tel:+233551000000">0551 000 000</a> with what you'd
+                like and when you'll collect it.
+              </p>
             </div>
+          </noscript>
 
-            <div class="order-field order-field--time">
-              <label for="order-time">Collection time</label>
-              <select id="order-time" class="form-field" required>
-                <option value="">Select a time</option>
-              </select>
-            </div>
+          <form id="order-form" class="order-form">
+            <fieldset class="order-type">
+              <legend class="sr-only">Order type</legend>
+              <label class="order-type-option">
+                <input
+                  type="radio"
+                  name="order-type"
+                  value="today-order"
+                  checked
+                />
+                <span>Today's order</span>
+              </label>
+              <label class="order-type-option">
+                <input type="radio" name="order-type" value="pre-order" />
+                <span>Pre-order</span>
+              </label>
+            </fieldset>
 
-            <div class="order-field order-field--item">
-              <label for="order-item-select">Item</label>
-              <select id="order-item-select" class="form-field" required>
-                <option value="">Select an item</option>
-              </select>
-            </div>
+            <p id="order-form-help" class="order-help" aria-live="polite">
+              Today's order: showing only what is baked today.
+            </p>
 
-            <div class="order-field order-field--quantity">
-              <label for="order-quantity">Quantity (up to 10) </label>
-              <div class="stepper">
-                <button type="button" class="stepper-btn" data-step="-1" aria-label="Decrease quantity">
-                  &minus;
-                </button>
-                <input type="number" id="order-quantity" class="form-field" min="1" max="10" step="1" value="1"
-                  inputmode="numeric" required />
-                <button type="button" class="stepper-btn" data-step="1" aria-label="Increase quantity">
-                  +
-                </button>
+            <p class="order-required-note">All fields are required.</p>
+
+            <div class="order-fields">
+              <div
+                class="order-field order-field--day"
+                id="order-day-field"
+                hidden
+              >
+                <label for="order-day">Collection day</label>
+                <select id="order-day" class="form-field">
+                  <option value="">Select a day</option>
+                </select>
+              </div>
+
+              <div class="order-field order-field--time">
+                <label for="order-time">Collection time</label>
+                <select id="order-time" class="form-field" required>
+                  <option value="">Select a time</option>
+                </select>
+              </div>
+
+              <div class="order-field order-field--item">
+                <label for="order-item-select">Item</label>
+                <select id="order-item-select" class="form-field" required>
+                  <option value="">Select an item</option>
+                </select>
+              </div>
+
+              <div class="order-field order-field--quantity">
+                <label for="order-quantity">Quantity (up to 10) </label>
+                <div class="stepper">
+                  <button
+                    type="button"
+                    class="stepper-btn"
+                    data-step="-1"
+                    aria-label="Decrease quantity"
+                  >
+                    &minus;
+                  </button>
+                  <input
+                    type="number"
+                    id="order-quantity"
+                    class="form-field"
+                    min="1"
+                    max="10"
+                    step="1"
+                    value="1"
+                    inputmode="numeric"
+                    required
+                  />
+                  <button
+                    type="button"
+                    class="stepper-btn"
+                    data-step="1"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div class="order-field order-field--name">
+                <label for="order-name">Name</label>
+                <input
+                  type="text"
+                  id="order-name"
+                  class="form-field"
+                  autocomplete="name"
+                  required
+                />
               </div>
             </div>
 
-            <div class="order-field order-field--name">
-              <label for="order-name">Name</label>
-              <input type="text" id="order-name" class="form-field" autocomplete="name" required />
-            </div>
-          </div>
-
-          <button type="submit" class="form-submit">
-            Send order on WhatsApp
-          </button>
-          <p id="order-status" class="form-status" role="status"></p>
-        </form>
-      </section>
-      <section id="faq-section" class="faq-list" aria-labelledby="faq-heading">
-        <h2 id="faq-heading">Common Questions</h2>
-        <p class="section-intro">Quick answers about ordering.</p>
-
-        <details class="faq-item" name="faq">
-          <summary>How do I place an order?</summary>
-          <div class="faq-body">
-            <p>
-              Choose Today's order or Pre-order, pick your collection time and
-              item, set the quantity and add your name. Then press "Send order
-              on WhatsApp". WhatsApp opens with your order already written,
-              and it is placed when you press send there.
-            </p>
-          </div>
-        </details>
-
-        <details class="faq-item" name="faq">
-          <summary>
-            What is the difference between a today's order and a pre-order?
-          </summary>
-          <div class="faq-body">
-            <p>
-              A today's order is for pick-up today and only lists what is
-              baked today. You can place one while there are pick-up times
-              left today. A pre-order is for a later day: you choose the day
-              you will collect, then pick from what is baked that day.
-            </p>
-          </div>
-        </details>
-
-        <details class="faq-item" name="faq">
-          <summary>How far in advance do I need to order?</summary>
-          <div class="faq-body">
-            <p>
-              We ask for at least one day's notice before your chosen
-              collection day. For large orders or custom items, two to three
-              days is better. This gives us time to plan our bake and make
-              sure everything is ready for you.
-            </p>
-          </div>
-        </details>
-
-        <details class="faq-item" name="faq">
-          <summary>Can I cancel or change my order?</summary>
-          <div class="faq-body">
-            <p>
-              Yes, but please let us know as early as possible. If we have
-              already started baking your order, we may not be able to cancel
-              it. Changes to quantity are usually fine if you give us a day's
-              notice.
-            </p>
-          </div>
-        </details>
-
-        <details class="faq-item" name="faq">
-          <summary>Can I ask for something custom or a large order?</summary>
-          <div class="faq-body">
-            <p>
-              You can ask. Two to three days' notice is better for these. Send
-              us a
-              <a href="#contact-section">message</a> or write to us on
-              <a href="https://wa.me/233551000000">WhatsApp</a> with what you
-              need, and we will tell you what we can do.
-            </p>
-          </div>
-        </details>
-
-        <details class="faq-item" name="faq">
-          <summary>Is there a limit on how many I can order?</summary>
-          <div class="faq-body">
-            <p>
-              The order form takes one item at a time, up to 10 of that item per
-              order. For several different items, send one order for each. For
-              anything bigger, send us a
-              <a href="#contact-section">message</a> or write to us on
-              <a href="https://wa.me/233551000000">WhatsApp</a>, ideally two to three
-              days ahead, and we will tell you what we can do.
-            </p>
-          </div>
-        </details>
-
-        <details class="faq-item" name="faq">
-          <summary>How do I collect my order?</summary>
-          <div class="faq-body">
-            <p>
-              Come to the bakery at your agreed collection time. We will have
-              your order bagged and labelled. If you are running late, let us
-              know. We can usually hold orders for up to two hours after the
-              agreed time.
-            </p>
-          </div>
-        </details>
-
-        <details class="faq-item" name="faq">
-          <summary>Do you deliver?</summary>
-          <div class="faq-body">
-            <p>
-              We do not currently offer delivery. All orders must be collected
-              from the bakery in person. We are looking at delivery options
-              for the future.
-            </p>
-          </div>
-        </details>
-      </section>
-    </div>
-
-    <section id="about-section" class="about-section">
-      <div class="about-text">
-        <h2>About The Corner Loaf</h2>
-        <p class="section-intro">
-          Marcus started The Corner Loaf after years of baking at home for
-          friends and family. What started as a hobby turned into a proper small
-          bakery when demand grew too much to keep up with. Everything is made
-          by hand in small batches, no mass production, no shortcuts.
-        </p>
-      </div>
-
-    </section>
-
-    <section id="contact-section" class="contact-section" aria-labelledby="contact-heading">
-      <h2 id="contact-heading">Get in Touch with Us</h2>
-
-      <div class="contact-layout">
-        <noscript>
-          <div class="noscript-notice">
-            <p>
-              The message form needs JavaScript. You can reach us on WhatsApp, by
-              phone or by email using the details beside it.
-            </p>
-          </div>
-        </noscript>
-        <div class="contact-form-col">
-          <form class="contact-form" novalidate>
-            <p id="contact-form-help" class="contact-help">
-              Have a question, custom request, or want to check on a bake? Send us a message here and we will get back
-              to you on WhatsApp.
-            </p>
-
-            <p class="contact-required-note">All fields are required.</p>
-
-            <div class="contact-field">
-              <label for="contact-name">Name</label>
-              <input type="text" id="contact-name" class="form-field contact-name-field" autocomplete="name" required />
-            </div>
-            <div class="contact-field contact-field--full">
-              <label for="contact-message">Message</label>
-              <textarea id="contact-message" class="form-field" rows="5" required></textarea>
-            </div>
-
-            <button type="submit" class="form-submit contact-submit">
-              Send on WhatsApp
+            <button type="submit" class="form-submit">
+              Send order on WhatsApp
             </button>
-            <p id="contact-status" class="form-status" role="status" aria-live="polite"></p>
+            <p id="order-status" class="form-status" role="status"></p>
           </form>
-        </div>
+        </section>
+        <section
+          id="faq-section"
+          class="faq-list"
+          aria-labelledby="faq-heading"
+        >
+          <h2 id="faq-heading">Common Questions</h2>
+          <p class="section-intro">Quick answers about ordering.</p>
 
-        <div class="contact-info-col">
-          <div class="contact-info-card">
-            <div class="contact-info-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                <path
-                  d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-              </svg>
+          <details class="faq-item" name="faq">
+            <summary>How do I place an order?</summary>
+            <div class="faq-body">
+              <p>
+                Choose Today's order or Pre-order, pick your collection time and
+                item, set the quantity and add your name. Then press "Send order
+                on WhatsApp". WhatsApp opens with your order already written,
+                and it is placed when you press send there.
+              </p>
             </div>
-            <div class="contact-info-body">
-              <h3 class="contact-info-title">Location</h3>
-              <a href="https://maps.google.com/?q=17+Boundary+Road+East+Legon+Accra" class="contact-info-link"
-                target="_blank" rel="noopener noreferrer"
-                aria-label="17 Boundary Road, East Legon, Accra — opens in Google Maps">
-                17 Boundary Road, East Legon, Accra
-              </a>
-            </div>
-          </div>
+          </details>
 
-          <div class="contact-info-card">
-            <div class="contact-info-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm.5 11H8v-1.5h3V7H12.5v6z" />
-              </svg>
+          <details class="faq-item" name="faq">
+            <summary>
+              What is the difference between a today's order and a pre-order?
+            </summary>
+            <div class="faq-body">
+              <p>
+                A today's order is for pick-up today and only lists what is
+                baked today. You can place one while there are pick-up times
+                left today. A pre-order is for a later day: you choose the day
+                you will collect, then pick from what is baked that day.
+              </p>
             </div>
-            <div class="contact-info-body">
-              <h3 class="contact-info-title">Open Hours</h3>
-              <dl class="contact-hours" id="contact-hours">
-                <div class="contact-hours-row">
-                  <dt>Monday to Friday</dt>
-                  <dd>7am to 5pm</dd>
-                </div>
-                <div class="contact-hours-row">
-                  <dt>Saturday</dt>
-                  <dd>7am to 2pm</dd>
-                </div>
-                <div class="contact-hours-row">
-                  <dt>Sunday</dt>
-                  <dd>Closed</dd>
-                </div>
-              </dl>
-            </div>
-          </div>
+          </details>
 
-          <div class="contact-info-card">
-            <div class="contact-info-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                <path
-                  d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z" />
-              </svg>
+          <details class="faq-item" name="faq">
+            <summary>How far in advance do I need to order?</summary>
+            <div class="faq-body">
+              <p>
+                We ask for at least one day's notice before your chosen
+                collection day. For large orders or custom items, two to three
+                days is better. This gives us time to plan our bake and make
+                sure everything is ready for you.
+              </p>
             </div>
-            <div class="contact-info-body">
-              <h3 class="contact-info-title">Direct Contact</h3>
-              <ul class="contact-links-list">
-                <li>
-                  <a href="https://wa.me/233551000000" class="contact-info-link" target="_blank"
-                    rel="noopener noreferrer" aria-label="Chat on WhatsApp: 0551 000 000 — opens in WhatsApp">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
-                      fill="currentColor" aria-hidden="true" focusable="false">
-                      <path
-                        d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.359 5.016l-1.422 5.203 5.328-1.391c1.484.813 3.141 1.234 4.828 1.234h.031c5.5 0 9.969-4.469 9.969-9.969 0-2.656-1.031-5.156-2.922-7.047a9.92 9.92 0 0 0-7.031-2.25zm5.828 14.125c-.25.703-1.438 1.344-1.984 1.422-.516.078-1.156.109-1.859-.109-.438-.141-.984-.328-1.703-.641-2.984-1.297-4.938-4.297-5.094-4.5-.156-.203-1.219-1.625-1.219-3.094s.766-2.188 1.047-2.484c.281-.297.609-.375.813-.375.203 0 .406 0 .578.016.188.016.438-.063.688.516.25.594.859 2.094.938 2.25.078.156.125.344.016.547-.109.203-.156.328-.313.5-.156.172-.328.391-.469.516-.156.141-.313.297-.141.594.172.297.781 1.281 1.672 2.078 1.156 1.031 2.125 1.359 2.422 1.5.297.141.469.125.641-.078.172-.203.75-.875.953-1.172.203-.297.406-.25.688-.156.281.094 1.797.844 2.109 1 .313.156.516.234.594.359.078.141.078.797-.172 1.5z" />
-                    </svg>
-                    WhatsApp: 0551 000 000
-                  </a>
-                </li>
-                <li>
-                  <a href="tel:+233551000000" class="contact-info-link" aria-label="Call: 0551 000 000">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
-                      fill="currentColor" aria-hidden="true" focusable="false">
-                      <path
-                        d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-                    </svg>
-                    Call: 0551 000 000
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:thecornerloaf@email.com" class="contact-info-link"
-                    aria-label="Email us at thecornerloaf@email.com">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
-                      fill="currentColor" aria-hidden="true" focusable="false">
-                      <path
-                        d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
-                    </svg>
-                    thecornerloaf@email.com
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+          </details>
 
+          <details class="faq-item" name="faq">
+            <summary>Can I cancel or change my order?</summary>
+            <div class="faq-body">
+              <p>
+                Yes, but please let us know as early as possible. If we have
+                already started baking your order, we may not be able to cancel
+                it. Changes to quantity are usually fine if you give us a day's
+                notice.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" name="faq">
+            <summary>Can I ask for something custom or a large order?</summary>
+            <div class="faq-body">
+              <p>
+                You can ask. Two to three days' notice is better for these. Send
+                us a
+                <a href="#contact-section">message</a> or write to us on
+                <a href="https://wa.me/233551000000">WhatsApp</a> with what you
+                need, and we will tell you what we can do.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" name="faq">
+            <summary>Is there a limit on how many I can order?</summary>
+            <div class="faq-body">
+              <p>
+                The order form takes one item at a time, up to 10 of that item
+                per order. For several different items, send one order for each.
+                For anything bigger, send us a
+                <a href="#contact-section">message</a> or write to us on
+                <a href="https://wa.me/233551000000">WhatsApp</a>, ideally two
+                to three days ahead, and we will tell you what we can do.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" name="faq">
+            <summary>How do I collect my order?</summary>
+            <div class="faq-body">
+              <p>
+                Come to the bakery at your agreed collection time. We will have
+                your order bagged and labelled. If you are running late, let us
+                know. We can usually hold orders for up to two hours after the
+                agreed time.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item" name="faq">
+            <summary>Do you deliver?</summary>
+            <div class="faq-body">
+              <p>
+                We do not currently offer delivery. All orders must be collected
+                from the bakery in person. We are looking at delivery options
+                for the future.
+              </p>
+            </div>
+          </details>
+        </section>
       </div>
-    </section>
-  </main>
 
-  <footer class="footer">
-    <p>The Corner Loaf &copy; 2026. Handmade in Accra.</p>
-  </footer>
+      <section id="about-section" class="about-section">
+        <div class="about-text">
+          <h2>About The Corner Loaf</h2>
+          <p class="section-intro">
+            Marcus started The Corner Loaf after years of baking at home for
+            friends and family. What started as a hobby turned into a proper
+            small bakery when demand grew too much to keep up with. Everything
+            is made by hand in small batches, no mass production, no shortcuts.
+          </p>
+        </div>
+      </section>
 
-  <script src="js/script.js" type="module"></script>
-</body>
+      <section
+        id="contact-section"
+        class="contact-section"
+        aria-labelledby="contact-heading"
+      >
+        <h2 id="contact-heading">Get in Touch with Us</h2>
 
+        <div class="contact-layout">
+          <noscript>
+            <div class="noscript-notice">
+              <p>
+                The message form needs JavaScript. You can reach us on WhatsApp,
+                by phone or by email using the details beside it.
+              </p>
+            </div>
+          </noscript>
+          <div class="contact-form-col">
+            <form class="contact-form" novalidate>
+              <p id="contact-form-help" class="contact-help">
+                Have a question, custom request, or want to check on a bake?
+                Send us a message here and we will get back to you on WhatsApp.
+              </p>
+
+              <p class="contact-required-note">All fields are required.</p>
+
+              <div class="contact-field">
+                <label for="contact-name">Name</label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  class="form-field contact-name-field"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+              <div class="contact-field contact-field--full">
+                <label for="contact-message">Message</label>
+                <textarea
+                  id="contact-message"
+                  class="form-field"
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="form-submit contact-submit">
+                Send on WhatsApp
+              </button>
+              <p
+                id="contact-status"
+                class="form-status"
+                role="status"
+                aria-live="polite"
+              ></p>
+            </form>
+          </div>
+
+          <div class="contact-info-col">
+            <div class="contact-info-card">
+              <div class="contact-info-icon" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"
+                  />
+                </svg>
+              </div>
+              <div class="contact-info-body">
+                <h3 class="contact-info-title">Location</h3>
+                <a
+                  href="https://maps.google.com/?q=17+Boundary+Road+East+Legon+Accra"
+                  class="contact-info-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="17 Boundary Road, East Legon, Accra — opens in Google Maps"
+                >
+                  17 Boundary Road, East Legon, Accra
+                </a>
+              </div>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="contact-info-icon" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm.5 11H8v-1.5h3V7H12.5v6z"
+                  />
+                </svg>
+              </div>
+              <div class="contact-info-body">
+                <h3 class="contact-info-title">Open Hours</h3>
+                <dl class="contact-hours" id="contact-hours">
+                  <div class="contact-hours-row">
+                    <dt>Monday to Friday</dt>
+                    <dd>7am to 5pm</dd>
+                  </div>
+                  <div class="contact-hours-row">
+                    <dt>Saturday</dt>
+                    <dd>7am to 2pm</dd>
+                  </div>
+                  <div class="contact-hours-row">
+                    <dt>Sunday</dt>
+                    <dd>Closed</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="contact-info-icon" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"
+                  />
+                </svg>
+              </div>
+              <div class="contact-info-body">
+                <h3 class="contact-info-title">Direct Contact</h3>
+                <ul class="contact-links-list">
+                  <li>
+                    <a
+                      href="https://wa.me/233551000000"
+                      class="contact-info-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Chat on WhatsApp: 0551 000 000 — opens in WhatsApp"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path
+                          d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.359 5.016l-1.422 5.203 5.328-1.391c1.484.813 3.141 1.234 4.828 1.234h.031c5.5 0 9.969-4.469 9.969-9.969 0-2.656-1.031-5.156-2.922-7.047a9.92 9.92 0 0 0-7.031-2.25zm5.828 14.125c-.25.703-1.438 1.344-1.984 1.422-.516.078-1.156.109-1.859-.109-.438-.141-.984-.328-1.703-.641-2.984-1.297-4.938-4.297-5.094-4.5-.156-.203-1.219-1.625-1.219-3.094s.766-2.188 1.047-2.484c.281-.297.609-.375.813-.375.203 0 .406 0 .578.016.188.016.438-.063.688.516.25.594.859 2.094.938 2.25.078.156.125.344.016.547-.109.203-.156.328-.313.5-.156.172-.328.391-.469.516-.156.141-.313.297-.141.594.172.297.781 1.281 1.672 2.078 1.156 1.031 2.125 1.359 2.422 1.5.297.141.469.125.641-.078.172-.203.75-.875.953-1.172.203-.297.406-.25.688-.156.281.094 1.797.844 2.109 1 .313.156.516.234.594.359.078.141.078.797-.172 1.5z"
+                        />
+                      </svg>
+                      WhatsApp: 0551 000 000
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="tel:+233551000000"
+                      class="contact-info-link"
+                      aria-label="Call: 0551 000 000"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path
+                          d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                        />
+                      </svg>
+                      Call: 0551 000 000
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="mailto:thecornerloaf@email.com"
+                      class="contact-info-link"
+                      aria-label="Email us at thecornerloaf@email.com"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path
+                          d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"
+                        />
+                      </svg>
+                      thecornerloaf@email.com
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>The Corner Loaf &copy; 2026. Handmade in Accra.</p>
+    </footer>
+
+    <script src="js/script.js" type="module"></script>
+  </body>
 </html>

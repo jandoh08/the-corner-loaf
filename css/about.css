@@ -5,17 +5,25 @@
 }
 
 .about-section::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 40% at 90% 50%, rgba(245, 222, 179, 0.45) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(255, 224, 178, 0.3) 0%, transparent 65%);
+    radial-gradient(
+      ellipse 60% 40% at 90% 50%,
+      rgba(245, 222, 179, 0.45) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40% 60% at 10% 80%,
+      rgba(255, 224, 178, 0.3) 0%,
+      transparent 65%
+    );
   pointer-events: none;
   z-index: 0;
 }
 
-.about-section>* {
+.about-section > * {
   position: relative;
   z-index: 1;
 }

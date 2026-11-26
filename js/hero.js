@@ -1,16 +1,16 @@
-import { getOpenStatus } from "./helpers.js";
+import { getOpenStatus } from './helpers.js';
 
 const REFRESH_MS = 60 * 1000;
 
 export function initHeroStatus() {
-  const statusEls = document.querySelectorAll("[data-open-status]");
+  const statusEls = document.querySelectorAll('[data-open-status]');
   if (!statusEls.length) return;
 
   const updateStatus = () => {
     const text = getOpenStatus();
     statusEls.forEach((el) => {
       el.textContent = text;
-      el.dataset.open = String(text.startsWith("Open now"));
+      el.dataset.open = String(text.startsWith('Open now'));
     });
   };
 
@@ -27,7 +27,7 @@ export function initHeroStatus() {
     timerId = null;
   };
 
-  document.addEventListener("visibilitychange", () => {
+  document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       stop();
     } else {

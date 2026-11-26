@@ -19,7 +19,7 @@
   max-width: unset;
 }
 
-.wrapper section+section {
+.wrapper section + section {
   margin-top: var(--space-6);
 }
 
@@ -31,7 +31,7 @@
   margin-top: var(--space-6);
 }
 
-.wrapper .order-faq-wrapper>section {
+.wrapper .order-faq-wrapper > section {
   margin: 0;
   max-width: none;
 }
