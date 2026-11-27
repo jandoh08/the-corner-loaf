@@ -11,20 +11,25 @@ function populateSelect(select, placeholder, options) {
   });
 }
 
-const spokenPrice = (product) =>
-  `${product.price} cedis${product.priceUnit ? ` per ${product.priceUnit}` : ''}`;
+function spokenPrice(product) {
+  return `${product.price} cedis${product.priceUnit ? ` per ${product.priceUnit}` : ''}`;
+}
 
-const toOption = (product) => ({
-  value: product.name,
-  label: `${product.name} (${spokenPrice(product)})`,
-});
+function toOption(product) {
+  return {
+    value: product.name,
+    label: `${product.name} (${spokenPrice(product)})`,
+  };
+}
 
 function formatSlotTime(hours) {
   const totalMinutes = Math.round(hours * 60);
-  const hour = Math.floor(totalMinutes / 60);
+  const hour24 = Math.floor(totalMinutes / 60) % 24;
   const minutes = String(totalMinutes % 60).padStart(2, '0');
+  const hour12 = hour24 % 12 || 12;
+  const period = hour24 >= 12 ? 'pm' : 'am';
 
-  return `${hour % 12 || 12}:${minutes}${hour < 12 ? 'am' : 'pm'}`;
+  return `${hour12}:${minutes}${period}`;
 }
 
 function getTimeSlots(day, after = 0) {
@@ -164,6 +169,7 @@ export function initOrderForm(availableToday) {
   preorderRadio.addEventListener('change', updateType);
   daySelect.addEventListener('change', updateChoices);
 
+  // Fall back to default bounds if min/max attributes are omitted in markup
   const min = Number(quantity.min) || 1;
   const max = Number(quantity.max) || 10;
 
@@ -185,21 +191,39 @@ export function initOrderForm(availableToday) {
     }
   });
 
-  form.querySelectorAll('[data-step]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const next =
-        (Number(quantity.value) || min) + Number(button.dataset.step);
-      quantity.value = Math.min(max, Math.max(min, next));
-    });
+  form.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-step]');
+    if (!button) return;
+
+    const next = (Number(quantity.value) || min) + Number(button.dataset.step);
+    quantity.value = Math.min(max, Math.max(min, next));
   });
+
+  const showOrderError = (field, message) => {
+    status.classList.add('is-error');
+    status.textContent = message;
+    field.focus();
+  };
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
 
     if (Number(quantity.value) > max) {
-      status.classList.add('is-error');
-      status.textContent = `The most you can order here is ${max} per order. For more, send us a message.`;
-      quantity.focus();
+      showOrderError(
+        quantity,
+        `The most you can order here is ${max} per order. For more, send us a message.`
+      );
+      return;
+    }
+
+    const selectedItem = itemSelect.selectedOptions[0];
+    if (!itemSelect.value || !selectedItem) {
+      showOrderError(itemSelect, 'Please select an item to order.');
+      return;
+    }
+
+    if (!timeSelect.value) {
+      showOrderError(timeSelect, 'Please select a pick-up time.');
       return;
     }
 
@@ -209,7 +233,7 @@ export function initOrderForm(availableToday) {
       '',
       `• Type: ${today ? "Today's order" : 'Pre-order'}`,
       `• Collection: ${today ? 'Today' : daySelect.value} at ${timeSelect.value}`,
-      `• Item: ${itemSelect.selectedOptions[0].textContent}`,
+      `• Item: ${selectedItem.textContent}`,
       `• Quantity: ${quantity.value}`,
       `• Name: ${nameInput.value.trim()}`,
       '',

@@ -25,7 +25,7 @@ The Corner Loaf is an artisanal neighbourhood bakery located on Boundary Road in
    ```bash
    npm run dev
    ```
-   Open the printed local URL (e.g., `http://localhost:5173/the-corner-loaf/`) in your browser.
+   Open the printed local URL (e.g., `http://localhost:5173/the-corner-loaf/` — the path suffix depends on `VITE_BASE_URL` and defaults to `/the-corner-loaf/` in `vite.config.js`) in your browser.
 
 ### Available Scripts
 
