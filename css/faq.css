@@ -50,8 +50,8 @@
    screen readers do not read "plus"; the first line is the fallback for
    browsers that do not understand that syntax. */
 .faq-item summary::after {
-  content: "+";
-  content: "+" / "";
+  content: '+';
+  content: '+' / '';
   display: grid;
   flex: none;
   place-items: center;
@@ -65,8 +65,8 @@
 }
 
 .faq-item[open] summary::after {
-  content: "−";
-  content: "−" / "";
+  content: '−';
+  content: '−' / '';
 }
 
 .faq-body {
