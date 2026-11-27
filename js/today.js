@@ -36,6 +36,7 @@ function createProductCard(product, day) {
   image.className = 'product-image';
   image.src = product.image;
   image.alt = product.imageAlt;
+  // All current product WebP assets in public/images/ share 300x402 intrinsic dimensions
   image.width = 300;
   image.height = 402;
 
@@ -66,7 +67,7 @@ function createProductCard(product, day) {
   } else if (day === 'All Bakes') {
     tag.textContent = `Baked: ${formatDayList(product.days)}`;
   } else {
-    const otherDays = product.days.filter((d) => d !== day);
+    const otherDays = product.days.filter((bakeDay) => bakeDay !== day);
     tag.textContent = `Also baked: ${formatDayList(otherDays)}`;
   }
 

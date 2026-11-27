@@ -20,10 +20,24 @@ if (header && infoBar && 'ResizeObserver' in window) {
     header.style.setProperty('--info-bar-height', `${infoBar.offsetHeight}px`);
   });
 
-  infoBarObserver.observe(infoBar);
+  let isObserving = false;
 
-  window.addEventListener('pagehide', () => infoBarObserver.disconnect());
+  const observeInfoBar = () => {
+    if (isObserving) return;
+    infoBarObserver.observe(infoBar);
+    isObserving = true;
+  };
+
+  const disconnectInfoBar = () => {
+    if (!isObserving) return;
+    infoBarObserver.disconnect();
+    isObserving = false;
+  };
+
+  observeInfoBar();
+
+  window.addEventListener('pagehide', disconnectInfoBar);
   window.addEventListener('pageshow', (event) => {
-    if (event.persisted) infoBarObserver.observe(infoBar);
+    if (event.persisted) observeInfoBar();
   });
 }

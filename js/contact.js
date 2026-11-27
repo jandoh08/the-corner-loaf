@@ -14,7 +14,9 @@ function buildWhatsAppUrl(name, message) {
 export function initContactForm() {
   const contactForm = document.querySelector('.contact-form');
   const contactStatus = document.getElementById('contact-status');
-  if (!contactForm || !contactStatus) return;
+  const nameEl = document.getElementById('contact-name');
+  const messageEl = document.getElementById('contact-message');
+  if (!contactForm || !contactStatus || !nameEl || !messageEl) return;
 
   const showStatus = (message, isError) => {
     contactStatus.textContent = message;
@@ -30,9 +32,6 @@ export function initContactForm() {
       showStatus(message, true);
       field.focus();
     };
-
-    const nameEl = document.getElementById('contact-name');
-    const messageEl = document.getElementById('contact-message');
 
     [nameEl, messageEl].forEach((field) => {
       field.removeAttribute('aria-invalid');
@@ -55,9 +54,17 @@ export function initContactForm() {
     const url = buildWhatsAppUrl(name, message);
     window.open(url, '_blank', 'noopener,noreferrer');
 
-    showStatus(
-      `WhatsApp should open with your message pre-filled. Press send there to reach us. If nothing opens, call or message ${PHONE_DISPLAY}.`,
-      false
+    const fallback = document.createElement('a');
+    fallback.href = url;
+    fallback.target = '_blank';
+    fallback.rel = 'noopener noreferrer';
+    fallback.textContent = 'Open WhatsApp';
+
+    contactStatus.classList.remove('is-error');
+    contactStatus.replaceChildren(
+      `WhatsApp should open with your message pre-filled. Press send there to reach us. If nothing opens, `,
+      fallback,
+      ` or call/message ${PHONE_DISPLAY}.`
     );
   });
 }

@@ -2,10 +2,6 @@
   "name": "the-corner-loaf",
   "version": "1.0.0",
   "description": "The Corner Loaf is an artisanal neighbourhood bakery located on Boundary Road in East Legon, Accra. Marcus bakes fresh sourdough bread and pastries in small morning batches.",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -21,9 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/jandoh08/the-corner-loaf.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "type": "module",
   "bugs": {
     "url": "https://github.com/jandoh08/the-corner-loaf/issues"
