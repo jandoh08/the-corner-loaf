@@ -2,8 +2,6 @@
 
 The Corner Loaf is an artisanal neighbourhood bakery located on Boundary Road in East Legon, Accra. Marcus bakes fresh sourdough bread and pastries in small morning batches.
 
-This repository documents the incremental design, development, and accessibility refactoring of the bakery's web presence across project modules.
-
 ---
 
 ## Run locally
@@ -36,8 +34,9 @@ This repository documents the incremental design, development, and accessibility
 | `dev`          | `npm run dev`          | Starts the Vite development server with Hot Module Replacement        |
 | `build`        | `npm run build`        | Builds the optimized production site into `dist/`                     |
 | `preview`      | `npm run preview`      | Locally serves the production build in `dist/`                        |
-| `lint`         | `npm run lint`         | Runs ESLint to check for code quality and syntax issues               |
-| `lint:fix`     | `npm run lint:fix`     | Automatically fixes safe ESLint issues                                |
+| `lint:js`      | `npm run lint:js`      | Runs ESLint on JavaScript files (--max-warnings 0)                    |
+| `lint:css`     | `npm run lint:css`     | Runs Stylelint on CSS files                                           |
+| `lint`         | `npm run lint`         | Runs both ESLint and Stylelint                                        |
 | `format`       | `npm run format`       | Formats all supported files using Prettier                            |
 | `format:check` | `npm run format:check` | Checks code formatting against Prettier rules without modifying files |
 
