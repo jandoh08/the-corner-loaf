@@ -9,6 +9,8 @@ export const weekdays = [
 ];
 export const bakeDays = weekdays.slice(1);
 
+const baseUrl = import.meta.env.VITE_BASE_URL || '/';
+
 export const bakeItems = [
   {
     name: 'Sourdough Loaf',
@@ -16,7 +18,7 @@ export const bakeItems = [
       'Classic long-ferment sourdough, crusty outside and chewy inside.',
     price: 35,
     days: ['Tuesday', 'Friday'],
-    image: 'images/sourdough-loaf.webp',
+    image: `${baseUrl}images/sourdough-loaf.webp`,
     imageAlt: 'Sourdough loaf with a floured, scored crust',
   },
   {
@@ -24,7 +26,7 @@ export const bakeItems = [
     description: 'Dense, nutty whole wheat. Great for toast and sandwiches.',
     price: 28,
     days: ['Monday', 'Wednesday', 'Friday'],
-    image: 'images/whole-wheat-loaf.webp',
+    image: `${baseUrl}images/whole-wheat-loaf.webp`,
     imageAlt: 'Hearty whole wheat bread loaf with a textured crust',
   },
   {
@@ -32,7 +34,7 @@ export const bakeItems = [
     description: 'Crunchy, lightly sweetened. Comes in a bag of 200g.',
     price: 20,
     days: bakeDays,
-    image: 'images/chin-chin.webp',
+    image: `${baseUrl}images/chin-chin.webp`,
     imageAlt: 'Crunchy golden-brown chin chin snack pieces',
   },
   {
@@ -40,7 +42,7 @@ export const bakeItems = [
     description: 'Buttery, flaky croissants. Baked fresh in the morning only.',
     price: 18,
     days: ['Saturday'],
-    image: 'images/butter-croissants.webp',
+    image: `${baseUrl}images/butter-croissants.webp`,
     imageAlt: 'Flaky, golden-brown baked butter croissants',
   },
   {
@@ -50,7 +52,7 @@ export const bakeItems = [
     price: 15,
     priceUnit: 'slice',
     days: ['Thursday', 'Saturday'],
-    image: 'images/banana-bread.webp',
+    image: `${baseUrl}images/banana-bread.webp`,
     imageAlt: 'Banana bread loaf sliced to show its soft crumb',
   },
   {
@@ -59,7 +61,7 @@ export const bakeItems = [
       'Short-crust pastry filled with spiced minced meat and vegetables.',
     price: 12,
     days: ['Wednesday', 'Friday'],
-    image: 'images/meat-pie.webp',
+    image: `${baseUrl}images/meat-pie.webp`,
     imageAlt: 'Meat pie with crimped flaky pastry edges',
   },
 ];

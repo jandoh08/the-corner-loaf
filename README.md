@@ -8,40 +8,38 @@ This repository documents the incremental design, development, and accessibility
 
 ## Run locally
 
-This is a static site with no build step, but it uses ES modules (`<script type="module">`), so it has to be served over HTTP. Opening `index.html` directly from the file system will not work in most browsers.
+### Prerequisites
 
-You can run the project locally using any of the following methods:
+- [Node.js](https://nodejs.org/) (version specified in `.nvmrc`)
+- npm
 
-### Option 1: VS Code Live Server
+### Setup and Development
 
-If you're using Visual Studio Code:
+1. **Clone the repository and install dependencies:**
 
-- Install the Live Server extension.
-- Open the project folder in VS Code.
-- Right-click index.html.
-- Select Open with Live Server.
+   ```bash
+   git clone https://github.com/jandoh08/the-corner-loaf.git
+   cd the-corner-loaf
+   npm install
+   ```
 
-The site will open in your default browser at <http://localhost:5500>.
+2. **Start the local development server:**
+   ```bash
+   npm run dev
+   ```
+   Open the printed local URL (e.g., `http://localhost:5173/the-corner-loaf/`) in your browser.
 
-### Option 2: Node.js
+### Available Scripts
 
-If you have Node.js installed, run:
-
-```bash
-npx serve
-```
-
-Then open the local URL displayed in your terminal.
-
-### Option 3: Python
-
-If you have Python installed, run:
-
-```bash
-python3 -m http.server 8000
-```
-
-Then open <http://localhost:8000>.
+| Script         | Command                | Description                                                           |
+| :------------- | :--------------------- | :-------------------------------------------------------------------- |
+| `dev`          | `npm run dev`          | Starts the Vite development server with Hot Module Replacement        |
+| `build`        | `npm run build`        | Builds the optimized production site into `dist/`                     |
+| `preview`      | `npm run preview`      | Locally serves the production build in `dist/`                        |
+| `lint`         | `npm run lint`         | Runs ESLint to check for code quality and syntax issues               |
+| `lint:fix`     | `npm run lint:fix`     | Automatically fixes safe ESLint issues                                |
+| `format`       | `npm run format`       | Formats all supported files using Prettier                            |
+| `format:check` | `npm run format:check` | Checks code formatting against Prettier rules without modifying files |
 
 ---
 
@@ -56,3 +54,7 @@ The project documentation is organised by module:
 - **Module 2 (EE02) — Peer Accessibility Audit & WCAG 2.2 Refactoring**  
   👉 **[docs/ee02/ee02.md](docs/ee02/ee02.md)**  
   Covers the peer accessibility audit of Samuel Attu's website, response and resolution of findings from the peer audit of The Corner Loaf, the layout evolution from EE01 to EE02, and implemented improvements beyond the audit scope (vestibular safety and motor accessibility).
+
+- **Module 3 (EE03) — Dev Tooling & Version Control**  
+  👉 **[docs/ee03/ee03.md](docs/ee03/ee03.md)**  
+  Covers the codebase comparison and version selection, modular project architecture, Git branching and pull request workflow, review checklist, and repository configuration conventions.
