@@ -11,8 +11,9 @@ export function formatPrice(product) {
   return product.priceUnit ? `${base} / ${product.priceUnit}` : base;
 }
 
-export const formatHour = (hour) =>
-  `${hour % 12 || 12}${hour < 12 ? 'am' : 'pm'}`;
+export function formatHour(hour) {
+  return `${hour % 12 || 12}${hour < 12 ? 'am' : 'pm'}`;
+}
 
 export function getBakeryNow(date = new Date()) {
   const parts = new Intl.DateTimeFormat('en', {
@@ -23,10 +24,23 @@ export function getBakeryNow(date = new Date()) {
     timeZone: bakeryTimeZone,
   }).formatToParts(date);
   const get = (type) => parts.find((part) => part.type === type)?.value ?? '';
+  const rawHour = get('hour');
+  const rawMinute = get('minute');
+  const hour = Number(rawHour);
+  const minute = Number(rawMinute);
+
+  if (
+    rawHour === '' ||
+    rawMinute === '' ||
+    !Number.isFinite(hour) ||
+    !Number.isFinite(minute)
+  ) {
+    throw new Error(`Failed to parse bakery time parts for ${bakeryTimeZone}`);
+  }
 
   return {
     weekday: get('weekday'),
-    time: (Number(get('hour')) || 0) + (Number(get('minute')) || 0) / 60,
+    time: hour + minute / 60,
   };
 }
 
@@ -56,6 +70,10 @@ function getOpenState(date = new Date()) {
   }
   const next = findNextOpenDay(weekday);
   return next ? { kind: 'opens-later', ...next } : { kind: 'closed' };
+}
+
+export function isBakeryOpen(date = new Date()) {
+  return getOpenState(date).kind === 'open';
 }
 
 export function getOpenStatus(date = new Date()) {

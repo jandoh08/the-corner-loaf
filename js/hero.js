@@ -1,4 +1,4 @@
-import { getOpenStatus } from './helpers.js';
+import { getOpenStatus, isBakeryOpen } from './helpers.js';
 
 const REFRESH_MS = 60 * 1000;
 
@@ -8,9 +8,10 @@ export function initHeroStatus() {
 
   const updateStatus = () => {
     const text = getOpenStatus();
+    const isOpen = String(isBakeryOpen());
     statusEls.forEach((el) => {
       el.textContent = text;
-      el.dataset.open = String(text.startsWith('Open now'));
+      el.dataset.open = isOpen;
     });
   };
 
@@ -23,16 +24,28 @@ export function initHeroStatus() {
   };
 
   const stop = () => {
+    if (timerId === null) return;
     clearInterval(timerId);
     timerId = null;
   };
 
-  document.addEventListener('visibilitychange', () => {
+  const onVisibilityChange = () => {
     if (document.hidden) {
       stop();
     } else {
       start();
     }
+  };
+
+  document.addEventListener('visibilitychange', onVisibilityChange);
+  window.addEventListener('pagehide', () => {
+    stop();
+    document.removeEventListener('visibilitychange', onVisibilityChange);
+  });
+  window.addEventListener('pageshow', (event) => {
+    if (!event.persisted) return;
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    if (!document.hidden) start();
   });
 
   start();
