@@ -9,7 +9,7 @@ export const weekdays = [
 ];
 export const bakeDays = weekdays.slice(1);
 
-const baseUrl = import.meta.env.VITE_BASE_URL || '/';
+const baseUrl = import.meta.env.BASE_URL;
 
 export const bakeItems = [
   {
