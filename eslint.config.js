@@ -1,9 +1,9 @@
 import js from '@eslint/js';
 import globals from 'globals';
-import eslintConfigPrettier from 'eslint-config-prettier';
+import prettier from 'eslint-config-prettier';
 
 export default [
-  { ignores: ['dist', 'node_modules'] },
+  { ignores: ['dist/**', 'node_modules/**'] },
   js.configs.recommended,
   {
     files: ['**/*.js'],
@@ -13,13 +13,15 @@ export default [
       globals: { ...globals.browser },
     },
     rules: {
-      'no-unused-vars': 'warn',
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'no-console': 'warn',
     },
   },
   {
     files: ['*.config.js'],
-    languageOptions: { globals: { ...globals.node } },
+    languageOptions: {
+      globals: { ...globals.node },
+    },
   },
-  eslintConfigPrettier,
+  prettier,
 ];
